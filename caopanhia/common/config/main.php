@@ -8,11 +8,17 @@ return [
     'components' => [
         'authManager' => [
             'class' => 'yii\rbac\DbManager',
-            // uncomment if you want to cache RBAC items hierarchy
-            // 'cache' => 'cache',
         ],
         'cache' => [
             'class' => \yii\caching\FileCache::class,
         ],
+        'view' => [
+            'theme' => [
+                'pathMap' => [
+                    '@app/views' => '@vendor/hail812/yii2-adminlte3/src/views'
+                ],
+            ],
+        ],
     ],
+
 ];
