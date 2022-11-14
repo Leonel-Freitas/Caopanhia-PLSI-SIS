@@ -2,6 +2,8 @@
 
 namespace frontend\models;
 
+use common\models\Distritos;
+use common\models\Userprofile;
 use Yii;
 use yii\base\Model;
 use common\models\User;
@@ -14,6 +16,15 @@ class SignupForm extends Model
     public $username;
     public $email;
     public $password;
+
+    public $nome;
+    public $morada;
+    public $codigoPostal;
+    public $genero;
+    public $nif;
+    public $contacto;
+    public $idDistrito;
+    public $formacao;
 
 
     /**
@@ -35,6 +46,14 @@ class SignupForm extends Model
 
             ['password', 'required'],
             ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
+
+            [['nome', 'morada', 'codigoPostal', 'genero', 'nif', 'contacto'], 'required'],
+            [['nif', 'contacto', 'idDistrito'], 'integer'],
+            [['nome', 'morada', 'formacao'], 'string', 'max' => 255],
+            [['codigoPostal'], 'string', 'max' => 8],
+            [['genero'], 'string', 'max' => 10],
+            [['nif'], 'unique'],
+            [['idDistrito'], 'exist', 'skipOnError' => true, 'targetClass' => Distritos::class, 'targetAttribute' => ['idDistrito' => 'id']],
         ];
     }
 
@@ -43,20 +62,38 @@ class SignupForm extends Model
      *
      * @return bool whether the creating new account was successful and email was sent
      */
-    public function signup()
+    public function signup($role)
     {
-        if (!$this->validate()) {
-            return null;
-        }
-        
         $user = new User();
         $user->username = $this->username;
         $user->email = $this->email;
         $user->setPassword($this->password);
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();
+        $user->status = 10;
 
-        return $user->save() && $this->sendEmail($user);
+        $user->save();
+
+        $listaDistritosAtivos = Distritos::find()->where(['status' => 10])->all();
+        $distritoEscolhido = $listaDistritosAtivos[$this->idDistrito];
+        $distrito = Distritos::find()->where(['designacao' => $distritoEscolhido->designacao])->one();
+
+
+
+        $userProfile = new Userprofile();
+        $userProfile->nome = $this->nome;
+        $userProfile->morada = $this->morada;
+        $userProfile->codigoPostal = $this->codigoPostal;
+        $userProfile->genero = $this->genero;
+        $userProfile->nif = $this->nif;
+        $userProfile->contacto = $this->contacto;
+        $userProfile->idDistrito = $distrito->id;
+        $userProfile->idUser = $user->id;
+        if ($role == 'vet'){
+            $userProfile->formacao = $this->formacao;
+        }
+
+        return $userProfile->save();
     }
 
     /**

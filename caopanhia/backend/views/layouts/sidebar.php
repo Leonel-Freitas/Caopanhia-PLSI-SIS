@@ -35,21 +35,34 @@
             <?php
             echo \hail812\adminlte\widgets\Menu::widget([
                 'items' => [
-                    [
-                        'label' => 'Starter Pages',
-                        'icon' => 'tachometer-alt',
-                        'badge' => '<span class="right badge badge-info">2</span>',
+                    ['label' => 'Dashboard', 'url' => ['site/login'], 'icon' => 'home'],
+                    ['label' => 'Loja', 'header' => true],
+                    ['label' => 'Encomendas Realizadas', 'icon' => 'archive'],
+                    ['label' => 'Gestão de Produtos', 'icon' => 'shopping-cart'],
+                    ['label' => 'Tipos de Porduto', 'icon' => 'tags'],
+                    ['label' => 'Gestão de Métodos', 'header' => true],
+                    ['label' => 'Métodos de Pagamemto', 'icon' => 'credit-card'],
+                    ['label' => 'Métodos de Expedição', 'icon' => 'truck'],
+                    ['label' => 'Distritos', 'header' => true],
+                    ['label' => 'Gestão dos Distritos', 'url' => ['distritos/index'], 'icon' => 'map-pin'],
+                    ['label' => 'Raças', 'header' => true],
+                    ['label' => 'Gestão das Raças', 'icon' => 'paw'],
+                    ['label' => 'Utilizadores', 'header' => true],
+                    [ 'label' => 'Gestão de Funcionários',
+                        'icon' => 'user-plus',
                         'items' => [
-                            ['label' => 'Active Page', 'url' => ['site/index'], 'iconStyle' => 'far'],
-                            ['label' => 'Inactive Page', 'iconStyle' => 'far'],
-                        ]
-                    ],
-                    ['label' => 'Simple Link', 'icon' => 'th', 'badge' => '<span class="right badge badge-danger">New</span>'],
-                    ['label' => 'Yii2 PROVIDED', 'header' => true],
-                    ['label' => 'Login', 'url' => ['site/login'], 'icon' => 'sign-in-alt', 'visible' => Yii::$app->user->isGuest],
+                            ['label' => 'Administradores','url' => ['user/index', 'role' => 'admin'], 'icon' => 'user'],
+                            ['label' => 'Gestores','url' => ['user/index', 'role' => 'gestor'], 'icon' => 'user'],
+                            ['label' => 'Veterinários','url' => ['user/index', 'role' => 'vet'], 'icon' => 'user']
+                        ]],
+                    ['label' => 'Lista de Clientes', 'url' => ['user/index', 'role' => 'client'], 'icon' => 'users'],
+                    ['label' => 'Framework YII2', 'header' => true],
                     ['label' => 'Gii',  'icon' => 'file-code', 'url' => ['/gii'], 'target' => '_blank'],
                     ['label' => 'Debug', 'icon' => 'bug', 'url' => ['/debug'], 'target' => '_blank'],
-                    ['label' => 'MULTI LEVEL EXAMPLE', 'header' => true],
+                    ['label' => 'Sessão', 'header' => true],
+                    ['label' => 'Terminar sessão', 'url' => ['site/logout'], ['data-method' => 'post'], 'icon' => 'sign-out-alt'],
+                    //['label' => 'Login', 'url' => ['site/login'], 'icon' => 'sign-in-alt', 'visible' => Yii::$app->user->isGuest],
+                    /*['label' => 'MULTI LEVEL EXAMPLE', 'header' => true],
                     ['label' => 'Level1'],
                     [
                         'label' => 'Level1',
@@ -71,7 +84,7 @@
                     ['label' => 'LABELS', 'header' => true],
                     ['label' => 'Important', 'iconStyle' => 'far', 'iconClassAdded' => 'text-danger'],
                     ['label' => 'Warning', 'iconClass' => 'nav-icon far fa-circle text-warning'],
-                    ['label' => 'Informational', 'iconStyle' => 'far', 'iconClassAdded' => 'text-info'],
+                    ['label' => 'Informational', 'iconStyle' => 'far', 'iconClassAdded' => 'text-info'],*/
                 ],
             ]);
             ?>

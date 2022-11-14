@@ -20,10 +20,18 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
 
                 <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
-
                 <?= $form->field($model, 'email') ?>
-
                 <?= $form->field($model, 'password')->passwordInput() ?>
+
+            <br><h3>Dados Pessoais:</h3>
+
+            <?= $form->field($model, 'nome')->textInput() ?>
+            <?= $form->field($model, 'genero')->dropDownList(['masculino' => 'Masculino', 'feminino' => 'Feminino']) ?>
+            <?= $form->field($model, 'morada')->textInput() ?>
+            <?= $form->field($model, 'codigoPostal')->textInput() ?>
+            <?= $form->field($model, 'idDistrito')->dropDownList($distritos)->label('Distrito') ?>
+            <?= $form->field($model, 'nif')->textInput() ?>
+            <?= $form->field($model, 'contacto')->textInput() ?>
 
                 <div class="form-group">
                     <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>

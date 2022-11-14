@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\Distritos;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
@@ -29,7 +30,7 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::class,
-                'only' => ['logout', 'signup'],
+                'only' => ['logout', 'signup', 'login', 'index'],
                 'rules' => [
                     [
                         'actions' => ['signup'],
@@ -37,9 +38,19 @@ class SiteController extends Controller
                         'roles' => ['?'],
                     ],
                     [
+                        'actions' => ['login'],
+                        'allow' => true,
+                        'roles' => ['?'],
+                    ],
+                    [
                         'actions' => ['logout'],
                         'allow' => true,
                         'roles' => ['@'],
+                    ],
+                    [
+                        'actions' => ['index'],
+                        'allow' => true,
+                        'roles' => ['client', 'vet'],
                     ],
                 ],
             ],
@@ -154,13 +165,21 @@ class SiteController extends Controller
     public function actionSignup()
     {
         $model = new SignupForm();
-        if ($model->load(Yii::$app->request->post()) && $model->signup()) {
+
+        $listaDistritos = Distritos::find()->where(['status' => 10])->all();
+        $distritos = [];
+        foreach ($listaDistritos as $distrito){
+            array_push($distritos, $distrito->designacao);
+        }
+
+        if ($model->load(Yii::$app->request->post()) && $model->signup('client')) {
             Yii::$app->session->setFlash('success', 'Thank you for registration. Please check your inbox for verification email.');
             return $this->goHome();
         }
 
         return $this->render('signup', [
             'model' => $model,
+            'distritos' => $distritos
         ]);
     }
 
