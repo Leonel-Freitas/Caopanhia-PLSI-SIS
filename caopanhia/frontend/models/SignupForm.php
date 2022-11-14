@@ -2,6 +2,7 @@
 
 namespace frontend\models;
 
+use backend\models\Auth_assignment;
 use common\models\Distritos;
 use common\models\Userprofile;
 use Yii;
@@ -92,6 +93,11 @@ class SignupForm extends Model
         if ($role == 'vet'){
             $userProfile->formacao = $this->formacao;
         }
+
+        $auth = Yii::$app->authManager;
+        $auth->assign($auth->getRole($role), $user->id);
+
+
 
         return $userProfile->save();
     }
