@@ -36,6 +36,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
 
             <?php ActiveForm::end(); ?>
+
+
         </div>
     </div>
+
 </div>
+
+<?= Html::a('Sign Up', ['site/signup'] ,['class' => 'btn btn-primary'])
+?>

@@ -31,11 +31,8 @@ AppAsset::register($this);
     <!-- Libraries Stylesheet -->
     <link href="../web/assets/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="../web/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Template Stylesheet -->
-    <link href="../web/css/style.css" rel="stylesheet">
+
 </head>
 <body class="d-flex flex-column h-100">
 <?php $this->beginBody() ?>
@@ -51,8 +48,6 @@ AppAsset::register($this);
         'options' => [
             'class' => 'navbar navbar-light ',
             'style' => 'background-color: #F1dd5b',
-
-
         ],
     ]);
     $menuItems = [
@@ -65,6 +60,7 @@ AppAsset::register($this);
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+        $menuItems[] = ['label' => 'Home', 'url' => ['/site/index']];
     }
 
     echo Nav::widget([

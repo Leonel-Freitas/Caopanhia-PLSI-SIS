@@ -10,33 +10,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="site-about">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <meta charset="utf-8">
-    <title>PET SHOP - Pet Shop Website Template</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Free HTML Templates" name="keywords">
-    <meta content="Free HTML Templates" name="description">
-
-    <!-- Favicon -->
-    <link href="image/favicon.ico" rel="icon">
-
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Roboto:wght@700&display=swap" rel="stylesheet">
-
-    <!-- Icon Font Stylesheet -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="../web/assets/flaticon/font/flaticon.css" rel="stylesheet">
-
-    <!-- Libraries Stylesheet -->
-    <link href="../web/assets/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="../web/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Template Stylesheet -->
-    <link href="../web/css/style.css" rel="stylesheet">
-    </head>
-
     <body>
     <!-- Topbar Start -->
     <div class="container-fluid border-bottom d-none d-lg-block">
@@ -212,22 +185,12 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     <!-- Team End -->
 
-
-    <!-- Footer Start -->
-
-    <!-- Footer End -->
-
-
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-primary py-3 fs-4 back-to-top"><i class="bi bi-arrow-up"></i></a>
-
-
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../web/assets/easing/easing.min.js"></script>
-    <script src="../web/assets/waypoints/waypoints.min.js"></script>
-    <script src="../web/assets/owlcarousel/owl.carousel.min.js"></script>
+
+
+
+    //<script src="../web/assets/owlcarousel/owl.carousel.min.js"></script>
 
     <!-- Template Javascript -->
     <script src="../web/jQuery/main.js"></script>
