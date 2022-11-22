@@ -29,7 +29,8 @@ AppAsset::register($this);
     <link href="../web/assets/flaticon/font/flaticon.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="../web/assets/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <?= Html::cssFile('@web/assets/owlcarousel/assets/owl.carousel.min.css')?>
 
 
 
@@ -40,8 +41,7 @@ AppAsset::register($this);
 <header>
     <?php
     NavBar::begin([
-        'brandLabel' => '<img src = "images/Logo.png" alt="Cãopanhia logo" class="Logo" style="width: 150px;
-    height: auto;"/> ' ,
+        'brandLabel' => Html::img('@web/images/Logo.png', ['class' => 'Logo']),
         //'brandLabel' => Yii::$app->name ,
 
         'brandUrl' => Yii::$app->homeUrl,

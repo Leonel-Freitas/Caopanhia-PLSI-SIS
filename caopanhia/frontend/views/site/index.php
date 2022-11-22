@@ -2,10 +2,14 @@
 
 /** @var yii\web\View $this */
 
+
+use yii\helpers\Html;
+
 $this->title = 'My Yii Application';
 ?>
 
 <div class="site-index">
+ 
 
     <div class="body-content">
         <body class="u-body u-xl-mode" data-lang="pt">
@@ -92,7 +96,8 @@ $this->title = 'My Yii Application';
                             </div>
                             <div class="u-black u-container-style u-layout-cell u-right-cell u-size-18 u-layout-cell-3">
                                 <div class="u-container-layout u-valign-bottom-lg u-valign-bottom-md u-valign-bottom-xl u-container-layout-3">
-                                    <img src="../../frontend/web/images/555.png" alt="" class="u-expanded-width u-image u-image-default u-image-2" data-image-width="650" data-image-height="461">
+                                    <?= Html::img('@web/images/555.png', ['class' => 'u-expanded-width u-image u-image-default u-image-2', 'data-image-width' => '650', 'data-image-height' => '461'])?>
+
                                 </div>
                             </div>
                         </div>

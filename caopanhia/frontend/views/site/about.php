@@ -51,7 +51,8 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="row gx-5">
                 <div class="col-lg-5 mb-5 mb-lg-0" style="min-height: 500px;">
                     <div class="position-relative h-100">
-                        <img class="position-absolute w-100 h-100 rounded" src="../web/images/about.jpg" style="object-fit: cover;">
+                        <?= Html::img('@web/images/about.jpg', ['class' => 'position-absolute w-100 h-100 rounded', 'style' => 'object-fit: cover'])?>
+
                     </div>
                 </div>
                 <div class="col-lg-7">
@@ -102,7 +103,8 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="owl-carousel team-carousel position-relative" style="padding-right: 25px;">
                 <div class="team-item">
                     <div class="position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="../web/images/team-1.jpg" alt="">
+                        <?= Html::img('@web/images/team-1.jpg', ['class' => 'img-fluid w-100'])?>
+
                         <div class="team-overlay">
                             <div class="d-flex align-items-center justify-content-start">
                                 <a class="btn btn-light btn-square mx-1" href="#"><i class="bi bi-twitter"></i></a>
@@ -118,7 +120,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
                 <div class="team-item">
                     <div class="position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="../web/images/team-2.jpg" alt="">
+                        <?= Html::img('@web/images/team-2.jpg', ['class' => 'img-fluid w-100'])?>
                         <div class="team-overlay">
                             <div class="d-flex align-items-center justify-content-start">
                                 <a class="btn btn-light btn-square mx-1" href="#"><i class="bi bi-twitter"></i></a>
@@ -134,7 +136,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
                 <div class="team-item">
                     <div class="position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="../web/images/team-3.jpg" alt="">
+                        <?= Html::img('@web/images/team-3.jpg', ['class' => 'img-fluid w-100'])?>
                         <div class="team-overlay">
                             <div class="d-flex align-items-center justify-content-start">
                                 <a class="btn btn-light btn-square mx-1" href="#"><i class="bi bi-twitter"></i></a>
@@ -150,7 +152,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
                 <div class="team-item">
                     <div class="position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="../web/images/team-4.jpg" alt="">
+                        <?= Html::img('@web/images/team-4.jpg', ['class' => 'img-fluid w-100'])?>
                         <div class="team-overlay">
                             <div class="d-flex align-items-center justify-content-start">
                                 <a class="btn btn-light btn-square mx-1" href="#"><i class="bi bi-twitter"></i></a>
@@ -166,7 +168,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
                 <div class="team-item">
                     <div class="position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="../web/images/team-5.jpg" alt="">
+                        <?= Html::img('@web/images/team-5.jpg', ['class' => 'img-fluid w-100'])?>
                         <div class="team-overlay">
                             <div class="d-flex align-items-center justify-content-start">
                                 <a class="btn btn-light btn-square mx-1" href="#"><i class="bi bi-twitter"></i></a>
@@ -189,11 +191,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 
+    <?= Html::jsFile('@web/assets/owlcarousel/owl.carousel.min.js')?>
 
-    //<script src="../web/assets/owlcarousel/owl.carousel.min.js"></script>
 
     <!-- Template Javascript -->
-    <script src="../web/jQuery/main.js"></script>
+    <?= Html::jsFile('@web/jQuery/main.js')?>
+
+
+
 
     <code><?= __FILE__ ?></code>
 </div>
