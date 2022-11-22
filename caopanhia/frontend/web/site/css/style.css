@@ -32,6 +32,7 @@
     --bs-btn-hover-color: #000000;
     --bs-btn-hover-bg: #e28743;
     --bs-btn-hover-border-color: #FFFFFF;
+    margin-top: 20px;
 }
 
 a {
@@ -630,3 +631,20 @@ a.desc:after {
     height: auto;
 }
 
+#AbandonoDes{
+    margin-left: 40px;
+    margin-top: 20px;
+
+}
+
+#Abandono{
+    margin-left: 20px;
+}
+
+#BtnAbandono{
+    margin-top: 60px;
+    margin-left: 20px;
+    --bs-btn-border-color: #000000;
+    --bs-btn-hover-border-color: #000000;
+    margin-bottom: 60px;
+}

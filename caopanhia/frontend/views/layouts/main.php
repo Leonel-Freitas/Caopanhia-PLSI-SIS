@@ -40,7 +40,7 @@ AppAsset::register($this);
 <header>
     <?php
     NavBar::begin([
-        'brandLabel' => '<img src = "./images/Logo.png" alt="Cãopanhia logo" class="Logo" style="width: 150px;
+        'brandLabel' => '<img src = "images/Logo.png" alt="Cãopanhia logo" class="Logo" style="width: 150px;
     height: auto;"/> ' ,
         //'brandLabel' => Yii::$app->name ,
 
@@ -125,13 +125,6 @@ AppAsset::register($this);
                 </div>
             </div>
             <div class="col-lg-3 col-md-6">
-                <h5 class="text-uppercase border-start border-5 border-primary ps-3 mb-4">Newsletter</h5>
-                <form action="">
-                    <div class="input-group">
-                        <input type="text" class="form-control p-3" placeholder="Your Email">
-                        <button class="btn btn-primary">Sign Up</button>
-                    </div>
-                </form>
                 <h6 class="text-uppercase mt-4 mb-3">Follow Us</h6>
                 <div class="d-flex">
                     <a class="btn btn-outline-primary btn-square me-2" href="#"><i class="bi bi-twitter"></i></a>

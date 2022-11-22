@@ -68,8 +68,9 @@ $this->title = 'My Yii Application';
         </section>
         <section class="u-clearfix u-image u-section-3" id="carousel_782e">
             <div class="u-clearfix u-sheet u-sheet-1">
-                <h2 class="u-custom-font u-font-playfair-display u-text u-text-body-alt-color u-text-1">Evite abandonos</h2>
-                <h5 class="u-text u-text-body-alt-color u-text-2">Se desconfiar de qualquer ato de violencia/abandono intervenha contactando as autoridades</h5>
+                <h2 class="u-custom-font u-font-playfair-display u-text u-text-body-alt-color u-text-1" id="Abandono">Evite abandonos</h2>
+                <h3 class="u-text u-text-body-alt-color u-text-1" id="AbandonoDes"> Se desconfiar de qualquer ato de violencia/abandono intervenha contactando as autoridades</h3>
+                <a><button id="BtnAbandono" class="btn btn-primary">Consulte o nosso Vlog</button></a>
             </div>
         </section>
         <section class="u-clearfix u-grey-10 u-section-4" id="carousel_f3ef">
@@ -83,7 +84,7 @@ $this->title = 'My Yii Application';
                                     <h1 class="u-custom-font u-font-playfair-display u-text u-text-default u-text-2">Ajude-nos a cuidar do seu <b>Animal</b>
                                     </h1>
                                     <p class="u-text u-text-default u-text-3">Cãopanhia ofereçe veterinarios prontos para ajudar o seu animal de estimação dispostos a encontrarem-se contigo</p>
-                                    <a href="https://nicepage.com/c/about-us-html-templates" class="u-active-black u-black u-border-radius-0 u-btn u-btn-rectangle u-button-style u-hover-grey-50 u-btn-1">Marque uma consulta</a>
+                                    <a><button class="btn btn-primary">Marque uma consulta</button></a>
                                 </div>
                             </div>
                             <div class="u-container-style u-image u-layout-cell u-size-24 u-image-1">
@@ -129,8 +130,7 @@ $this->title = 'My Yii Application';
                                     <div class="u-container-layout u-container-layout-4">
                                         <p class="u-text u-text-3">Visite-nos para encontrar os melhores produtos a preços asseciveis<br>
                                         </p>
-
-                                            <a href="https://nicepage.com/c/about-us-html-templates" class="u-active-black u-black u-border-radius-0 u-btn u-btn-rectangle u-button-style u-hover-grey-50 u-btn-1">Consultar loja</a>
+                                        <a><button class="btn btn-primary">Consultar loja</button></a>
 
                                     </div>
                                 </div>
