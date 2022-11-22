@@ -34,10 +34,42 @@ class RbacController extends Controller
         $updateUserProfile->description = 'Update a user profile';
         $auth->add($updateUserProfile);
 
-        //Eliminar/Desativar um utilizador
-        $deleteUserProfile = $auth->createPermission('deleteUserProfile');
-        $deleteUserProfile->description = 'Delete a user profile';
-        $auth->add($deleteUserProfile);
+        //Desativar um utilizador
+        $desactivateUserProfile = $auth->createPermission('desactivateUserProfile');
+        $desactivateUserProfile->description = 'Desactivate a user profile';
+        $auth->add($desactivateUserProfile);
+
+        //Ativar um utilizador
+        $reactivateUserProfile = $auth->createPermission('reactivateUserProfile');
+        $reactivateUserProfile->description = 'Reactivate a user profile';
+        $auth->add($reactivateUserProfile);
+
+
+        //Distritos
+        //Acessar distritos
+        $viewDistrict = $auth->createPermission('viewDistrict');
+        $viewDistrict->description = 'View all disctricts';
+        $auth->add($viewDistrict);
+
+        //Criar um distrito
+        $createDistrict = $auth->createPermission('createDistrict');
+        $createDistrict->description = 'Create a new district';
+        $auth->add($createDistrict);
+
+        //Editar os dados de um distrito
+        $updateDistrict = $auth->createPermission('updateDistrict');
+        $updateDistrict->description = 'Update a district details';
+        $auth->add($updateDistrict);
+
+        //Desativar um distrito
+        $desactivateDistrict = $auth->createPermission('desactivateDistrict');
+        $desactivateDistrict->description = 'Desactivate a district';
+        $auth->add($desactivateDistrict);
+
+        //Ativar um distrito
+        $reactivateDistrict = $auth->createPermission('reactivateDistrict');
+        $reactivateDistrict->description = 'Reactivate a district';
+        $auth->add($reactivateDistrict);
 
 
 
@@ -66,6 +98,257 @@ class RbacController extends Controller
         $deleteDog = $auth->createPermission('deleteDog');
         $deleteDog->description = 'Delete a dog profile';
         $auth->add($deleteDog);
+
+
+        //Raça
+        //Acessar raças
+        $viewBreed = $auth->createPermission('viewBreed');
+        $viewBreed->description = 'View all breeds';
+        $auth->add($viewBreed);
+
+        //Criar uma raça
+        $createBreed = $auth->createPermission('createBreed');
+        $createBreed->description = 'Create a new breed';
+        $auth->add($createBreed);
+
+        //Editar os dados de uma raça
+        $updateBreed = $auth->createPermission('updateBreed');
+        $updateBreed->description = 'Update a breed details';
+        $auth->add($updateBreed);
+
+        //Eliminar uma raça
+        $deleteBreed = $auth->createPermission('deleteBreed');
+        $deleteBreed->description = 'Delete a breed';
+        $auth->add($deleteBreed);
+
+
+        //Questionário
+        //Aceder as perguntas
+        $viewQuestions = $auth->createPermission('viewQuestions');
+        $viewQuestions->description = 'View all questions';
+        $auth->add($viewQuestions);
+
+        //Criar perguntas
+        $createQuestion = $auth->createPermission('createQuestions');
+        $createQuestion->description = 'Create a question';
+        $auth->add($createQuestion);
+
+        //Editar uma pergunta
+        $updateQuestion = $auth->createPermission('updateQuestion');
+        $updateQuestion->description = 'Update a question';
+        $auth->add($updateQuestion);
+
+        //Eliminar uma pergunta
+        $deleteQuestion = $auth->createPermission('deleteQuestion');
+        $deleteQuestion->description = 'Delete a question';
+        $auth->add($deleteQuestion);
+
+
+        //Anuncios
+        //Aceder aos anuncios
+        $viewAds = $auth->createPermission('viewAds');
+        $viewAds->description = 'View all ads';
+        $auth->add($viewAds);
+
+        //Criar anuncio
+        $createAds = $auth->createPermission('createAds');
+        $createAds->description = 'Create ads';
+        $auth->add($createAds);
+
+        //Visualizar um anuncio
+        $readAds = $auth->createPermission('readAds');
+        $readAds->description = 'view ads';
+        $auth->add($readAds);
+
+        //Editar um anuncio
+        $updateAds = $auth->createPermission('updateAds');
+        $updateAds->description = 'Update ads';
+        $auth->add($updateAds);
+
+        //Eliminar um anuncio
+        $deleteAds = $auth->createPermission('deleteAds');
+        $deleteAds->description = 'Delete ads';
+        $auth->add($deleteAds);
+
+
+
+        //Comentários aos anuncios
+        //Aceder aos comentários
+        $viewComments = $auth->createPermission('viewComments');
+        $viewComments->description = 'View all comments';
+        $auth->add($viewComments);
+
+        //Criar comentário
+        $createComment = $auth->createPermission('createComment');
+        $createComment->description = 'Create a comment';
+        $auth->add($createComment);
+
+        //Visualizar um comentário
+        $readComment = $auth->createPermission('readComment');
+        $readComment->description = 'read a comment';
+        $auth->add($readComment);
+
+        //Editar um comentário
+        $updateComments = $auth->createPermission('updateComments');
+        $updateComments->description = 'Update a comment';
+        $auth->add($updateComments);
+
+        //Eliminar um comentário
+        $deleteComment = $auth->createPermission('deleteComment');
+        $deleteComment->description = 'Delete a comment';
+        $auth->add($deleteComment);
+
+
+        //Marcações veterinárias
+        //Aceder as marcações
+        $viewAppointment = $auth->createPermission('viewAppointment');
+        $viewAppointment->description = 'View all appointments';
+        $auth->add($viewAppointment);
+
+        //Criar marcação
+        $createAppointment = $auth->createPermission('createAppointment');
+        $createAppointment->description = 'create a new appointment';
+        $auth->add($createAppointment);
+
+        //Visualizar uma marcação
+        $readAppointment = $auth->createPermission('readAppointment');
+        $readAppointment->description = 'view appointments';
+        $auth->add($readAppointment);
+
+        //Editar uma marcação
+        $updateAppointment = $auth->createPermission('updateAppointment');
+        $updateAppointment->description = 'Update a appointment details';
+        $auth->add($updateAppointment);
+
+        //Eliminar uma marcação
+        $deleteAppointment = $auth->createPermission('deleteAppointment');
+        $deleteAppointment->description = 'Delete a appointment';
+        $auth->add($deleteAppointment);
+
+
+
+        //Consultas veterinárias
+        //Criar consulta
+        $createExamination = $auth->createPermission('createExamination');
+        $createExamination->description = 'create a new examination';
+        $auth->add($createExamination);
+
+        //Visualizar uma consulta
+        $readExamination = $auth->createPermission('readExamination');
+        $readExamination->description = 'view a examination';
+        $auth->add($readExamination);
+
+        //Editar uma consulta
+        $updateExamination = $auth->createPermission('updateExamination');
+        $updateExamination->description = 'Update a examination details';
+        $auth->add($updateExamination);
+
+        //Eliminar uma consulta
+        $deleteExamination = $auth->createPermission('deleteExamination');
+        $deleteExamination->description = 'Delete a examination';
+        $auth->add($deleteExamination);
+
+
+
+        //Encomenda
+        //Acessar encomendas
+        $viewPackages = $auth->createPermission('viewPackages');
+        $viewPackages->description = 'View all packages';
+        $auth->add($viewPackages);
+
+        //Criar uma encomenda
+        $createPackage = $auth->createPermission('createPackage');
+        $createPackage->description = 'create a new package';
+        $auth->add($createPackage);
+
+        //Visualizar encomendas
+        $readPackage = $auth->createPermission('readPackage');
+        $readPackage->description = 'See orders';
+        $auth->add($readPackage);
+
+        //Editar dados de uma encomenda
+        $updatePackage = $auth->createPermission('updatePackage');
+        $updatePackage->description = 'Update a order details';
+        $auth->add($updatePackage);
+
+
+
+        //Metodos de Expedição
+        //Acessar expedições
+        $viewShippingMethods = $auth->createPermission('viewShippingMethods');
+        $viewShippingMethods->description = 'View all shipping methods';
+        $auth->add($viewShippingMethods);
+
+        //Criar um metodo de expedição
+        $createShippingMethods = $auth->createPermission('createShippingMethods');
+        $createShippingMethods->description = 'Create a new shipping method';
+        $auth->add($createShippingMethods);
+
+        //Editar os dados de um metodo de expedição
+        $updateShippingMethods = $auth->createPermission('updateShippingMethods');
+        $updateShippingMethods->description = 'Update a shipping method details';
+        $auth->add($updateShippingMethods);
+
+        //Desativar um metodo de expedição
+        $desactivateShippingMethods = $auth->createPermission('desactivateShippingMethods');
+        $desactivateShippingMethods->description = 'Desactivate a shipping method';
+        $auth->add($desactivateShippingMethods);
+
+        //Ativar um metodo de expedição
+        $reactivateShippingMethods = $auth->createPermission('reactivateShippingMethods');
+        $reactivateShippingMethods->description = 'Reactivate a shipping method';
+        $auth->add($reactivateShippingMethods);
+
+
+
+        //Metodos de Pagamento
+        //Acessar expedições
+        $viewPaymentMethods = $auth->createPermission('viewPaymentMethods');
+        $viewPaymentMethods->description = 'View all payment methods';
+        $auth->add($viewPaymentMethods);
+
+        //Criar um metodo de pagamento
+        $createPaymentMethods = $auth->createPermission('createPaymentMethods');
+        $createPaymentMethods->description = 'Create a new payment method';
+        $auth->add($createPaymentMethods);
+
+        //Editar os dados de um metodo de pagamento
+        $updatePaymentMethods = $auth->createPermission('updatePaymentMethods');
+        $updatePaymentMethods->description = 'Update a payment method details';
+        $auth->add($updatePaymentMethods);
+
+        //Desativar um metodo de pagamento
+        $desactivatePaymentMethods = $auth->createPermission('desactivatePaymentMethods');
+        $desactivatePaymentMethods->description = 'Desactivate a payment method';
+        $auth->add($desactivatePaymentMethods);
+
+        //Ativar um metodo de pagamento
+        $reactivatePaymentMethods = $auth->createPermission('reactivatePaymentMethods');
+        $reactivatePaymentMethods->description = 'Reactivate a payment method';
+        $auth->add($reactivatePaymentMethods);
+
+
+
+        //Carrinho
+        //Adicionar produtos a um carrinho
+        $createShopCar = $auth->createPermission('createShopCar');
+        $createShopCar->description = 'Add a product to shop car';
+        $auth->add($createShopCar);
+
+        //Visualizar produtos no carrinho
+        $readShopCar = $auth->createPermission('readShopCar');
+        $readShopCar->description = 'See the shop car';
+        $auth->add($readShopCar);
+
+        //Editar dados de um produto no carrinho (ex quantidade)
+        $updateShopCar = $auth->createPermission('updateShopCar');
+        $updateShopCar->description = 'Update a product details on shop car';
+        $auth->add($updateShopCar);
+
+        //Remover um produto do carrinho
+        $deleteShopCar = $auth->createPermission('deleteShopCar');
+        $deleteShopCar->description = 'Remove a product from shop car';
+        $auth->add($deleteShopCar);
 
 
 
@@ -97,170 +380,9 @@ class RbacController extends Controller
 
 
 
-        //Carrinho
-        //Adicionar produtos a um carrinho
-        $createShopCar = $auth->createPermission('createShopCar');
-        $createShopCar->description = 'Add a product to shop car';
-        $auth->add($createShopCar);
-
-        //Visualizar produtos no carrinho
-        $readShopCar = $auth->createPermission('readShopCar');
-        $readShopCar->description = 'See the shop car';
-        $auth->add($readShopCar);
-
-        //Editar dados de um produto no carrinho (ex quantidade)
-        $updateShopCar = $auth->createPermission('updateShopCar');
-        $updateShopCar->description = 'Update a product details on shop car';
-        $auth->add($updateShopCar);
-
-        //Remover um produto do carrinho
-        $deleteShopCar = $auth->createPermission('deleteShopCar');
-        $deleteShopCar->description = 'Remove a product from shop car';
-        $auth->add($deleteShopCar);
-
-
-
-        //Encomenda
-        //Acessar encomendas
-        $viewPackages = $auth->createPermission('viewPackages');
-        $viewPackages->description = 'View all packages';
-        $auth->add($viewPackages);
-
-        //Criar uma encomenda
-        $createPackage = $auth->createPermission('createPackage');
-        $createPackage->description = 'create a new package';
-        $auth->add($createPackage);
-
-        //Visualizar encomendas
-        $readPackage = $auth->createPermission('readPackage');
-        $readPackage->description = 'See orders';
-        $auth->add($readPackage);
-
-        //Editar dados de uma encomenda
-        $updatePackage = $auth->createPermission('updatePackage');
-        $updatePackage->description = 'Update a order details';
-        $auth->add($updatePackage);
-
-
-
-        //Consultas do veterinário
-        //Acessar consultas
-        $viewAppointment = $auth->createPermission('viewAppointment');
-        $viewAppointment->description = 'View all appointments';
-        $auth->add($viewAppointment);
-
-        //Criar uma consulta
-        $createAppointment = $auth->createPermission('createAppointment');
-        $createAppointment->description = 'create a new appointment';
-        $auth->add($createAppointment);
-
-        //Visualizar consulta
-        $readAppointment = $auth->createPermission('readAppointment');
-        $readAppointment->description = 'view appointments';
-        $auth->add($readAppointment);
-
-        //Editar detalhes de uma consulta
-        $updateAppointment = $auth->createPermission('updateAppointment');
-        $updateAppointment->description = 'Update a appointment details';
-        $auth->add($updateAppointment);
-
-
-
-        //Distritos
-        //Acessar distritos
-        $viewDistrict = $auth->createPermission('viewDistrict');
-        $viewDistrict->description = 'View all disctricts';
-        $auth->add($viewDistrict);
-
-        //Criar um distrito
-        $createDistrict = $auth->createPermission('createDistrict');
-        $createDistrict->description = 'Create a new district';
-        $auth->add($createDistrict);
-
-        //Editar os dados de um distrito
-        $updateDistrict = $auth->createPermission('updateDistrict');
-        $updateDistrict->description = 'Update a district details';
-        $auth->add($updateDistrict);
-
-        //Eliminar um distrito
-        $deleteDistrict = $auth->createPermission('deleteDistrict');
-        $deleteDistrict->description = 'Delete a district';
-        $auth->add($deleteDistrict);
-
-
-
-        //Raça
-        //Acessar raças
-        $viewBreed = $auth->createPermission('viewBreed');
-        $viewBreed->description = 'View all breeds';
-        $auth->add($viewBreed);
-
-        //Criar uma raça
-        $createBreed = $auth->createPermission('createBreed');
-        $createBreed->description = 'Create a new breed';
-        $auth->add($createBreed);
-
-        //Editar os dados de uma raça
-        $updateBreed = $auth->createPermission('updateBreed');
-        $updateBreed->description = 'Update a breed details';
-        $auth->add($updateBreed);
-
-        //Eliminar uma raça
-        $deleteBreed = $auth->createPermission('deleteBreed');
-        $deleteBreed->description = 'Delete a breed';
-        $auth->add($deleteBreed);
-
-
-
-        //Metodos de Expedição
-        //Acessar expedições
-        $viewShippingMethods = $auth->createPermission('viewShippingMethods');
-        $viewShippingMethods->description = 'View all shipping methods';
-        $auth->add($viewShippingMethods);
-
-        //Criar um metodo de expedição
-        $createShippingMethods = $auth->createPermission('createShippingMethods');
-        $createShippingMethods->description = 'Create a new shipping method';
-        $auth->add($createShippingMethods);
-
-        //Editar os dados de um metodo de expedição
-        $updateShippingMethods = $auth->createPermission('updateShippingMethods');
-        $updateShippingMethods->description = 'Update a shipping method details';
-        $auth->add($updateShippingMethods);
-
-        //Eliminar um metodo de expedição
-        $deleteShippingMethods = $auth->createPermission('deleteShippingMethods');
-        $deleteShippingMethods->description = 'Delete a shipping method';
-        $auth->add($deleteShippingMethods);
-
-
-
-        //Metodos de Pagamento
-        //Acessar expedições
-        $viewPaymentMethods = $auth->createPermission('viewPaymentMethods');
-        $viewPaymentMethods->description = 'View all payment methods';
-        $auth->add($viewPaymentMethods);
-
-        //Criar um metodo de pagamento
-        $createPaymentMethods = $auth->createPermission('createPaymentMethods');
-        $createPaymentMethods->description = 'Create a new payment method';
-        $auth->add($createPaymentMethods);
-
-        //Editar os dados de um metodo de pagamento
-        $updatePaymentMethods = $auth->createPermission('updatePaymentMethods');
-        $updatePaymentMethods->description = 'Update a payment method details';
-        $auth->add($updatePaymentMethods);
-
-        //Eliminar um metodo de pagamento
-        $deletePaymentMethods = $auth->createPermission('deletePaymentMethods');
-        $deletePaymentMethods->description = 'Delete a payment method';
-        $auth->add($deletePaymentMethods);
-
-
-
         //Tipo de produtos
         //Acessar tipos de procutos
-        $viewProductType = $auth->createPermission('$viewProductType');
+        $viewProductType = $auth->createPermission('viewProductType');
         $viewProductType->description = 'View all product types';
         $auth->add($viewProductType);
 
@@ -274,39 +396,51 @@ class RbacController extends Controller
         $updateProductType->description = 'Update a product type details';
         $auth->add($updateProductType);
 
-        //Eliminar um tipo de produto
-        $deleteProductType = $auth->createPermission('deleteProductType');
-        $deleteProductType->description = 'Delete a product type';
-        $auth->add($deleteProductType);
+        //Desativar um tipo de produto
+        $desactivateProductType = $auth->createPermission('desactivateProductType');
+        $desactivateProductType->description = 'Desactivate a product type';
+        $auth->add($desactivateProductType);
 
-
+        //Ativar um tipo de produto
+        $reactivateProductType = $auth->createPermission('reactivateProductType');
+        $reactivateProductType->description = 'Reactivate a product type';
+        $auth->add($reactivateProductType);
 
 
         //ROLES
         //Gestor
         $gestor = $auth->createRole('gestor');
         $auth->add($gestor);
+        $auth->addChild($gestor, $viewPackages);
+        $auth->addChild($gestor, $readPackage);
         $auth->addChild($gestor, $viewProducts);
         $auth->addChild($gestor, $createProduct);
         $auth->addChild($gestor, $readProduct);
         $auth->addChild($gestor, $updateProduct);
         $auth->addChild($gestor, $deleteProduct);
-        $auth->addChild($gestor, $viewPackages);
-        $auth->addChild($gestor, $readPackage);
         $auth->addChild($gestor, $viewProductType);
         $auth->addChild($gestor, $createProductType);
         $auth->addChild($gestor, $updateProductType);
-        $auth->addChild($gestor, $deleteProductType);
+        $auth->addChild($gestor, $desactivateProductType);
+        $auth->addChild($gestor, $reactivateProductType);
 
 
         //Veterinario
         $vet = $auth->createRole('vet');
         $auth->add($vet);
-        $auth->addChild($vet, $readDog);
-        $auth->addChild($vet, $updateDog);
+        $auth->addChild($vet, $viewAds);
+        $auth->addChild($vet, $readAds);
+        $auth->addChild($vet, $updateAds);
+        $auth->addChild($vet, $viewAppointment);
         $auth->addChild($vet, $createAppointment);
         $auth->addChild($vet, $readAppointment);
         $auth->addChild($vet, $updateAppointment);
+        $auth->addChild($vet, $deleteAppointment);
+        $auth->addChild($vet, $createExamination);
+        $auth->addChild($vet, $readExamination);
+        $auth->addChild($vet, $updateExamination);
+        $auth->addChild($vet, $deleteExamination);
+
 
         //Cliente
         $client = $auth->createRole('client');
@@ -317,36 +451,62 @@ class RbacController extends Controller
         $auth->addChild($client, $readDog);
         $auth->addChild($client, $updateDog);
         $auth->addChild($client, $deleteDog);
-        $auth->addChild($client, $readProduct);
+        $auth->addChild($client, $viewAds);
+        $auth->addChild($client, $createAds);
+        $auth->addChild($client, $readAds);
+        $auth->addChild($client, $updateAds);
+        $auth->addChild($client, $deleteAds);
+        $auth->addChild($client, $viewComments);
+        $auth->addChild($client, $createComment);
+        $auth->addChild($client, $readComment);
+        $auth->addChild($client, $updateComments);
+        $auth->addChild($client, $deleteComment);
+        $auth->addChild($client, $viewAppointment);
+        $auth->addChild($client, $readAppointment);
+        $auth->addChild($client, $readExamination);
+        $auth->addChild($client, $viewPackages);
+        $auth->addChild($client, $createPackage);
+        $auth->addChild($client, $readPackage);
+        $auth->addChild($client, $updatePackage);
         $auth->addChild($client, $createShopCar);
         $auth->addChild($client, $readShopCar);
         $auth->addChild($client, $updateShopCar);
         $auth->addChild($client, $deleteShopCar);
-        $auth->addChild($client, $createPackage);
-        $auth->addChild($client, $readPackage);
-        $auth->addChild($client, $updatePackage);
-        $auth->addChild($client, $readAppointment);
+        $auth->addChild($client, $viewProducts);
+        $auth->addChild($client, $readProduct);
+
+
 
         //Admin
         $admin = $auth->createRole('admin');
         $auth->add($admin);
         $auth->addChild($admin, $viewUsersProfile);
         $auth->addChild($admin, $createUserProfile);
-        $auth->addChild($admin, $deleteUserProfile);
+        $auth->addChild($admin, $desactivateUserProfile);
+        $auth->addChild($admin, $reactivateUserProfile);
+        $auth->addChild($admin, $viewDistrict);
         $auth->addChild($admin, $createDistrict);
         $auth->addChild($admin, $updateDistrict);
-        $auth->addChild($admin, $deleteDistrict);
+        $auth->addChild($admin, $desactivateDistrict);
+        $auth->addChild($admin, $reactivateDistrict);
+        $auth->addChild($admin, $viewBreed);
         $auth->addChild($admin, $createBreed);
         $auth->addChild($admin, $updateBreed);
         $auth->addChild($admin, $deleteBreed);
+        $auth->addChild($admin, $viewQuestions);
+        $auth->addChild($admin, $createQuestion);
+        $auth->addChild($admin, $updateQuestion);
+        $auth->addChild($admin, $deleteQuestion);
         $auth->addChild($admin, $viewShippingMethods);
         $auth->addChild($admin, $createShippingMethods);
         $auth->addChild($admin, $updateShippingMethods);
-        $auth->addChild($admin, $deleteShippingMethods);
+        $auth->addChild($admin, $desactivateShippingMethods);
+        $auth->addChild($admin, $reactivateShippingMethods);
         $auth->addChild($admin, $viewPaymentMethods);
         $auth->addChild($admin, $createPaymentMethods);
         $auth->addChild($admin, $updatePaymentMethods);
-        $auth->addChild($admin, $deletePaymentMethods);
+        $auth->addChild($admin, $desactivatePaymentMethods);
+        $auth->addChild($admin, $reactivatePaymentMethods);
         $auth->addChild($admin, $gestor);
         $auth->addChild($admin, $vet);
         $auth->addChild($admin, $client);
