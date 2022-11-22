@@ -3,6 +3,8 @@
 namespace backend\controllers;
 
 use common\models\LoginForm;
+use common\models\User;
+use PHPUnit\Framework\Warning;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -30,7 +32,7 @@ class SiteController extends Controller
                     [
                         'actions' => ['index'],
                         'allow' => true,
-                        'roles' => ['admin', 'gestor'],
+                        'roles' => ['admin', 'gestor', 'vet'],
                     ],
                     [
                         'actions' => ['logout'],
@@ -85,7 +87,17 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+
+            $userRole = Yii::$app->user->identity->getRoleName();
+
+            if ($userRole == 'client' ){
+                Yii::$app->user->logout();
+                Yii::$app->session->setFlash('error', 'O utilizador inserido não tem permissões para aceder ao backend');
+                return $this->goHome();
+            }else{
+                return $this->goHome();
+            }
+
         }
 
         $model->password = '';

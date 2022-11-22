@@ -14,6 +14,11 @@ class RbacController extends Controller
         //PERMISSOES
 
         //Utilizadores
+        //Acessar utilizadores
+        $viewUsersProfile = $auth->createPermission('viewUsersProfile');
+        $viewUsersProfile->description = 'View all users profile';
+        $auth->add($viewUsersProfile);
+
         //Criar um utilizador
         $createUserProfile = $auth->createPermission('createUserProfile');
         $createUserProfile->description = 'Create a new user profile';
@@ -37,6 +42,11 @@ class RbacController extends Controller
 
 
         //Caes
+        //Acessar caes
+        $viewDogs = $auth->createPermission('viewDogs');
+        $viewDogs->description = 'View all dogs';
+        $auth->add($viewDogs);
+
         //Criar um cao
         $createDog = $auth->createPermission('createDog');
         $createDog->description = 'Create a new dog';
@@ -60,6 +70,11 @@ class RbacController extends Controller
 
 
         //Produtos
+        //Acessar produtos
+        $viewProducts = $auth->createPermission('viewProducts');
+        $viewProducts->description = 'View all products';
+        $auth->add($viewProducts);
+
         //Criar um produto
         $createProduct = $auth->createPermission('createProduct');
         $createProduct->description = 'Create a new product';
@@ -106,6 +121,11 @@ class RbacController extends Controller
 
 
         //Encomenda
+        //Acessar encomendas
+        $viewPackages = $auth->createPermission('viewPackages');
+        $viewPackages->description = 'View all packages';
+        $auth->add($viewPackages);
+
         //Criar uma encomenda
         $createPackage = $auth->createPermission('createPackage');
         $createPackage->description = 'create a new package';
@@ -124,6 +144,11 @@ class RbacController extends Controller
 
 
         //Consultas do veterinário
+        //Acessar consultas
+        $viewAppointment = $auth->createPermission('viewAppointment');
+        $viewAppointment->description = 'View all appointments';
+        $auth->add($viewAppointment);
+
         //Criar uma consulta
         $createAppointment = $auth->createPermission('createAppointment');
         $createAppointment->description = 'create a new appointment';
@@ -141,7 +166,12 @@ class RbacController extends Controller
 
 
 
-        //District
+        //Distritos
+        //Acessar distritos
+        $viewDistrict = $auth->createPermission('viewDistrict');
+        $viewDistrict->description = 'View all disctricts';
+        $auth->add($viewDistrict);
+
         //Criar um distrito
         $createDistrict = $auth->createPermission('createDistrict');
         $createDistrict->description = 'Create a new district';
@@ -160,6 +190,11 @@ class RbacController extends Controller
 
 
         //Raça
+        //Acessar raças
+        $viewBreed = $auth->createPermission('viewBreed');
+        $viewBreed->description = 'View all breeds';
+        $auth->add($viewBreed);
+
         //Criar uma raça
         $createBreed = $auth->createPermission('createBreed');
         $createBreed->description = 'Create a new breed';
@@ -178,6 +213,11 @@ class RbacController extends Controller
 
 
         //Metodos de Expedição
+        //Acessar expedições
+        $viewShippingMethods = $auth->createPermission('viewShippingMethods');
+        $viewShippingMethods->description = 'View all shipping methods';
+        $auth->add($viewShippingMethods);
+
         //Criar um metodo de expedição
         $createShippingMethods = $auth->createPermission('createShippingMethods');
         $createShippingMethods->description = 'Create a new shipping method';
@@ -196,6 +236,11 @@ class RbacController extends Controller
 
 
         //Metodos de Pagamento
+        //Acessar expedições
+        $viewPaymentMethods = $auth->createPermission('viewPaymentMethods');
+        $viewPaymentMethods->description = 'View all payment methods';
+        $auth->add($viewPaymentMethods);
+
         //Criar um metodo de pagamento
         $createPaymentMethods = $auth->createPermission('createPaymentMethods');
         $createPaymentMethods->description = 'Create a new payment method';
@@ -214,6 +259,11 @@ class RbacController extends Controller
 
 
         //Tipo de produtos
+        //Acessar tipos de procutos
+        $viewProductType = $auth->createPermission('$viewProductType');
+        $viewProductType->description = 'View all product types';
+        $auth->add($viewProductType);
+
         //Criar um tipo de produto
         $createProductType = $auth->createPermission('createProductType');
         $createProductType->description = 'Create a new product type';
@@ -236,11 +286,14 @@ class RbacController extends Controller
         //Gestor
         $gestor = $auth->createRole('gestor');
         $auth->add($gestor);
+        $auth->addChild($gestor, $viewProducts);
         $auth->addChild($gestor, $createProduct);
         $auth->addChild($gestor, $readProduct);
         $auth->addChild($gestor, $updateProduct);
         $auth->addChild($gestor, $deleteProduct);
+        $auth->addChild($gestor, $viewPackages);
         $auth->addChild($gestor, $readPackage);
+        $auth->addChild($gestor, $viewProductType);
         $auth->addChild($gestor, $createProductType);
         $auth->addChild($gestor, $updateProductType);
         $auth->addChild($gestor, $deleteProductType);
@@ -277,6 +330,7 @@ class RbacController extends Controller
         //Admin
         $admin = $auth->createRole('admin');
         $auth->add($admin);
+        $auth->addChild($admin, $viewUsersProfile);
         $auth->addChild($admin, $createUserProfile);
         $auth->addChild($admin, $deleteUserProfile);
         $auth->addChild($admin, $createDistrict);
@@ -285,9 +339,11 @@ class RbacController extends Controller
         $auth->addChild($admin, $createBreed);
         $auth->addChild($admin, $updateBreed);
         $auth->addChild($admin, $deleteBreed);
+        $auth->addChild($admin, $viewShippingMethods);
         $auth->addChild($admin, $createShippingMethods);
         $auth->addChild($admin, $updateShippingMethods);
         $auth->addChild($admin, $deleteShippingMethods);
+        $auth->addChild($admin, $viewPaymentMethods);
         $auth->addChild($admin, $createPaymentMethods);
         $auth->addChild($admin, $updatePaymentMethods);
         $auth->addChild($admin, $deletePaymentMethods);
