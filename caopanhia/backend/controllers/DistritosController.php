@@ -5,6 +5,7 @@ namespace backend\controllers;
 use common\models\Distritos;
 use common\models\DistritosSearch;
 use common\models\Userprofile;
+use PHPUnit\Framework\Error;
 use PHPUnit\Framework\Warning;
 use Yii;
 use yii\console\Exception;
@@ -26,16 +27,16 @@ class DistritosController extends Controller
         return array_merge(
             parent::behaviors(),
             [
-                'access' => [
+                /*'access' => [
                     'class' => AccessControl::class,
                     'rules' => [
                         [
-                            'actions' => ['index', 'create', 'update', 'disable', 'reactivate'],
+                           // 'actions' => ['index', 'create', 'update', 'disable', 'reactivate'],
                             'allow' => true,
                             'roles' => ['admin'],
                         ],
                     ],
-                ],
+                ],*/
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
@@ -53,35 +54,48 @@ class DistritosController extends Controller
      */
     public function actionIndex()
     {
-       $listaDistritos = Distritos::find()->all();
+        if (Yii::$app->user->can('viewDistrict')) {
+            $listaDistritos = Distritos::find()->all();
 
-        return $this->render('index', [
-            'distritos' => $listaDistritos
-        ]);
+            return $this->render('index', [
+                'distritos' => $listaDistritos
+            ]);
+        }else{
+            throw new Warning('Você não tem permissão para realizar esta ação!');
+        }
+
     }
 
     public function actionDisable($id)
     {
-        $users = Userprofile::find()->all();
-        foreach ($users as $user){
-            if ($user->idDistrito == $id){
-                Yii::$app->session->setFlash('error', 'Não pode desativar este distrito porque existem utilizadores associados a este distrito');
-                return $this->redirect(['index']);
+        if (Yii::$app->user->can('desactivateDistrict')) {
+            $users = Userprofile::find()->all();
+            foreach ($users as $user) {
+                if ($user->idDistrito == $id) {
+                    Yii::$app->session->setFlash('error', 'Não pode desativar este distrito porque existem utilizadores associados a este distrito');
+                    return $this->redirect(['index']);
+                }
             }
-        }
 
-        $model = $this->findModel($id);
-        $model->status = 9;
-        $model->save();
-        return $this->redirect(['index']);
+            $model = $this->findModel($id);
+            $model->status = 9;
+            $model->save();
+            return $this->redirect(['index']);
+        }else{
+            throw new Warning('Você não tem permissão para realizar esta ação!');
+        }
     }
 
     public function actionReactivate($id)
     {
-        $model = $this->findModel($id);
-        $model->status = 10;
-        $model->save();
-        return $this->redirect(['index']);
+        if (Yii::$app->user->can('reactivateDistrict')) {
+            $model = $this->findModel($id);
+            $model->status = 10;
+            $model->save();
+            return $this->redirect(['index']);
+        }else{
+            throw new Warning('Você não tem permissão para realizar esta ação!');
+        }
     }
 
     /**
@@ -104,19 +118,23 @@ class DistritosController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Distritos();
+        if (Yii::$app->user->can('createDistrict')) {
+            $model = new Distritos();
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['index']);
+            if ($this->request->isPost) {
+                if ($model->load($this->request->post()) && $model->save()) {
+                    return $this->redirect(['index']);
+                }
+            } else {
+                $model->loadDefaultValues();
             }
-        } else {
-            $model->loadDefaultValues();
-        }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }else{
+            throw new Warning('Você não tem permissão para realizar esta ação!');
+        }
     }
 
     /**
@@ -128,15 +146,19 @@ class DistritosController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        if (Yii::$app->user->can('updateDistrict')) {
+            $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+            if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['index']);
+            }
+
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }else{
+            throw new Warning('Você não tem permissão para realizar esta ação!');
         }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
     }
 
     /**

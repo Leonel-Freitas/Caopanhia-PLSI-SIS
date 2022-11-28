@@ -52,7 +52,7 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'Anuncios'],
+        ['label' => 'Anuncios', 'url' => ['/anuncios/index']],
         ['label' => 'Loja'],
         ['label' => 'About', 'url' => ['/site/about']],
 
@@ -60,7 +60,6 @@ AppAsset::register($this);
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
-        $menuItems[] = ['label' => 'Home', 'url' => ['/site/index']];
     }
 
     echo Nav::widget([

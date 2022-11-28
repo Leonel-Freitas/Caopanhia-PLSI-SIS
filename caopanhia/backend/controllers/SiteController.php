@@ -44,7 +44,7 @@ class SiteController extends Controller
             'verbs' => [
                 'class' => VerbFilter::class,
                 'actions' => [
-                    'logout' => ['get'],
+                    'logout' => ['post'],
                 ],
             ],
         ];

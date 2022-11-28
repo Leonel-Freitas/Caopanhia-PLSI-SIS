@@ -411,6 +411,7 @@ class RbacController extends Controller
         //Gestor
         $gestor = $auth->createRole('gestor');
         $auth->add($gestor);
+        $auth->addChild($gestor, $readUserProfile);
         $auth->addChild($gestor, $viewPackages);
         $auth->addChild($gestor, $readPackage);
         $auth->addChild($gestor, $viewProducts);
@@ -428,6 +429,7 @@ class RbacController extends Controller
         //Veterinario
         $vet = $auth->createRole('vet');
         $auth->add($vet);
+        $auth->addChild($vet, $readUserProfile);
         $auth->addChild($vet, $viewAds);
         $auth->addChild($vet, $readAds);
         $auth->addChild($vet, $updateAds);
