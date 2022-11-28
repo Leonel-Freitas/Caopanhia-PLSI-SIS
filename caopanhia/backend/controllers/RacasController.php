@@ -9,6 +9,7 @@ use PHPUnit\Framework\Warning;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -29,7 +30,6 @@ class RacasController extends Controller
                     'class' => AccessControl::class,
                     'rules' => [
                         [
-                            //'actions' => ['index', 'create', 'update', 'delete'],
                             'allow' => true,
                             'roles' => ['admin'],
                         ],
@@ -59,22 +59,17 @@ class RacasController extends Controller
                 'racas' => $racas,
             ]);
         }else{
-            throw new Warning('Você não tem permissão para realizar esta ação!');
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
         }
     }
 
-    /**
-     * Displays a single Racas model.
-     * @param int $id ID
-     * @return string
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+    /*
     public function actionView($id)
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
-    }
+    }*/
 
     /**
      * Creates a new Racas model.
@@ -98,7 +93,7 @@ class RacasController extends Controller
                 'model' => $model,
             ]);
         }else{
-            throw new Warning('Você não tem permissão para realizar esta ação!');
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
         }
     }
 
@@ -122,7 +117,7 @@ class RacasController extends Controller
                 'model' => $model,
             ]);
         }else{
-            throw new Warning('Você não tem permissão para realizar esta ação!');
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
         }
     }
 
@@ -147,7 +142,7 @@ class RacasController extends Controller
             }
 
         }else{
-            throw new Warning('Você não tem permissão para realizar esta ação!');
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
         }
     }
 

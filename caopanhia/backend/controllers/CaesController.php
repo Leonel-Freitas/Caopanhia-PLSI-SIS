@@ -3,8 +3,11 @@
 namespace backend\controllers;
 
 use common\models\Caes;
+use Yii;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -21,6 +24,15 @@ class CaesController extends Controller
         return array_merge(
             parent::behaviors(),
             [
+                'access' => [
+                    'class' => AccessControl::class,
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'roles' => ['admin', 'vet'],
+                        ],
+                    ],
+                ],
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
@@ -36,46 +48,30 @@ class CaesController extends Controller
      *
      * @return string
      */
-    public function actionIndex()
+    /*public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Caes::find(),
-            /*
-            'pagination' => [
-                'pageSize' => 50
-            ],
-            'sort' => [
-                'defaultOrder' => [
-                    'id' => SORT_DESC,
-                ]
-            ],
-            */
-        ]);
+        $dataProvider = new ActiveDataProvider(['query' => Caes::find()]);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
-    }
+    }*/
 
-    /**
-     * Displays a single Caes model.
-     * @param int $id ID
-     * @return string
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        if (Yii::$app->user->can('readDog')) {
+            return $this->render('view', [
+                'model' => $this->findModel($id),
+            ]);
+        }else{
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
+        }
+
     }
 
-    /**
-     * Creates a new Caes model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return string|\yii\web\Response
-     */
-    public function actionCreate()
+
+    /*public function actionCreate()
     {
         $model = new Caes();
 
@@ -90,16 +86,10 @@ class CaesController extends Controller
         return $this->render('create', [
             'model' => $model,
         ]);
-    }
+    }*/
 
-    /**
-     * Updates an existing Caes model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id ID
-     * @return string|\yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionUpdate($id)
+
+    /*public function actionUpdate($id)
     {
         $model = $this->findModel($id);
 
@@ -110,21 +100,15 @@ class CaesController extends Controller
         return $this->render('update', [
             'model' => $model,
         ]);
-    }
+    }*/
 
-    /**
-     * Deletes an existing Caes model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id ID
-     * @return \yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionDelete($id)
+
+    /*public function actionDelete($id)
     {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
-    }
+    }*/
 
     /**
      * Finds the Caes model based on its primary key value.

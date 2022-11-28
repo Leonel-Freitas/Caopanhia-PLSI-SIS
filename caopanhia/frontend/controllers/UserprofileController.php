@@ -5,7 +5,9 @@ namespace frontend\controllers;
 use common\models\Userprofile;
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yiiunit\extensions\bootstrap5\data\User;
@@ -23,6 +25,15 @@ class UserprofileController extends Controller
         return array_merge(
             parent::behaviors(),
             [
+                'access' => [
+                    'class' => AccessControl::class,
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'roles' => ['admin', 'client'],
+                        ],
+                    ],
+                ],
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
@@ -33,16 +44,11 @@ class UserprofileController extends Controller
         );
     }
 
-    /**
-     * Lists all Userprofile models.
-     *
-     * @return string
-     */
+    /*
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
             'query' => Userprofile::find(),
-            /*
             'pagination' => [
                 'pageSize' => 50
             ],
@@ -51,13 +57,13 @@ class UserprofileController extends Controller
                     'id' => SORT_DESC,
                 ]
             ],
-            */
+
         ]);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
-    }
+    }*/
 
     /**
      * Displays a single Userprofile model.
@@ -67,18 +73,17 @@ class UserprofileController extends Controller
      */
     public function actionView($id)
     {
-        //$thisUser = Userprofile::find()->where(['idUser' => $id])->one();
-        $thisUser = Userprofile::findOne($id);
-        return $this->render('view', [
-            'thisUser' => $thisUser,
-        ]);
+        if (Yii::$app->user->can('readUserProfile')) {
+            $thisUser = Userprofile::findOne($id);
+            return $this->render('view', [
+                'thisUser' => $thisUser,
+            ]);
+        }else{
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
+        }
     }
 
-    /**
-     * Creates a new Userprofile model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return string|\yii\web\Response
-     */
+    /*
     public function actionCreate()
     {
         $model = new Userprofile();
@@ -94,17 +99,20 @@ class UserprofileController extends Controller
         return $this->render('create', [
             'model' => $model,
         ]);
-    }
+    }*/
 
     public function actionViewprofile($id)
     {
-
-        $thisUser = Userprofile::findOne($id);
-        $thisEmailUser = \common\models\User::findOne($thisUser->idUser)->email;
-        return $this->render('viewprofile', [
-            'thisUser' => $thisUser,
-            'thisEmailUser' => $thisEmailUser,
-        ]);
+        if (Yii::$app->user->can('readUserProfile')) {
+            $thisUser = Userprofile::findOne($id);
+            $thisEmailUser = \common\models\User::findOne($thisUser->idUser)->email;
+            return $this->render('viewprofile', [
+                'thisUser' => $thisUser,
+                'thisEmailUser' => $thisEmailUser,
+            ]);
+        }else{
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
+        }
     }
 
     /**
@@ -116,33 +124,30 @@ class UserprofileController extends Controller
      */
     public function actionUpdate($id)
     {
+        if (Yii::$app->user->can('updateUserProfile')) {
+            $thisUser = Userprofile::find()->where(['idUser' => $id])->one();
 
-        $thisUser = Userprofile::find()->where(['idUser' => $id])->one();
+            if ($this->request->isPost && $thisUser->load($this->request->post()) && $thisUser->save()) {
+                return $this->redirect(['view', 'id' => $thisUser->id]);
+            }
 
-        if ($this->request->isPost && $thisUser->load($this->request->post()) && $thisUser->save()) {
-            return $this->redirect(['view', 'id' => $thisUser->id]);
+
+
+            return $this->render('update', [
+                'thisUser' => $thisUser,
+            ]);
+        }else{
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
         }
-
-
-
-        return $this->render('update', [
-            'thisUser' => $thisUser,
-        ]);
     }
 
-    /**
-     * Deletes an existing Userprofile model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id ID
-     * @return \yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+    /*
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
-    }
+    }*/
 
     /**
      * Finds the Userprofile model based on its primary key value.

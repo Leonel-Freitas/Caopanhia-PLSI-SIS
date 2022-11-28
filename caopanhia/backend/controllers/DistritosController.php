@@ -11,6 +11,7 @@ use Yii;
 use yii\console\Exception;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -27,16 +28,15 @@ class DistritosController extends Controller
         return array_merge(
             parent::behaviors(),
             [
-                /*'access' => [
+                'access' => [
                     'class' => AccessControl::class,
                     'rules' => [
                         [
-                           // 'actions' => ['index', 'create', 'update', 'disable', 'reactivate'],
                             'allow' => true,
                             'roles' => ['admin'],
                         ],
                     ],
-                ],*/
+                ],
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
@@ -61,7 +61,7 @@ class DistritosController extends Controller
                 'distritos' => $listaDistritos
             ]);
         }else{
-            throw new Warning('Você não tem permissão para realizar esta ação!');
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
         }
 
     }
@@ -82,7 +82,7 @@ class DistritosController extends Controller
             $model->save();
             return $this->redirect(['index']);
         }else{
-            throw new Warning('Você não tem permissão para realizar esta ação!');
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
         }
     }
 
@@ -94,22 +94,17 @@ class DistritosController extends Controller
             $model->save();
             return $this->redirect(['index']);
         }else{
-            throw new Warning('Você não tem permissão para realizar esta ação!');
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
         }
     }
 
-    /**
-     * Displays a single Distritos model.
-     * @param int $id ID
-     * @return string
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id)
+
+    /*public function actionView($id)
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
-    }
+    }*/
 
     /**
      * Creates a new Distritos model.
@@ -133,7 +128,7 @@ class DistritosController extends Controller
                 'model' => $model,
             ]);
         }else{
-            throw new Warning('Você não tem permissão para realizar esta ação!');
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
         }
     }
 
@@ -157,23 +152,16 @@ class DistritosController extends Controller
                 'model' => $model,
             ]);
         }else{
-            throw new Warning('Você não tem permissão para realizar esta ação!');
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
         }
     }
 
-    /**
-     * Deletes an existing Distritos model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id ID
-     * @return \yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionDelete($id)
+    /*public function actionDelete($id)
     {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
-    }
+    }*/
 
     /**
      * Finds the Distritos model based on its primary key value.

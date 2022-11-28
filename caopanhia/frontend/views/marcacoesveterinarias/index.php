@@ -32,7 +32,7 @@ $contador = 1;
                         <td><?= \common\models\Caes::find()->where(['id' => $marcacao->idCao])->one()->nome ?></td>
                         <td><?= \common\models\Userprofile::find()->where(['id' => $marcacao->idVet])->one()->nome ?></td>
                         <td>
-                            <a href="<?=Url::to(['update'])?>" class="btn btn-warning">Detalhes do veterinário</a>
+                            <a href="<?=Url::to(['userprofile/viewprofile', 'id' => $marcacao->idVet])?>" class="btn btn-warning">Detalhes do veterinário</a>
                         </td>
                     </tr>
                 <?php $contador++; } ?>

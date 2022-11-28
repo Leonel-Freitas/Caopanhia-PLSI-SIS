@@ -3,8 +3,11 @@
 namespace frontend\controllers;
 
 use common\models\Marcacoesveterinarias;
+use Yii;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -21,6 +24,15 @@ class MarcacoesveterinariasController extends Controller
         return array_merge(
             parent::behaviors(),
             [
+                'access' => [
+                    'class' => AccessControl::class,
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'roles' => ['admin', 'client'],
+                        ],
+                    ],
+                ],
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
@@ -38,31 +50,26 @@ class MarcacoesveterinariasController extends Controller
      */
     public function actionIndex()
     {
-        $marcacoes = Marcacoesveterinarias::find()->where(['idClient' => \Yii::$app->user->getId()])->orderBy(['data' => SORT_ASC, 'hora' => SORT_ASC]) ->all();
+        if (Yii::$app->user->can('viewAppointment')) {
+            $marcacoes = Marcacoesveterinarias::find()->where(['idClient' => \Yii::$app->user->getId()])->orderBy(['data' => SORT_ASC, 'hora' => SORT_ASC]) ->all();
 
-        return $this->render('index', [
-            'marcacoes' => $marcacoes,
-        ]);
+            return $this->render('index', [
+                'marcacoes' => $marcacoes,
+            ]);
+        }else{
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
+        }
     }
 
-    /**
-     * Displays a single Marcacoesveterinarias model.
-     * @param int $id ID
-     * @return string
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+    /*
     public function actionView($id)
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
-    }
+    }*/
 
-    /**
-     * Creates a new Marcacoesveterinarias model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return string|\yii\web\Response
-     */
+    /*
     public function actionCreate()
     {
         $model = new Marcacoesveterinarias();
@@ -78,15 +85,9 @@ class MarcacoesveterinariasController extends Controller
         return $this->render('create', [
             'model' => $model,
         ]);
-    }
+    }*/
 
-    /**
-     * Updates an existing Marcacoesveterinarias model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id ID
-     * @return string|\yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+    /*
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
@@ -98,21 +99,15 @@ class MarcacoesveterinariasController extends Controller
         return $this->render('update', [
             'model' => $model,
         ]);
-    }
+    }*/
 
-    /**
-     * Deletes an existing Marcacoesveterinarias model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id ID
-     * @return \yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+    /*
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
-    }
+    }*/
 
     /**
      * Finds the Marcacoesveterinarias model based on its primary key value.

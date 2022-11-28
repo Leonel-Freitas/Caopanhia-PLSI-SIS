@@ -430,6 +430,7 @@ class RbacController extends Controller
         $vet = $auth->createRole('vet');
         $auth->add($vet);
         $auth->addChild($vet, $readUserProfile);
+        $auth->addChild($vet, $readDog);
         $auth->addChild($vet, $viewAds);
         $auth->addChild($vet, $readAds);
         $auth->addChild($vet, $updateAds);

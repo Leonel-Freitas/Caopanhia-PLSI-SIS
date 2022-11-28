@@ -66,7 +66,7 @@ $this->title = $cao->nome;
         <p>
             <?= Html::a('Voltar', ['index'], ['class' => 'btn btn-primary']) ?>
             <?= Html::a('Ver detalhes do dono', ['userprofile/viewprofile', 'id' => $anuncio->idUser], ['class' => 'btn btn-success']) ?>
-            <?= Html::a('Enviar mensagem', ['comentarios/create', 'idAnuncio' => $anuncio->id], ['class' => 'btn btn-danger']) ?>
+            <?= Html::a('Enviar mensagem', ['comentarios/create', 'idAnuncio' => $anuncio->id], ['class' => 'btn btn-success']) ?>
         </p>
 
     <?php } ?>

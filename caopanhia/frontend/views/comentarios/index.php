@@ -16,6 +16,8 @@ $this->title = 'Mensagens';
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+    <?php if ($comentarios != null){ ?>
+
     <div class="row">
         <div class="col-sm-12">
             <table class="table table-striped"><thead><th><h3>#</h3></th><th><h3>Mensagem</h3></th><th><h3>Opcoes</h3></th></thead>
@@ -25,7 +27,7 @@ $this->title = 'Mensagens';
                         <td><?= $contador++ ?></td>
                         <td><?= $comentario->descricao ?></td>
                         <td>
-                            <a href="<?=Url::to(['update', 'id' => $comentario->id])?>" class="btn btn-info">Visualizar perfil</a>
+                            <a href="<?=Url::to(['userprofile/viewprofile', 'id' => $comentario->idUser])?>" class="btn btn-primary">Visualizar perfil</a>
                             <a href="<?=Url::to(['anuncios/adotar', 'id' => $comentario->idAnuncio, 'idUser' => $comentario->idUser])?>" class="btn btn-success">Doar</a>
                         </td>
                     </tr>
@@ -34,6 +36,13 @@ $this->title = 'Mensagens';
             </table>
         </div>
     </div>
+
+    <?php }else{ ?>
+
+        <br><br>
+        <h4>Ainda nenhum utilizador respondeu ao seu anuncio... verifique mais tarde!</h4>
+
+    <?php } ?>
 
     <p>
         <?= Html::a('Voltar', ['anuncios/view', 'id' => $idAnuncio], ['class' => 'btn btn-warning']) ?>

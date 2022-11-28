@@ -13,6 +13,7 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\rbac\Role;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -33,7 +34,6 @@ class UserController extends Controller
                     'class' => AccessControl::class,
                     'rules' => [
                         [
-                            //'actions' => ['index', 'create', 'update', 'view', 'disable', 'reactivate'],
                             'allow' => true,
                             'roles' => ['admin', 'vet', 'gestor'],
                         ],
@@ -69,7 +69,7 @@ class UserController extends Controller
                 'role' => $role
             ]);
         }else{
-            throw new Warning('Você não tem permissão para realizar esta ação!');
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
         }
     }
 
@@ -93,7 +93,7 @@ class UserController extends Controller
                 'email' => $userEmail,
             ]);
         }else{
-            throw new Warning('Você não tem permissão para realizar esta ação!');
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
         }
     }
 
@@ -111,7 +111,7 @@ class UserController extends Controller
                 'idCao' => $idCao,
             ]);
         }else{
-            throw new Warning('Você não tem permissão para realizar esta ação!');
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
         }
     }
 
@@ -141,7 +141,7 @@ class UserController extends Controller
                 'role' => $role,
             ]);
         }else{
-            throw new Warning('Você não tem permissão para realizar esta ação!');
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
         }
     }
 
@@ -189,7 +189,7 @@ class UserController extends Controller
                 'role' => $role
             ]);
         }else{
-            throw new Warning('Você não tem permissão para realizar esta ação!');
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
         }
 
     }
@@ -206,7 +206,7 @@ class UserController extends Controller
             return $this->redirect(['view', 'id' => $model->id, 'role' => $role]);
 
         }else{
-            throw new Warning('Você não tem permissão para realizar esta ação!');
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
         }
     }
 
@@ -221,23 +221,17 @@ class UserController extends Controller
             return $this->redirect(['view', 'id' => $model->id, 'role' => $role]);
 
         }else{
-            throw new Warning('Você não tem permissão para realizar esta ação!');
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
         }
     }
 
-    /**
-     * Deletes an existing User model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id
-     * @return \yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+    /*
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
-    }
+    }*/
 
     /**
      * Finds the User model based on its primary key value.

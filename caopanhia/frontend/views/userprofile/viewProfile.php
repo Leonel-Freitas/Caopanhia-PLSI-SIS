@@ -23,9 +23,7 @@ $this->title = $thisUser->nome;
                             <div class="row g-0">
                                 <div class="col-md-4 gradient-custom text-center text-black" , id="perfil"
                                      style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem; ">
-                                    <img
-                                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
-                                        alt="Avatar" class="img-fluid my-5" style="width: 80px;"/>
+                                    <?php echo Html::img('@web/images/userAvatar', ['class' => 'img-fluid my-5']) ?>
                                     <h5><?= $thisUser->nome ?></h5>
                                     <p><?= $thisUser->formacao ?></p>
                                     <i class="far fa-edit mb-5"></i>

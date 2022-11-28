@@ -7,6 +7,8 @@ use common\models\CaesSearch;
 use common\models\UploadImage;
 use common\models\Userprofile;
 use Yii;
+use yii\filters\AccessControl;
+use yii\web\ForbiddenHttpException;
 use yii\web\UploadedFile;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -25,6 +27,15 @@ class CaesController extends Controller
         return array_merge(
             parent::behaviors(),
             [
+                'access' => [
+                    'class' => AccessControl::class,
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'roles' => ['admin', 'client'],
+                        ],
+                    ],
+                ],
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
@@ -35,11 +46,7 @@ class CaesController extends Controller
         );
     }
 
-    /**
-     * Lists all Caes models.
-     *
-     * @return string
-     */
+    /*
     public function actionIndex()
     {
         $searchModel = new CaesSearch();
@@ -49,20 +56,15 @@ class CaesController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
-    }
+    }*/
 
-    /**
-     * Displays a single Caes model.
-     * @param int $id ID
-     * @return string
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+    /*
     public function actionView($id)
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
-    }
+    }*/
 
     /**
      * Creates a new Caes model.
@@ -71,26 +73,30 @@ class CaesController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Caes();
+        if (Yii::$app->user->can('createDog')) {
+            $model = new Caes();
 
-        if ($this->request->isPost) {
-            if (UploadedFile::getInstance($model, 'imageFile') != null) {
-                $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-                $model->upload();
-                $model->imagem = $model->imageFile->name;
+            if ($this->request->isPost) {
+                if (UploadedFile::getInstance($model, 'imageFile') != null) {
+                    $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+                    $model->upload();
+                    $model->imagem = $model->imageFile->name;
+                }
+                $model->idUserProfile = Userprofile::find()->where(['idUser' => \Yii::$app->user->getId()])->one()->id;
+                $model->load($this->request->post());
+                if ($model->save()) {
+                    return $this->redirect(['anuncios/create', 'idcao' => $model->id]);
+                }
+            } else {
+                $model->loadDefaultValues();
             }
-            $model->idUserProfile = Userprofile::find()->where(['idUser' => \Yii::$app->user->getId()])->one()->id;
-            $model->load($this->request->post());
-            if ($model->save()) {
-                return $this->redirect(['anuncios/create', 'idcao' => $model->id]);
-            }
-        } else {
-            $model->loadDefaultValues();
+
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }else{
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
         }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -102,47 +108,49 @@ class CaesController extends Controller
      */
     public function actionUpdate($id, $idAnuncio)
     {
-        $model = $this->findModel($id);
+        if (Yii::$app->user->can('updateDog')) {
+            $model = $this->findModel($id);
 
-        if ($this->request->isPost) {
-            if (UploadedFile::getInstance($model, 'imageFile') != null){
-                $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-                $model->upload();
-                $model->imagem = $model->imageFile->name;
+            if ($this->request->isPost) {
+                if (UploadedFile::getInstance($model, 'imageFile') != null){
+                    $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+                    $model->upload();
+                    $model->imagem = $model->imageFile->name;
+                }
+                $model->load($this->request->post());
+                if ($model->save()) {
+                    return $this->redirect(['anuncios/update', 'id' => $idAnuncio]);
+                }
             }
-            $model->load($this->request->post());
-            if ($model->save()) {
-                return $this->redirect(['anuncios/update', 'id' => $idAnuncio]);
-            }
+
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }else{
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
         }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
     }
 
-    /**
-     * Deletes an existing Caes model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id ID
-     * @return \yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+    /*
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
-    }
+    }*/
 
     public function actionSolicitarmarcacao($id, $idAnuncio)
     {
-        $cao = Caes::findOne($id);
-        $cao->pedidoConsulta = 1;
-        $cao->save();
+        if (Yii::$app->user->can('updateDog')) {
+            $cao = Caes::findOne($id);
+            $cao->pedidoConsulta = 1;
+            $cao->save();
 
-        Yii::$app->session->setFlash('success', 'Foi solicitada uma marcação de consulta veterinária, os nossos veterinários iram responder o mais brevemente possivel!');
-        return $this->redirect(['anuncios/view', 'id' => $idAnuncio]);
+            Yii::$app->session->setFlash('success', 'Foi solicitada uma marcação de consulta veterinária, os nossos veterinários iram responder o mais brevemente possivel!');
+            return $this->redirect(['anuncios/view', 'id' => $idAnuncio]);
+        }else{
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
+        }
     }
 
     /**

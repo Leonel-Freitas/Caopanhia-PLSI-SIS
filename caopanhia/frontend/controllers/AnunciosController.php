@@ -8,7 +8,9 @@ use common\models\Caes;
 use common\models\Comentarios;
 use common\models\Userprofile;
 use Yii;
+use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -25,6 +27,15 @@ class AnunciosController extends Controller
         return array_merge(
             parent::behaviors(),
             [
+                'access' => [
+                    'class' => AccessControl::class,
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'roles' => ['admin', 'client'],
+                        ],
+                    ],
+                ],
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
@@ -42,28 +53,36 @@ class AnunciosController extends Controller
      */
     public function actionIndex()
     {
-        $user = Userprofile::find()->where(['idUser' => Yii::$app->user->getId()])->one();
-        $anuncios = Anuncios::find()->where(['dataAdocao' => null])->andWhere(['not', ['idUser' => $user->id]])->all();
+        if (Yii::$app->user->can('viewAds')) {
+            $user = Userprofile::find()->where(['idUser' => Yii::$app->user->getId()])->one();
+            $anuncios = Anuncios::find()->where(['dataAdocao' => null])->andWhere(['not', ['idUser' => $user->id]])->all();
 
-        $searchModel = new AnunciosSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+            $searchModel = new AnunciosSearch();
+            $dataProvider = $searchModel->search($this->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-            'anuncios' => $anuncios
-        ]);
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+                'anuncios' => $anuncios
+            ]);
+        }else{
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
+        }
     }
 
     public function actionIndexpessoal()
     {
-        $user = Userprofile::find()->where(['idUser' => Yii::$app->user->getId()])->one();
-        $anuncios = Anuncios::find()->where(['dataAdocao' => null])->andWhere(['idUser' => $user->id])->all();
+        if (Yii::$app->user->can('viewAds')) {
+            $user = Userprofile::find()->where(['idUser' => Yii::$app->user->getId()])->one();
+            $anuncios = Anuncios::find()->where(['dataAdocao' => null])->andWhere(['idUser' => $user->id])->all();
 
 
-        return $this->render('indexpessoal', [
-            'anuncios' => $anuncios
-        ]);
+            return $this->render('indexpessoal', [
+                'anuncios' => $anuncios
+            ]);
+        }else{
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
+        }
     }
 
     /**
@@ -74,13 +93,17 @@ class AnunciosController extends Controller
      */
     public function actionView($id)
     {
-        $anuncio = Anuncios::findOne($id);
-        $cao = Caes::findOne($anuncio->idCao);
+        if (Yii::$app->user->can('readAds')) {
+            $anuncio = Anuncios::findOne($id);
+            $cao = Caes::findOne($anuncio->idCao);
 
-        return $this->render('view', [
-            'anuncio' => $anuncio,
-            'cao' => $cao,
-        ]);
+            return $this->render('view', [
+                'anuncio' => $anuncio,
+                'cao' => $cao,
+            ]);
+        }else{
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
+        }
     }
 
     /**
@@ -90,23 +113,27 @@ class AnunciosController extends Controller
      */
     public function actionCreate($idcao)
     {
-        $model = new Anuncios();
-        $model->idCao = $idcao;
-        $model->idUser = Userprofile::find()->where(['idUser' => \Yii::$app->user->getId()])->one()->id;
-        $model->dataCriacao = Yii::$app->formatter->asDatetime('now', 'yyyy-MM-dd HH:mm:ss');
+        if (Yii::$app->user->can('readAds')) {
+            $model = new Anuncios();
+            $model->idCao = $idcao;
+            $model->idUser = Userprofile::find()->where(['idUser' => \Yii::$app->user->getId()])->one()->id;
+            $model->dataCriacao = Yii::$app->formatter->asDatetime('now', 'yyyy-MM-dd HH:mm:ss');
 
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                    return $this->redirect(['view', 'id' => $model->id]);
+            if ($this->request->isPost) {
+                if ($model->load($this->request->post()) && $model->save()) {
+                        return $this->redirect(['view', 'id' => $model->id]);
+                }
+            } else {
+                $model->loadDefaultValues();
             }
-        } else {
-            $model->loadDefaultValues();
-        }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }else{
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
+        }
     }
 
     /**
@@ -118,17 +145,21 @@ class AnunciosController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
-        $nomeCao = Caes::findOne($model->idCao)->nome;
+        if (Yii::$app->user->can('updateAds')) {
+            $model = $this->findModel($id);
+            $nomeCao = Caes::findOne($model->idCao)->nome;
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+
+            return $this->render('update', [
+                'model' => $model,
+                'nomeCao' => $nomeCao
+            ]);
+        }else{
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
         }
-
-        return $this->render('update', [
-            'model' => $model,
-            'nomeCao' => $nomeCao
-        ]);
     }
 
     /**
@@ -140,31 +171,39 @@ class AnunciosController extends Controller
      */
     public function actionDelete($id, $idCao)
     {
-        $comentarios = Comentarios::find()->where(['idAnuncio' => $id])->all();
-        if ($comentarios != null){
-            foreach ($comentarios as $comentario)
-                $comentario->delete();
-        }
-        Anuncios::findOne($id)->delete();
-        Caes::findOne($idCao)->delete();
+        if (Yii::$app->user->can('deleteAds')) {
+            $comentarios = Comentarios::find()->where(['idAnuncio' => $id])->all();
+            if ($comentarios != null){
+                foreach ($comentarios as $comentario)
+                    $comentario->delete();
+            }
+            Anuncios::findOne($id)->delete();
+            Caes::findOne($idCao)->delete();
 
-        Yii::$app->session->setFlash('success', 'O seu anuncio foi removido com sucesso! O cão associado ao anúncio também foi removido do sistema.');
-        return $this->redirect(['indexpessoal']);
+            Yii::$app->session->setFlash('success', 'O seu anuncio foi removido com sucesso! O cão associado ao anúncio também foi removido do sistema.');
+            return $this->redirect(['indexpessoal']);
+        }else{
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
+        }
     }
 
     public function actionAdotar($id, $idUser)
     {
-        $anuncio = Anuncios::findOne($id);
-        $anuncio -> dataAdocao = Yii::$app->formatter->asDatetime('now', 'yyyy-MM-dd HH:mm:ss');
-        $anuncio->idUser = $idUser;
-        $anuncio->save();
+        if (Yii::$app->user->can('updateAds')) {
+            $anuncio = Anuncios::findOne($id);
+            $anuncio -> dataAdocao = Yii::$app->formatter->asDatetime('now', 'yyyy-MM-dd HH:mm:ss');
+            $anuncio->idUser = $idUser;
+            $anuncio->save();
 
-        $cao = Caes::findOne($anuncio->idCao);
-        $cao->adotado = 'sim';
-        $cao->idUserProfile = $idUser;
-        $cao->save();
+            $cao = Caes::findOne($anuncio->idCao);
+            $cao->adotado = 'sim';
+            $cao->idUserProfile = $idUser;
+            $cao->save();
 
-        return $this->redirect(['indexpessoal']);
+            return $this->redirect(['indexpessoal']);
+        }else{
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
+        }
     }
 
     /**

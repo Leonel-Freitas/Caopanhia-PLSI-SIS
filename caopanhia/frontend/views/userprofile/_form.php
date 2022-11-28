@@ -28,10 +28,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($thisUser, 'idDistrito')->dropDownList(\yii\helpers\ArrayHelper::map(\common\models\Distritos::find()->where(['status' => '10'])->asArray()->all(),'id', 'designacao'))->label('Distrito')?>
 
-    <?= $form->field($thisUser, 'formacao')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-primary']) ?>
+        <?= Html::submitButton('Guardar', ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Voltar', ['userprofile/view', 'id' => $thisUser->id] ,['class' => 'btn btn-danger'])?>
     </div>
     <div class=""

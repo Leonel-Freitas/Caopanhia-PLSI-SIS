@@ -50,7 +50,7 @@ class SiteController extends Controller
                     [
                         'actions' => ['index'],
                         'allow' => true,
-                        'roles' => ['client', 'vet'],
+                        'roles' => ['client', 'admin'],
                     ],
                 ],
             ],
