@@ -1,11 +1,12 @@
 <?php
 
+
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
 /** @var common\models\Userprofile $thisUser */
-
+/** @var common\models\Userprofile $thisEmailUser */
 
 $this->title = $thisUser->nome;
 
@@ -20,12 +21,13 @@ $this->title = $thisUser->nome;
                     <div class="col col-lg-6 mb-4 mb-lg-0">
                         <div class="card mb-3" style="border-radius: .5rem;">
                             <div class="row g-0">
-                                <div class="col-md-4 gradient-custom text-center text-black", id="perfil"
+                                <div class="col-md-4 gradient-custom text-center text-black" , id="perfil"
                                      style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem; ">
-                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
-                                         alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
-                                    <h5><?=$thisUser->nome?></h5>
-                                    <p><?=$thisUser->formacao?></p>
+                                    <img
+                                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                                        alt="Avatar" class="img-fluid my-5" style="width: 80px;"/>
+                                    <h5><?= $thisUser->nome ?></h5>
+                                    <p><?= $thisUser->formacao ?></p>
                                     <i class="far fa-edit mb-5"></i>
                                 </div>
                                 <div class="col-md-8">
@@ -35,27 +37,27 @@ $this->title = $thisUser->nome;
                                         <div class="row pt-1">
                                             <div class="col-6 mb-3">
                                                 <h6>Email</h6>
-                                                <p class="text-muted"><?=Yii::$app->user->identity->email?></p>
+                                                <p class="text-muted"><?= $thisEmailUser ?></p>
                                             </div>
                                             <div class="col-6 mb-3">
                                                 <h6>Contacto</h6>
-                                                <p class="text-muted"><?=$thisUser->contacto?></p>
+                                                <p class="text-muted"><?= $thisUser->contacto ?></p>
                                             </div>
                                             <div class="col-6 mb-3">
                                                 <h6>Genero</h6>
-                                                <p class="text-muted"><?=$thisUser->genero?></p>
+                                                <p class="text-muted"><?= $thisUser->genero ?></p>
                                             </div>
                                             <div class="col-6 mb-3">
                                                 <h6>NIF</h6>
-                                                <p class="text-muted"><?=$thisUser->nif?></p>
+                                                <p class="text-muted"><?= $thisUser->nif ?></p>
                                             </div>
                                             <div class="col-6 mb-3">
                                                 <h6>Morada</h6>
-                                                <p class="text-muted"><?=$thisUser->morada?></p>
+                                                <p class="text-muted"><?= $thisUser->morada ?></p>
                                             </div>
                                             <div class="col-6 mb-3">
                                                 <h6>Codigo Postal</h6>
-                                                <p class="text-muted"><?=$thisUser->codigoPostal?></p>
+                                                <p class="text-muted"><?= $thisUser->codigoPostal ?></p>
                                             </div>
                                             <div class="col-6 mb-3">
                                                 <h6>Distrito</h6>
@@ -64,7 +66,7 @@ $this->title = $thisUser->nome;
 
                                             </div>
 
-                                            <?= Html::a('Alterar Dados', ['update', 'id' => Yii::$app->user->identity->getId()] ,['class' => 'btn btn-primary']) ?>
+
                                         </div>
                                     </div>
                                 </div>

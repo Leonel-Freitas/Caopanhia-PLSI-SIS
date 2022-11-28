@@ -74,7 +74,7 @@ $this->title = 'My Yii Application';
             <div class="u-clearfix u-sheet u-sheet-1">
                 <h2 class="u-custom-font u-font-playfair-display u-text u-text-body-alt-color u-text-1" id="Abandono">Evite abandonos</h2>
                 <h3 class="u-text u-text-body-alt-color u-text-1" id="AbandonoDes"> Se desconfiar de qualquer ato de violencia/abandono intervenha contactando as autoridades</h3>
-                <a><button id="BtnAbandono" class="btn btn-primary">Consulte o nosso Vlog</button></a>
+                <?= Html::a('Consulte os nossos Anuncios', ['/anuncios/index'] , ['class' => 'btn btn-primary', 'id' => "BtnAbandono"]) ?>
             </div>
         </section>
         <section class="u-clearfix u-grey-10 u-section-4" id="carousel_f3ef">

@@ -64,8 +64,8 @@ $this->title = $cao->nome;
         </p>
     <?php }else{ ?>
         <p>
-            <?= Html::a('Voltar', ['index'], ['class' => 'btn btn-warning']) ?>
-            <?= Html::a('Ver detalhes do dono', ['USER/view', 'id' => $anuncio->idUser], ['class' => 'btn btn-success']) ?>
+            <?= Html::a('Voltar', ['index'], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a('Ver detalhes do dono', ['userprofile/viewprofile', 'id' => $anuncio->idUser], ['class' => 'btn btn-success']) ?>
             <?= Html::a('Enviar mensagem', ['comentarios/create', 'idAnuncio' => $anuncio->id], ['class' => 'btn btn-danger']) ?>
         </p>
 

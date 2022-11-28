@@ -8,6 +8,7 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yiiunit\extensions\bootstrap5\data\User;
 
 /**
  * UserprofileController implements the CRUD actions for Userprofile model.
@@ -66,7 +67,8 @@ class UserprofileController extends Controller
      */
     public function actionView($id)
     {
-        $thisUser = Userprofile::find()->where(['idUser' => $id])->one();
+        //$thisUser = Userprofile::find()->where(['idUser' => $id])->one();
+        $thisUser = Userprofile::findOne($id);
         return $this->render('view', [
             'thisUser' => $thisUser,
         ]);
@@ -91,6 +93,17 @@ class UserprofileController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+        ]);
+    }
+
+    public function actionViewprofile($id)
+    {
+
+        $thisUser = Userprofile::findOne($id);
+        $thisEmailUser = \common\models\User::findOne($thisUser->idUser)->email;
+        return $this->render('viewprofile', [
+            'thisUser' => $thisUser,
+            'thisEmailUser' => $thisEmailUser,
         ]);
     }
 

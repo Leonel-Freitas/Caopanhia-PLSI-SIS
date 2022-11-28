@@ -46,8 +46,8 @@ AppAsset::register($this);
 
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar navbar-light ',
-            'style' => 'background-color: #F1dd5b',
+            'class' => 'navbar navbar-light '
+
         ],
     ]);
     $menuItems = [
@@ -55,12 +55,14 @@ AppAsset::register($this);
         ['label' => 'Anuncios', 'url' => ['/anuncios/index']],
         ['label' => 'Loja'],
         ['label' => 'About', 'url' => ['/site/about']],
-        ['label' => 'Perfil','url' => ['/userprofile/view', 'id' => Yii::$app->user->getId()]],
+
 
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+    }else{
+        $menuItems[] = ['label' => 'Perfil','url' => ['/userprofile/view', 'id' => \common\models\Userprofile::find()->where(['idUser'=>Yii::$app->user->getId()])->one()->id]];
     }
 
     echo Nav::widget([
@@ -73,7 +75,7 @@ AppAsset::register($this);
     } else {
         echo Html::beginForm(['/site/logout'], 'post', ['class' => 'd-flex'])
             . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
+                'Logout (' . \common\models\Userprofile::find()->where(['idUser' => Yii::$app->user->identity->getId()])->one()->nome . ')',
                 ['class' => 'btn btn-link logout text-decoration-none',
                 'style' => 'color: black']
             )
