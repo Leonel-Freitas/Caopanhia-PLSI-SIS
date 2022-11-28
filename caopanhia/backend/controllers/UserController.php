@@ -8,6 +8,7 @@ use common\models\User;
 use common\models\Userprofile;
 use common\models\UserSearch;
 use frontend\models\SignupForm;
+use PHPUnit\Framework\Warning;
 use Yii;
 use yii\filters\AccessControl;
 use yii\rbac\Role;
@@ -32,9 +33,9 @@ class UserController extends Controller
                     'class' => AccessControl::class,
                     'rules' => [
                         [
-                            'actions' => ['index', 'create', 'update', 'view', 'disable', 'reactivate'],
+                            //'actions' => ['index', 'create', 'update', 'view', 'disable', 'reactivate'],
                             'allow' => true,
-                            'roles' => ['admin'],
+                            'roles' => ['admin', 'vet', 'gestor'],
                         ],
                     ],
                 ],
@@ -55,17 +56,21 @@ class UserController extends Controller
      */
     public function actionIndex($role)
     {
-        $usersRole = Auth_assignment::find()->where(['item_name' => $role])->all();
-        $users= [];
-        foreach ($usersRole as $userRole){
-            $user = User::find()->where(['id' => $userRole->user_id])->one();
-            array_push($users, $user);
-        }
+        if (Yii::$app->user->can('viewUsersProfile')) {
+            $usersRole = Auth_assignment::find()->where(['item_name' => $role])->all();
+            $users = [];
+            foreach ($usersRole as $userRole) {
+                $user = User::find()->where(['id' => $userRole->user_id])->one();
+                array_push($users, $user);
+            }
 
-        return $this->render('index', [
-            'users' => $users,
-            'role' => $role
-        ]);
+            return $this->render('index', [
+                'users' => $users,
+                'role' => $role
+            ]);
+        }else{
+            throw new Warning('Você não tem permissão para realizar esta ação!');
+        }
     }
 
     /**
@@ -76,16 +81,38 @@ class UserController extends Controller
      */
     public function actionView($id, $role)
     {
-        $userProfile = Userprofile::find()->where(['idUser' => $id])->one();
-        $userEmail = User::findOne($id)->email;
-        $distrito = Distritos::findOne($userProfile->idDistrito)->designacao;
+        if (Yii::$app->user->can('readUserProfile')) {
+            $userProfile = Userprofile::find()->where(['idUser' => $id])->one();
+            $userEmail = User::findOne($id)->email;
+            $distrito = Distritos::findOne($userProfile->idDistrito)->designacao;
 
-        return $this->render('view', [
-            'userProfile' => $userProfile,
-            'role' => $role,
-            'distrito' => $distrito,
-            'email' => $userEmail,
-        ]);
+            return $this->render('view', [
+                'userProfile' => $userProfile,
+                'role' => $role,
+                'distrito' => $distrito,
+                'email' => $userEmail,
+            ]);
+        }else{
+            throw new Warning('Você não tem permissão para realizar esta ação!');
+        }
+    }
+
+    public function actionViewclient($id, $idCao)
+    {
+        if (Yii::$app->user->can('readUserProfile')) {
+            $userProfile = Userprofile::findOne($id);
+            $userEmail = User::findOne($userProfile->idUser)->email;
+            $distrito = Distritos::findOne($userProfile->idDistrito)->designacao;
+
+            return $this->render('viewclient', [
+                'userProfile' => $userProfile,
+                'distrito' => $distrito,
+                'email' => $userEmail,
+                'idCao' => $idCao,
+            ]);
+        }else{
+            throw new Warning('Você não tem permissão para realizar esta ação!');
+        }
     }
 
     /**
@@ -95,23 +122,27 @@ class UserController extends Controller
      */
     public function actionCreate($role)
     {
-        $model = new SignupForm();
+        if (Yii::$app->user->can('createUserProfile')) {
+            $model = new SignupForm();
 
-        $listaDistritos = Distritos::find()->where(['status' => 10])->all();
-        $distritos = [];
-        foreach ($listaDistritos as $distrito){
-            array_push($distritos, $distrito->designacao);
+            $listaDistritos = Distritos::find()->where(['status' => 10])->all();
+            $distritos = [];
+            foreach ($listaDistritos as $distrito) {
+                array_push($distritos, $distrito->designacao);
+            }
+
+            if ($model->load(Yii::$app->request->post()) && $model->signup($role)) {
+                return $this->redirect(['index', 'role' => $role]);
+            }
+
+            return $this->render('create', [
+                'model' => $model,
+                'distritos' => $distritos,
+                'role' => $role,
+            ]);
+        }else{
+            throw new Warning('Você não tem permissão para realizar esta ação!');
         }
-
-        if ($model->load(Yii::$app->request->post()) && $model->signup($role)) {
-           return $this->redirect(['index', 'role' => $role]);
-        }
-
-        return $this->render('create', [
-            'model' => $model,
-            'distritos' => $distritos,
-            'role' => $role,
-        ]);
     }
 
     /**
@@ -123,60 +154,75 @@ class UserController extends Controller
      */
     public function actionUpdate($id, $role)
     {
-        $model = Userprofile::find()->where(['idUser' => $id])->one();
-        $user = User::findOne($id);
+        if (Yii::$app->user->can('updateUserProfile')){
+            $model = Userprofile::find()->where(['idUser' => $id])->one();
+            $user = User::findOne($id);
 
-        $listaDistritosAtivos = Distritos::find()->where(['status' => 10])->all();
-        $distritoUtilizador = Distritos::find()->where(['id' => $model->idDistrito])->one();//10
-        $distritos = [];
-        $contador = 0;
-        foreach ($listaDistritosAtivos as $distrito){
-            array_push($distritos, $distrito->designacao);
-            if ($distrito->designacao == $distritoUtilizador->designacao){
-                $model->idDistrito = $contador;
+            $listaDistritosAtivos = Distritos::find()->where(['status' => 10])->all();
+            $distritoUtilizador = Distritos::find()->where(['id' => $model->idDistrito])->one();//10
+            $distritos = [];
+            $contador = 0;
+            foreach ($listaDistritosAtivos as $distrito){
+                array_push($distritos, $distrito->designacao);
+                if ($distrito->designacao == $distritoUtilizador->designacao){
+                    $model->idDistrito = $contador;
+                }
+                $contador++;
             }
-            $contador++;
+
+
+            if ($this->request->isPost && $model->load($this->request->post()) && $user->load($this->request->post())) {
+               $distritoEscolhido = $listaDistritosAtivos[$model->idDistrito];
+               $distritoPretendido = Distritos::find()->where(['designacao' => $distritoEscolhido->designacao])->one();
+               $model->idDistrito = $distritoPretendido->id;
+
+                $model->save();
+                $user->save();
+                return $this->redirect(['view', 'id' => $model->id, 'role' => $role]);
+            }
+
+
+            return $this->render('update', [
+                'model' => $model,
+                'distritos' => $distritos,
+                'user' => $user,
+                'role' => $role
+            ]);
+        }else{
+            throw new Warning('Você não tem permissão para realizar esta ação!');
         }
 
-
-        if ($this->request->isPost && $model->load($this->request->post()) && $user->load($this->request->post())) {
-           $distritoEscolhido = $listaDistritosAtivos[$model->idDistrito];
-           $distritoPretendido = Distritos::find()->where(['designacao' => $distritoEscolhido->designacao])->one();
-           $model->idDistrito = $distritoPretendido->id;
-
-            $model->save();
-            $user->save();
-            return $this->redirect(['view', 'id' => $model->id, 'role' => $role]);
-        }
-
-
-        return $this->render('update', [
-            'model' => $model,
-            'distritos' => $distritos,
-            'user' => $user,
-            'role' => $role
-        ]);
     }
 
     public function actionDisable($id, $role)
     {
-        $model = $this->findModel($id);
+        if (Yii::$app->user->can('desactivateUserProfile')){
+            $model = $this->findModel($id);
 
-        $model->status = 9;
+            $model->status = 9;
 
 
-        $model->save();
-        return $this->redirect(['view', 'id' => $model->id, 'role' => $role]);
+            $model->save();
+            return $this->redirect(['view', 'id' => $model->id, 'role' => $role]);
+
+        }else{
+            throw new Warning('Você não tem permissão para realizar esta ação!');
+        }
     }
 
     public function actionReactivate($id, $role)
     {
-        $model = $this->findModel($id);
+        if (Yii::$app->user->can('reactivateUserProfile')) {
+            $model = $this->findModel($id);
 
-        $model->status = 10;
+            $model->status = 10;
 
-        $model->save();
-        return $this->redirect(['view', 'id' => $model->id, 'role' => $role]);
+            $model->save();
+            return $this->redirect(['view', 'id' => $model->id, 'role' => $role]);
+
+        }else{
+            throw new Warning('Você não tem permissão para realizar esta ação!');
+        }
     }
 
     /**

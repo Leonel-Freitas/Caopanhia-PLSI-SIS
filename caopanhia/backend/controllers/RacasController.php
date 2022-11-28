@@ -2,8 +2,11 @@
 
 namespace backend\controllers;
 
+use common\models\Caes;
 use common\models\Racas;
 use common\models\RacasSearch;
+use PHPUnit\Framework\Warning;
+use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -26,7 +29,7 @@ class RacasController extends Controller
                     'class' => AccessControl::class,
                     'rules' => [
                         [
-                            'actions' => ['index', 'create', 'update'],
+                            //'actions' => ['index', 'create', 'update', 'delete'],
                             'allow' => true,
                             'roles' => ['admin'],
                         ],
@@ -49,11 +52,15 @@ class RacasController extends Controller
      */
     public function actionIndex()
     {
-        $racas = Racas::find()->orderBy(['pontos' => SORT_ASC])->all();
+        if (\Yii::$app->user->can('viewBreed')) {
+            $racas = Racas::find()->orderBy(['pontos' => SORT_ASC])->all();
 
-        return $this->render('index', [
-            'racas' => $racas,
-        ]);
+            return $this->render('index', [
+                'racas' => $racas,
+            ]);
+        }else{
+            throw new Warning('Você não tem permissão para realizar esta ação!');
+        }
     }
 
     /**
@@ -76,19 +83,23 @@ class RacasController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Racas();
+        if (\Yii::$app->user->can('createBreed')){
+            $model = new Racas();
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['index']);
+            if ($this->request->isPost) {
+                if ($model->load($this->request->post()) && $model->save()) {
+                    return $this->redirect(['index']);
+                }
+            } else {
+                $model->loadDefaultValues();
             }
-        } else {
-            $model->loadDefaultValues();
-        }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }else{
+            throw new Warning('Você não tem permissão para realizar esta ação!');
+        }
     }
 
     /**
@@ -100,15 +111,19 @@ class RacasController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        if (\Yii::$app->user->can('updateBreed')){
+            $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+            if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['index']);
+            }
+
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }else{
+            throw new Warning('Você não tem permissão para realizar esta ação!');
         }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -120,9 +135,20 @@ class RacasController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        if (\Yii::$app->user->can('deleteBreed')){
 
-        return $this->redirect(['index']);
+            if (Caes::find()->where(['idRaca' => $id])->all() == null){
+                $this->findModel($id)->delete();
+                Yii::$app->session->setFlash('success', 'Raça apagada permanentemente com sucesso.');
+                return $this->redirect(['index']);
+            }else{
+                Yii::$app->session->setFlash('error', 'Não pode eliminar esta raça uma vez que já existem cães associados a esta raça.');
+                return $this->redirect(['index']);
+            }
+
+        }else{
+            throw new Warning('Você não tem permissão para realizar esta ação!');
+        }
     }
 
     /**

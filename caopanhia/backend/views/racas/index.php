@@ -18,6 +18,8 @@ $this->title = 'Raças';
         <?= Html::a('Adicionar raça', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
+    <?= common\widgets\Alert::widget()?>
+
     <div class="row">
         <div class="col-sm-12">
             <table class="table table-striped"><thead><th><h3>Id</h3></th><th><h3>Designacao</h3></th><th><h3>Pontos</h3></th><th><h3>Opcoes</h3></th></thead>
@@ -29,6 +31,10 @@ $this->title = 'Raças';
                         <td><?= $raca->pontos ?></td>
                         <td>
                             <a href="<?=Url::to(['update', 'id' => $raca->id])?>" class="btn btn-warning">Editar</a>
+                            <?= Html::a('Remover', ['delete', 'id' => $raca->id], [
+                                'class' => 'btn btn-danger',
+                                'data' => ['method' => 'post',],
+                            ]) ?>
                         </td>
                     </tr>
                 <?php } ?>
