@@ -51,6 +51,7 @@
                     ['label' => 'Gestão dos Distritos', 'url' => ['distritos/index'], 'icon' => 'map-pin'],
                     ['label' => 'Raças', 'header' => true],
                     ['label' => 'Gestão das Raças', 'url' => ['racas/index'],'icon' => 'paw'],
+                    ['label' => 'Questionário','icon' => 'list-ol'],
                     ['label' => 'Utilizadores', 'header' => true],
                     [ 'label' => 'Gestão de Funcionários',
                         'icon' => 'user-plus',

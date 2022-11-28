@@ -55,4 +55,7 @@ class Distritos extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Userprofile::class, ['idDistrito' => 'id']);
     }
+
+
+
 }
