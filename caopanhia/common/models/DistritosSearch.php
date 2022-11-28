@@ -65,4 +65,6 @@ class DistritosSearch extends Distritos
 
         return $dataProvider;
     }
+
+
 }

@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 use common\models\User;
 use yii\helpers\Html;
