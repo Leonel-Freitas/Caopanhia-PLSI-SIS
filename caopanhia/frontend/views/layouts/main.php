@@ -55,6 +55,7 @@ AppAsset::register($this);
         ['label' => 'Anuncios', 'url' => ['/anuncios/index']],
         ['label' => 'Loja'],
         ['label' => 'About', 'url' => ['/site/about']],
+        ['label' => 'Perfil','url' => ['/userprofile/view', 'id' => Yii::$app->user->getId()]],
 
     ];
     if (Yii::$app->user->isGuest) {
@@ -65,6 +66,7 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav me-auto mb-2 mb-md-0'],
         'items' => $menuItems,
+
     ]);
     if (Yii::$app->user->isGuest) {
         //echo Html::tag('div',Html::a('Login',['/site/login'],['class' => ['btn btn-link login text-decoration-none']]),['class' => ['d-flex']]);
@@ -75,7 +77,9 @@ AppAsset::register($this);
                 ['class' => 'btn btn-link logout text-decoration-none',
                 'style' => 'color: black']
             )
+
             . Html::endForm();
+
     }
     NavBar::end();
     ?>

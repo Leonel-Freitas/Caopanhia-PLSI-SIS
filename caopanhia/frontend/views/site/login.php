@@ -43,5 +43,4 @@ $this->params['breadcrumbs'][] = $this->title;
 
 </div>
 
-<?= Html::a('Sign Up', ['site/signup'] ,['class' => 'btn btn-primary'])
-?>
+<?= Html::a('Sign Up', ['site/signup'] ,['class' => 'btn btn-primary']) ?>
