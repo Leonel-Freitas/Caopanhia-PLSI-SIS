@@ -8,6 +8,8 @@ use common\models\Caes;
 use common\models\Comentarios;
 use common\models\Userprofile;
 use Yii;
+use yii\data\ActiveDataProvider;
+use yii\db\Query;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
@@ -57,12 +59,8 @@ class AnunciosController extends Controller
             $user = Userprofile::find()->where(['idUser' => Yii::$app->user->getId()])->one();
             $anuncios = Anuncios::find()->where(['dataAdocao' => null])->andWhere(['not', ['idUser' => $user->id]])->all();
 
-            $searchModel = new AnunciosSearch();
-            $dataProvider = $searchModel->search($this->request->queryParams);
 
             return $this->render('index', [
-                'searchModel' => $searchModel,
-                'dataProvider' => $dataProvider,
                 'anuncios' => $anuncios
             ]);
         }else{

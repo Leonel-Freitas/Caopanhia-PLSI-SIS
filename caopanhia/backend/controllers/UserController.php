@@ -97,7 +97,7 @@ class UserController extends Controller
         }
     }
 
-    public function actionViewclient($id, $idCao)
+    public function actionViewclient($id)
     {
         if (Yii::$app->user->can('readUserProfile')) {
             $userProfile = Userprofile::findOne($id);
@@ -108,7 +108,6 @@ class UserController extends Controller
                 'userProfile' => $userProfile,
                 'distrito' => $distrito,
                 'email' => $userEmail,
-                'idCao' => $idCao,
             ]);
         }else{
             throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');

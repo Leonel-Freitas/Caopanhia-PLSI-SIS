@@ -47,20 +47,19 @@ class MarcacoesveterinariasController extends Controller
         );
     }
 
-    /**
-     * Lists all Marcacoesveterinarias models.
-     *
-     * @return string
-     */
+
     public function actionIndex()
     {
-        $searchModel = new MarcacoesveterinariasSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+        if (Yii::$app->user->can('viewAppointment')) {
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+            $marcacoes = Marcacoesveterinarias::find()->where(['idVet' => \Yii::$app->user->getId()])->andWhere(['>=' ,'data', date('Y-m-d')])->orderBy(['data' => SORT_ASC, 'hora' => SORT_ASC]) ->all();
+
+            return $this->render('index', [
+                'marcacoes' => $marcacoes,
+            ]);
+        }else{
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
+        }
     }
 
     public function actionIndexpedidos()
@@ -70,6 +69,32 @@ class MarcacoesveterinariasController extends Controller
 
             return $this->render('indexpedidos', [
                 'caes' => $caes,
+            ]);
+        }else{
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
+        }
+    }
+
+    public function actionIndexhistorico()
+    {
+        if (Yii::$app->user->can('viewAppointment')) {
+
+            $marcacoes = Marcacoesveterinarias::find()->where(['idVet' => \Yii::$app->user->getId()])->andWhere(['<' ,'data', date('Y-m-d')])->orderBy(['data' => SORT_DESC, 'hora' => SORT_DESC]) ->all();
+
+            $marcacaoComConsulta = [];
+            $marcacaoSemConsulta = [];
+
+            foreach ($marcacoes as $marcacao) {
+                if (Consultas::findOne($marcacao->idConsulta)->diagonostico == 'a definir') {
+                    array_push($marcacaoSemConsulta, $marcacao);
+                } else {
+                    array_push($marcacaoComConsulta, $marcacao);
+                }
+            }
+
+            return $this->render('indexhistorico', [
+                'marcacaoComConsulta' => $marcacaoComConsulta,
+                'marcacaoSemConsulta' => $marcacaoSemConsulta,
             ]);
         }else{
             throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
@@ -101,8 +126,8 @@ class MarcacoesveterinariasController extends Controller
             if ($this->request->isPost) {
                 if ($model->load($this->request->post())) {
                     $consulta = new Consultas();
-                    $consulta->diagonostico = 'a defenir';
-                    $consulta->tratamento = 'a defenir';
+                    $consulta->diagonostico = 'a definir';
+                    $consulta->tratamento = 'a definir';
                     $consulta->notas = 'nada a apontar';
                     $consulta->save();
                     $model->idConsulta = $consulta->id;
@@ -124,27 +149,42 @@ class MarcacoesveterinariasController extends Controller
         }
     }
 
-    /*
+
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        if (Yii::$app->user->can('updateAppointment')) {
+            $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['index']);
+            }
+
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }else{
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
         }
+    }
 
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-    }*/
 
-    /*
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        if (Yii::$app->user->can('deleteAppointment')) {
+            $marcacao = $this->findModel($id);
+            $consulta = Consultas::findOne($marcacao->idConsulta);
+            $cao = Caes::findOne($marcacao->idCao);
 
-        return $this->redirect(['index']);
-    }*/
+            $cao->pedidoConsulta = 1;
+            $cao->save();
+            $marcacao->delete();
+            $consulta->delete();
+
+            return $this->redirect(['index']);
+        }else{
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
+        }
+    }
 
     /**
      * Finds the Marcacoesveterinarias model based on its primary key value.

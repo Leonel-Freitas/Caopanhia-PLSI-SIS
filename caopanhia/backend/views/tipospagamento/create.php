@@ -3,11 +3,11 @@
 use yii\helpers\Html;
 
 /** @var yii\web\View $this */
-/** @var common\models\Distritos $model */
+/** @var common\models\Tipospagamento $model */
 
-$this->title = 'Adicionar distrito';
+$this->title = 'Adicionar método de pagamento';
 ?>
-<div class="distritos-create">
+<div class="tipospagamento-create">
 
     <?= $this->render('_form', [
         'model' => $model,

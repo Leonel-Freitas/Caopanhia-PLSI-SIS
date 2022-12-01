@@ -11,7 +11,6 @@ use yii\grid\GridView;
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = 'Lista de Distritos';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="distritos-index">
     <?= common\widgets\Alert::widget()?>

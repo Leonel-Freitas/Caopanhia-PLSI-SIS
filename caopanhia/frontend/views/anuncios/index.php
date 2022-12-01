@@ -5,6 +5,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
+use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
 /** @var common\models\AnunciosSearch $searchModel */
@@ -19,6 +20,7 @@ $this->title = 'Anúncios';
     <p>
         <?= Html::a('Os meus anuncios', ['indexpessoal'], ['class' => 'btn btn-success']) ?>
     </p>
+
 
     <div class="row">
     <?php foreach ($anuncios as $anuncio){
@@ -43,16 +45,3 @@ $this->title = 'Anúncios';
 
 
 </div>
-
-
-
-
-
-
-<style>
-
-
-
-
-
-</style>

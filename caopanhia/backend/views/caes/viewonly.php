@@ -30,9 +30,8 @@ $this->title = $model->nome;
     ]) ?>
 
     <p>
-        <?= Html::a('Voltar', ['marcacoesveterinarias/indexpedidos'], ['class' => 'btn btn-warning']) ?>
-        <?= Html::a('Ver perfil do utilizador', ['user/viewclient', 'id' => $model->idUserProfile], ['class' => 'btn btn-info']) ?>
-        <?= Html::a('Marcar consulta', ['marcacoesveterinarias/create', 'idCao' => $model->id], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Voltar', Yii::$app->request->referrer, ['class' => 'btn btn-warning']) ?>
     </p>
 
 </div>
+

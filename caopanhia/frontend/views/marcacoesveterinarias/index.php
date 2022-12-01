@@ -10,7 +10,6 @@ use yii\grid\GridView;
 /** @var yii\data\ActiveDataProvider $marcacoes */
 
 $this->title = 'Consultas marcadas';
-$contador = 1;
 ?>
 <div class="marcacoesveterinarias-index">
 
@@ -18,15 +17,18 @@ $contador = 1;
 
     <p>
         <?= Html::a('Voltar', ['anuncios/indexpessoal'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Histórico de consultas', ['indexhistorico'], ['class' => 'btn btn-success']) ?>
     </p>
+
+    <?php if ($marcacoes != null){ ?>
 
     <div class="row">
         <div class="col-sm-12">
-            <table class="table table-striped"><thead><th><h3>#</h3></th><th><h3>Data</h3></th><th><h3>Hora</h3></th><th><h3>Cao</h3></th><th><h3>Veterinário</h3></th><th><h3>Opções</h3></th></thead>
+            <table class="table table-striped"><thead><th><h3>Consulta</h3></th><th><h3>Data</h3></th><th><h3>Hora</h3></th><th><h3>Cao</h3></th><th><h3>Veterinário</h3></th><th><h3>Opções</h3></th></thead>
                 <tbody>
                 <?php foreach ($marcacoes as $marcacao) { ?>
                     <tr>
-                        <td><?= $contador ?></td>
+                        <td><?= $marcacao->idConsulta ?></td>
                         <td><?= $marcacao->data ?></td>
                         <td><?= $marcacao->hora ?></td>
                         <td><?= \common\models\Caes::find()->where(['id' => $marcacao->idCao])->one()->nome ?></td>
@@ -35,11 +37,18 @@ $contador = 1;
                             <a href="<?=Url::to(['userprofile/viewprofile', 'id' => $marcacao->idVet])?>" class="btn btn-warning">Detalhes do veterinário</a>
                         </td>
                     </tr>
-                <?php $contador++; } ?>
+                <?php } ?>
                 </tbody>
             </table>
         </div>
     </div>
+
+    <?php }else{ ?>
+
+        <br><br>
+        <h4>Ainda não possui consultas marcadas... verifique mais tarde!</h4>
+
+    <?php } ?>
 
 
 </div>
