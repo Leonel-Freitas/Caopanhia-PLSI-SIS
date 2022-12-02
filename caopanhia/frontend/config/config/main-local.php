@@ -6,12 +6,6 @@ $config = [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'ygwKo2KCUd8hVRnNHkkwRrZDk6ocgf21',
         ],
-        'urlManagerBackend' => [
-            'class' => 'yii\web\urlManager',
-            'baseUrl' => '/Caopanhia-PLSI-SIS/caopanhia/backend/web/images/',
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-        ],
     ],
 ];
 
