@@ -3,11 +3,11 @@
 use yii\helpers\Html;
 
 /** @var yii\web\View $this */
-/** @var common\models\Distritos $model */
+/** @var common\models\Tiposexpedicao $model */
 
-$this->title = 'Adicionar distrito';
+$this->title = 'Adicionar método de expedição';
 ?>
-<div class="distritos-create">
+<div class="tiposexpedicao-create">
 
     <?= $this->render('_form', [
         'model' => $model,

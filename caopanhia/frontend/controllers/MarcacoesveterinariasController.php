@@ -51,9 +51,24 @@ class MarcacoesveterinariasController extends Controller
     public function actionIndex()
     {
         if (Yii::$app->user->can('viewAppointment')) {
-            $marcacoes = Marcacoesveterinarias::find()->where(['idClient' => \Yii::$app->user->getId()])->orderBy(['data' => SORT_ASC, 'hora' => SORT_ASC]) ->all();
+
+            $marcacoes = Marcacoesveterinarias::find()->where(['idClient' => \Yii::$app->user->getId()])->andWhere(['>=' ,'data', date('Y-m-d')])->orderBy(['data' => SORT_ASC, 'hora' => SORT_ASC]) ->all();
 
             return $this->render('index', [
+                'marcacoes' => $marcacoes,
+            ]);
+        }else{
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
+        }
+    }
+
+    public function actionIndexhistorico()
+    {
+        if (Yii::$app->user->can('viewAppointment')) {
+
+            $marcacoes = Marcacoesveterinarias::find()->where(['idClient' => \Yii::$app->user->getId()])->andWhere(['<' ,'data', date('Y-m-d')])->orderBy(['data' => SORT_DESC, 'hora' => SORT_DESC]) ->all();
+
+            return $this->render('indexhistorico', [
                 'marcacoes' => $marcacoes,
             ]);
         }else{

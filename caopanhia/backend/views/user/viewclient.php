@@ -29,7 +29,7 @@ $this->title = $userProfile->nome;
         ]) ?>
 
     <p>
-        <?= Html::a('Voltar', ['caes/view', 'id' => $idCao], ['class' => 'btn btn-warning']) ?>
+        <?= Html::a('Voltar',  Yii::$app->request->referrer, ['class' => 'btn btn-warning']) ?>
     </p>
 
 </div>

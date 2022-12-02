@@ -1,8 +1,11 @@
 <?php
 
-namespace backend\controllers;
+namespace frontend\controllers;
 
+use common\models\Anuncios;
 use common\models\Caes;
+use common\models\Consultas;
+use common\models\Marcacoesveterinarias;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
@@ -12,9 +15,9 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * CaesController implements the CRUD actions for Caes model.
+ * ConsultasController implements the CRUD actions for Consultas model.
  */
-class CaesController extends Controller
+class ConsultasController extends Controller
 {
     /**
      * @inheritDoc
@@ -29,7 +32,7 @@ class CaesController extends Controller
                     'rules' => [
                         [
                             'allow' => true,
-                            'roles' => ['admin', 'vet'],
+                            'roles' => ['admin', 'client'],
                         ],
                     ],
                 ],
@@ -43,49 +46,53 @@ class CaesController extends Controller
         );
     }
 
-    /**
-     * Lists all Caes models.
-     *
-     * @return string
-     */
-    /*public function actionIndex()
+    /*
+    public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider(['query' => Caes::find()]);
+        $dataProvider = new ActiveDataProvider([
+            'query' => Consultas::find(),
+
+            'pagination' => [
+                'pageSize' => 50
+            ],
+            'sort' => [
+                'defaultOrder' => [
+                    'id' => SORT_DESC,
+                ]
+            ],
+
+        ]);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
     }*/
 
-
+    /**
+     * Displays a single Consultas model.
+     * @param int $id ID
+     * @return string
+     * @throws NotFoundHttpException if the model cannot be found
+     */
     public function actionView($id)
     {
-        if (Yii::$app->user->can('readDog')) {
+        if (Yii::$app->user->can('readExamination')) {
+            $marcacao = Marcacoesveterinarias::find()->where(['idConsulta' => $id])->one();
+            $cao = Caes::find()->where(['id' => $marcacao->idCao])->one();
+
             return $this->render('view', [
                 'model' => $this->findModel($id),
+                'cao' => $cao
             ]);
         }else{
             throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
         }
-
     }
 
-    public function actionViewonly($id)
+    /*
+    public function actionCreate()
     {
-        if (Yii::$app->user->can('readDog')) {
-            return $this->render('viewonly', [
-                'model' => $this->findModel($id),
-            ]);
-        }else{
-            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
-        }
-
-    }
-
-
-    /*public function actionCreate()
-    {
-        $model = new Caes();
+        $model = new Consultas();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -100,8 +107,8 @@ class CaesController extends Controller
         ]);
     }*/
 
-
-    /*public function actionUpdate($id)
+    /*
+    public function actionUpdate($id)
     {
         $model = $this->findModel($id);
 
@@ -114,8 +121,8 @@ class CaesController extends Controller
         ]);
     }*/
 
-
-    /*public function actionDelete($id)
+    /*
+    public function actionDelete($id)
     {
         $this->findModel($id)->delete();
 
@@ -123,15 +130,15 @@ class CaesController extends Controller
     }*/
 
     /**
-     * Finds the Caes model based on its primary key value.
+     * Finds the Consultas model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return Caes the loaded model
+     * @return Consultas the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Caes::findOne(['id' => $id])) !== null) {
+        if (($model = Consultas::findOne(['id' => $id])) !== null) {
             return $model;
         }
 
