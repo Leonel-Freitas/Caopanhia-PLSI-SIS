@@ -139,4 +139,12 @@ class ProdutosController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    function actionAddToBasket()
+
+    {
+
+    }
+
+
 }
