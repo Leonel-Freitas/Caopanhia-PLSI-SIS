@@ -9,12 +9,7 @@ use yii\grid\GridView;
 /** @var yii\web\View $this */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Produtos';
-$this->params['breadcrumbs'][] = $this->title;
-
-
-
-
+$this->title = 'Loja';
 
 ?>
 <div class="produtos-index">
@@ -23,9 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="container page-wrapper">
         <div class="page-inner">
             <div class="row">
-    <?php foreach ($produtos as $produto){
-
-    ?>
+    <?php foreach ($produtos as $produto){?>
 
 
                 <div class="el-wrapper">
@@ -35,31 +28,22 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <div class="info-inner">
                                     <span class="p-name"><?php echo $produto->designacao  ?></span>
 
-                    <!-- Product details-->
-
-
-
                                     <div class="box-down">
                                         <div class="h-bg">
                                             <div class="h-bg-inner"></div>
                                         </div>
 
-                                        <a class="cart" href="#">
+
+                                        <a class="cart" href="<?= 'view'.'/'.$produto->id ?>">
                                             <span class="price"><?php echo strval ($produto->valor . "€") ?></span>
                                             <span class="add-to-cart">
-                                        <span class="txt">Add in cart</span>
+                                        <span class="txt">Adicionar ao carrinho</span>
                                         </a>
                                             </span>
                                     </div>
-                                    
 
 
-                                      <?= Html::a('Ver detalhes', ['produtos/view', 'id' => $produto->id], ['class' => 'btn btn-primary']) ?>
-
-
-                            <!-- Product name-->
-
-                            <!-- Product price-->
+                                      <?= Html::a('Ver detalhes', ['view', 'id' => $produto->id], ['class' => 'btn btn-primary']) ?>
 
 
                         </div>

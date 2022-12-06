@@ -18,8 +18,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'valor')->textInput(['step' => 'any'])->label('Valor') ?>
 
-    <?= $form->field($model, 'stock')->textInput()->label('Stock') ?>
-
     <?=$form->field($model, 'idCategoria')->dropDownList(\yii\helpers\ArrayHelper::map(\common\models\Categorias::find()->asArray()->all(),'id', 'designacao'))->label('Categoria') ?>
 
     <?= $form->field($model, 'descricao')->textarea(['maxlength' => true])->label('Descrição') ?>
@@ -31,3 +29,4 @@ use yii\widgets\ActiveForm;
     <?php ActiveForm::end(); ?>
 
 </div>
+
