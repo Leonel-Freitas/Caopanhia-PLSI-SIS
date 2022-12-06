@@ -13,6 +13,8 @@ use Yii;
  * @property float $valor
  * @property int $stock
  * @property int $idCategoria
+ * @property int $status
+ * @property string $descricao
  *
  * @property Carrinho[] $carrinhos
  * @property Categorias $idCategoria0
@@ -22,6 +24,8 @@ class Produtos extends \yii\db\ActiveRecord
 {
 
     public $imageFile;
+    public $toAddStock;
+
     /**
      * {@inheritdoc}
      */
@@ -36,11 +40,10 @@ class Produtos extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['designacao', 'valor', 'stock', 'idCategoria'], 'required'],
+            [['designacao', 'valor', 'stock', 'idCategoria', 'descricao'], 'required'],
             [['valor'], 'number'],
-            [['stock', 'idCategoria'], 'integer'],
-            [['imagem', 'designacao'], 'string', 'max' => 250],
-            [['imageFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
+            [['stock', 'idCategoria', 'status', 'toAddStock'], 'integer'],
+            [['imagem', 'designacao', 'descricao'], 'string', 'max' => 250],
             [['idCategoria'], 'exist', 'skipOnError' => true, 'targetClass' => Categorias::class, 'targetAttribute' => ['idCategoria' => 'id']],
         ];
     }
@@ -57,6 +60,8 @@ class Produtos extends \yii\db\ActiveRecord
             'valor' => 'Valor',
             'stock' => 'Stock',
             'idCategoria' => 'Id Categoria',
+            'status' => 'Status',
+            'descricao' => 'Descricao',
         ];
     }
 

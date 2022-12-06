@@ -73,7 +73,7 @@ $this->title = 'Histórico de consultas';
     <?php }else{ ?>
 
         <br><br>
-        <h4>Ainda não possui consultas marcadas!</h4>
+        <h4>Ainda não possui consultas realizadas!</h4>
 
     <?php } ?>
 
