@@ -2,17 +2,16 @@
 
 namespace frontend\controllers;
 
-use common\models\Produtos;
-use Yii;
+use common\models\Carrinho;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ProdutosController implements the CRUD actions for Produtos model.
+ * CarrinhoController implements the CRUD actions for Carrinho model.
  */
-class ProdutosController extends Controller
+class CarrinhoController extends Controller
 {
     /**
      * @inheritDoc
@@ -33,74 +32,74 @@ class ProdutosController extends Controller
     }
 
     /**
-     * Lists all Produtos models.
+     * Lists all Carrinho models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $produtos = Produtos::find()->all();
         $dataProvider = new ActiveDataProvider([
-            'query' => Produtos::find(),
-
+            'query' => Carrinho::find(),
+            
         ]);
-
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
-            'produtos' => $produtos,
-
         ]);
     }
 
     /**
-     * Displays a single Produtos model.
-     * @param int $id ID
+     * Displays a single Carrinho model.
+     * @param int $idEncomenda Id Encomenda
+     * @param int $idProduto Id Produto
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($idEncomenda, $idProduto)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($idEncomenda, $idProduto),
         ]);
     }
 
     /**
-     * Creates a new Produtos model.
+     * Creates a new Carrinho model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
+    public function actionCreate($idProduto)
     {
-        $model = new Produtos();
+        $idEncomenda = 1;
+        $model = new Carrinho();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['view', 'idEncomenda' => $model->idEncomenda, 'idProduto' => $model->idProduto]);
             }
         } else {
             $model->loadDefaultValues();
         }
 
         return $this->render('create', [
-            'model' => $model,
+            'model' => $model
+
         ]);
     }
 
     /**
-     * Updates an existing Produtos model.
+     * Updates an existing Carrinho model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id ID
+     * @param int $idEncomenda Id Encomenda
+     * @param int $idProduto Id Produto
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate($idEncomenda, $idProduto)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($idEncomenda, $idProduto);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'idEncomenda' => $model->idEncomenda, 'idProduto' => $model->idProduto]);
         }
 
         return $this->render('update', [
@@ -109,40 +108,34 @@ class ProdutosController extends Controller
     }
 
     /**
-     * Deletes an existing Produtos model.
+     * Deletes an existing Carrinho model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id ID
+     * @param int $idEncomenda Id Encomenda
+     * @param int $idProduto Id Produto
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete($idEncomenda, $idProduto)
     {
-        $this->findModel($id)->delete();
+        $this->findModel($idEncomenda, $idProduto)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Produtos model based on its primary key value.
+     * Finds the Carrinho model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $id ID
-     * @return Produtos the loaded model
+     * @param int $idEncomenda Id Encomenda
+     * @param int $idProduto Id Produto
+     * @return Carrinho the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($idEncomenda, $idProduto)
     {
-        if (($model = Produtos::findOne(['id' => $id])) !== null) {
+        if (($model = Carrinho::findOne(['idEncomenda' => $idEncomenda, 'idProduto' => $idProduto])) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
-
-    function actionAddToBasket()
-
-    {
-
-    }
-
-
 }
