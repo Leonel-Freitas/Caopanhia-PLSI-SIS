@@ -6,35 +6,40 @@ use yii\widgets\DetailView;
 /** @var yii\web\View $this */
 /** @var common\models\Produtos $model */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Produtos', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = $model->designacao;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="produtos-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Tem a certeza que quer eliminar o produto?',
-                'method' => 'post',
-            ],
-        ]) ?>
+        <?= Html::a('Voltar', ['index'], ['class' => 'btn btn-warning']) ?>
+        <?= Html::a('Editar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Adicionar stock', ['stock', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
+        <?php if ($model->status == 10){ ?>
+            <?= Html::a('Desativar', ['update', 'id' => $model->id], ['class' => 'btn btn-danger']) ?>
+        <?php }else{ ?>
+            <?= Html::a('Ativar', ['update', 'id' => $model->id], ['class' => 'btn btn-danger']) ?>
+        <?php } ?>
     </p>
+
+    <center>
+        <?php echo Html::img('@web/images/produtos/'. $model->imagem) ?>
+    </center>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'imagem',
             'designacao',
-            'valor',
+            [
+                'label' => 'Valor',
+                'value' => $model->valor.' €'
+            ],
             'stock',
-            'idCategoria',
+            [
+                'label' => 'Categoria',
+                'value' => \common\models\Categorias::findOne($model->idCategoria)->designacao
+            ],
+            'descricao'
         ],
     ]) ?>
 

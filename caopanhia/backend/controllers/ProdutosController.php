@@ -6,7 +6,9 @@ use common\models\Categorias;
 use common\models\Produtos;
 use common\models\SearchProdutos;
 use Yii;
+use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
@@ -24,6 +26,15 @@ class ProdutosController extends Controller
         return array_merge(
             parent::behaviors(),
             [
+                'access' => [
+                    'class' => AccessControl::class,
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'roles' => ['admin', 'gestor'],
+                        ],
+                    ],
+                ],
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
@@ -44,15 +55,17 @@ class ProdutosController extends Controller
         if (Yii::$app->user->can('viewProducts')) {
             $produtos = Produtos::find()->all();
 
-        $searchModel = new SearchProdutos();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+            $searchModel = new SearchProdutos();
+            $dataProvider = $searchModel->search($this->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-            'produtos' => $produtos,
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+                'produtos' => $produtos,
 
-        ]);
+            ]);
+        }else{
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
         }
     }
 
@@ -64,9 +77,13 @@ class ProdutosController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        if (Yii::$app->user->can('readProduct')) {
+            return $this->render('view', [
+                'model' => $this->findModel($id),
+            ]);
+        }else{
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
+        }
     }
 
     /**
@@ -76,24 +93,28 @@ class ProdutosController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Produtos();
+        if (Yii::$app->user->can('createProduct')) {
+            $model = new Produtos();
 
-        if (UploadedFile::getInstance($model, 'imageFile') != null) {
-            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-            $model->upload();
-            $model->imagem = $model->imageFile->name;
-        }
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            if (UploadedFile::getInstance($model, 'imageFile') != null) {
+                $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+                $model->upload();
+                $model->imagem = $model->imageFile->name;
             }
-        } else {
-            $model->loadDefaultValues();
-        }
+            if ($this->request->isPost) {
+                if ($model->load($this->request->post()) && $model->save()) {
+                    return $this->redirect(['index']);
+                }
+            } else {
+                $model->loadDefaultValues();
+            }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }else{
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
+        }
     }
 
     /**
@@ -105,30 +126,78 @@ class ProdutosController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        if (Yii::$app->user->can('updateProduct')) {
+            $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }else{
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
         }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
     }
 
-    /**
-     * Deletes an existing Produtos model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id ID
-     * @return \yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+    public function actionStock($id)
+    {
+        if (Yii::$app->user->can('updateProduct')) {
+            $model = $this->findModel($id);
+
+            if ($this->request->isPost && $model->load($this->request->post())) {
+                $model->stock = $model->toAddStock + $model->stock;
+                $model->save();
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+
+            return $this->render('addstock', [
+                'model' => $model,
+            ]);
+        }else{
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
+        }
+    }
+
+    //TODO ESTAS DUAS FUNCOES
+    public function actionDisable($id)
+    {
+        if (Yii::$app->user->can('desactivateProductType')){
+            $model = $this->findModel($id);
+            $produtosAssociados = Produtos::find()->where(['idCategoria' => $model->id])->all();
+            if ($produtosAssociados == null){
+                $model->status = 9;
+                $model->save();
+            }else{
+                Yii::$app->session->setFlash('error', 'Não pode desativar esta categoria uma vez que existem produtos associados a ela!');
+            }
+            return $this->redirect(['index']);
+        }else{
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
+        }
+    }
+
+    public function actionReactivate($id)
+    {
+        if (Yii::$app->user->can('reactivateProductType')){
+            $model = $this->findModel($id);
+            $model->status = 10;
+            $model->save();
+
+            return $this->redirect(['index']);
+        }else{
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
+        }
+    }
+
+    /*
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
-    }
+    }*/
 
     /**
      * Finds the Produtos model based on its primary key value.

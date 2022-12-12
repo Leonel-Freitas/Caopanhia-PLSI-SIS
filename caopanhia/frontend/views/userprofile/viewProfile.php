@@ -36,6 +36,7 @@ $this->title = $thisUser->nome;
                                         echo Html::img('@web/images/userAvatar', ['class' => 'img-fluid my-3']) ;
                                     }else{
                                         echo Html::img('@web/images/croupier', ['class' => 'img-fluid my-3','style'=>'width: 140px;' ]);
+
                                     }?>
                                     <h5><?= $thisUser->nome ?></h5>
                                     <p><?= $thisUser->formacao ?></p>

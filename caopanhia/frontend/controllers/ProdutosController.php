@@ -5,7 +5,9 @@ namespace frontend\controllers;
 use common\models\Produtos;
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -22,6 +24,15 @@ class ProdutosController extends Controller
         return array_merge(
             parent::behaviors(),
             [
+                'access' => [
+                    'class' => AccessControl::class,
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'roles' => ['admin', 'client'],
+                        ],
+                    ],
+                ],
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
@@ -39,18 +50,21 @@ class ProdutosController extends Controller
      */
     public function actionIndex()
     {
-        $produtos = Produtos::find()->all();
-        $dataProvider = new ActiveDataProvider([
-            'query' => Produtos::find(),
+        if (Yii::$app->user->can('viewProducts')) {
+            $produtos = Produtos::find()->all();
+            $dataProvider = new ActiveDataProvider([
+                'query' => Produtos::find(),
 
-        ]);
+            ]);
 
+            return $this->render('index', [
+                'dataProvider' => $dataProvider,
+                'produtos' => $produtos,
 
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-            'produtos' => $produtos,
-
-        ]);
+            ]);
+        }else{
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
+        }
     }
 
     /**
@@ -61,16 +75,16 @@ class ProdutosController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        if (Yii::$app->user->can('readProduct')) {
+            return $this->render('view', [
+                'model' => $this->findModel($id),
+            ]);
+        }else{
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
+        }
     }
 
-    /**
-     * Creates a new Produtos model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return string|\yii\web\Response
-     */
+    /*
     public function actionCreate()
     {
         $model = new Produtos();
@@ -86,15 +100,9 @@ class ProdutosController extends Controller
         return $this->render('create', [
             'model' => $model,
         ]);
-    }
+    }*/
 
-    /**
-     * Updates an existing Produtos model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id ID
-     * @return string|\yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+    /*
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
@@ -106,21 +114,15 @@ class ProdutosController extends Controller
         return $this->render('update', [
             'model' => $model,
         ]);
-    }
+    }*/
 
-    /**
-     * Deletes an existing Produtos model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id ID
-     * @return \yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+    /*
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
-    }
+    }*/
 
     /**
      * Finds the Produtos model based on its primary key value.

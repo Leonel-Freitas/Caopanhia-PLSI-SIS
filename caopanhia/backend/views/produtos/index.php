@@ -11,20 +11,16 @@ use yii\grid\GridView;
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = 'Produtos';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="produtos-index">
 
     <p>
-        <?= Html::a('Create Produtos', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Adicionar Produto', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= common\widgets\Alert::widget()?>
 
     <div class="row">
-        <?php foreach ($produtos as $produto){
-
-
-            ?>
+        <?php foreach ($produtos as $produto){?>
 
             <div class="column">
                 <div class="card">

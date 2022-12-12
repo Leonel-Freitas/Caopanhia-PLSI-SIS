@@ -5,13 +5,12 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var common\models\Produtos $model */
 
-$this->title = 'Create Produtos';
-$this->params['breadcrumbs'][] = ['label' => 'Produtos', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Adicionar um novo Produto';
 ?>
 <div class="produtos-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h5>Insira uma imagem do produto e preencha os campos</h5>
+
 
     <?= $this->render('_form', [
         'model' => $model,
