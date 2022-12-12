@@ -41,12 +41,15 @@ switch ($role){
         <div class="col-sm-12">
             <table class="table table-striped"><thead><th><h3>Id</h3></th><th><h3>Username</h3></th><th><h3>Email</h3></th><th><h3>Opcoes</h3></th></thead>
                 <tbody>
+
                 <?php foreach ($users as $user) { ?>
                     <tr>
+
                         <td><?= $user->id ?></td>
                         <td><?= $user->username ?></td>
                         <td><?= $user->email ?></td>
                         <td>
+
                             <a href="<?=Url::to(['view', 'id' => $user->id, 'role' => $role])?>" class="btn btn-info">Ver Detalhes</a>
                             <?php if($user->status == 10){ ?>
                                 <a href="<?=Url::to(['disable', 'id' => $user->id, 'role' => $role])?>" class="btn btn-danger">Desativar</a>

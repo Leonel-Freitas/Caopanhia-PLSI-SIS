@@ -18,6 +18,7 @@ use yii\widgets\ActiveForm;
 
     <br><h3>Dados Pessoais:</h3>
 
+
     <?= $form->field($model, 'nome')->textInput() ?>
     <?= $form->field($model, 'genero')->dropDownList(['masculino' => 'Masculino', 'feminino' => 'Feminino']) ?>
     <?= $form->field($model, 'morada')->textInput() ?>
@@ -28,6 +29,9 @@ use yii\widgets\ActiveForm;
     <?php if ($role == 'vet'){ ?>
         <?= $form->field($model, 'formacao')->textInput() ?>
     <?php } ?>
+
+
+
 
     <div class="form-group">
         <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>

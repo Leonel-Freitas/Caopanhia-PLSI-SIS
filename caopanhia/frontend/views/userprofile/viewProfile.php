@@ -7,8 +7,10 @@ use yii\widgets\DetailView;
 /** @var yii\web\View $this */
 /** @var common\models\Userprofile $thisUser */
 /** @var common\models\Userprofile $thisEmailUser */
+/** @var common\models\Userprofile $role */
 
 $this->title = $thisUser->nome;
+
 
 \yii\web\YiiAsset::register($this);
 ?>
@@ -24,10 +26,17 @@ $this->title = $thisUser->nome;
                                 <div class="col-md-4 gradient-custom text-center text-black" , id="perfil"
                                      style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem; ">
 
-                                    <?php if ($thisUser->genero=='masculino'){
-                                    echo Html::img('@web/images/userAvatar', ['class' => 'img-fluid my-5']) ;
+                                    <?php
+                                    if ($role=='vet'){
+                                        echo Html::img(\yii\helpers\BaseUrl::to(Yii::$app->urlManagerBackend->baseUrl.'/user/'.$thisUser->imagem), ['class' => 'img-fluid my-5']);
+                                    } else if ($thisUser->imagem) {
+                                        echo Html::img(\yii\helpers\BaseUrl::to('@web/images/User/'.$thisUser->imagem), ['class' => 'img-fluid my-5']);
+                                    }
+                                        else if ($thisUser->genero=='masculino'){
+                                        echo Html::img('@web/images/userAvatar', ['class' => 'img-fluid my-3']) ;
                                     }else{
-                                       echo Html::img('@web/images/userAvatarFemale', ['class' => 'img-fluid my-5']);
+                                        echo Html::img('@web/images/croupier', ['class' => 'img-fluid my-3','style'=>'width: 140px;' ]);
+
                                     }?>
                                     <h5><?= $thisUser->nome ?></h5>
                                     <p><?= $thisUser->formacao ?></p>

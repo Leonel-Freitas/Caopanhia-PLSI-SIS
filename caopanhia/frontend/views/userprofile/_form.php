@@ -14,6 +14,8 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
+    <?= $form->field($thisUser, 'imageFile')->fileInput()->label('') ?>
+
     <?= $form->field($thisUser, 'nome')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($thisUser, 'morada')->textInput(['maxlength' => true]) ?>

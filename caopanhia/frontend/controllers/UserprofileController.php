@@ -10,6 +10,8 @@ use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
+use yii\rbac\Role;
 use yiiunit\extensions\bootstrap5\data\User;
 
 /**
@@ -75,8 +77,11 @@ class UserprofileController extends Controller
     {
         if (Yii::$app->user->can('readUserProfile')) {
             $thisUser = Userprofile::findOne($id);
+            $role = \common\models\User::findOne($thisUser->id)->getRoleName();
             return $this->render('view', [
                 'thisUser' => $thisUser,
+                'role' => $role,
+
             ]);
         }else{
             throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
@@ -106,9 +111,11 @@ class UserprofileController extends Controller
         if (Yii::$app->user->can('readUserProfile')) {
             $thisUser = Userprofile::findOne($id);
             $thisEmailUser = \common\models\User::findOne($thisUser->idUser)->email;
+            $thisRoleUser = \common\models\User::findOne($thisUser->id)->getRoleName();
             return $this->render('viewprofile', [
                 'thisUser' => $thisUser,
                 'thisEmailUser' => $thisEmailUser,
+                'role' => $thisRoleUser,
             ]);
         }else{
             throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
@@ -127,6 +134,13 @@ class UserprofileController extends Controller
         if (Yii::$app->user->can('updateUserProfile')) {
             $thisUser = Userprofile::find()->where(['idUser' => $id])->one();
 
+            if ($this->request->isPost) {
+                if (UploadedFile::getInstance($thisUser, 'imageFile') != null) {
+                    $thisUser->imageFile = UploadedFile::getInstance($thisUser, 'imageFile');
+                    $thisUser->upload();
+                    $thisUser->imagem = $thisUser->imageFile->name;
+                }
+            }
             if ($this->request->isPost && $thisUser->load($this->request->post()) && $thisUser->save()) {
                 return $this->redirect(['view', 'id' => $thisUser->id]);
             }
