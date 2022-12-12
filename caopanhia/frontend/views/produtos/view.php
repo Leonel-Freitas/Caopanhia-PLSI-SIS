@@ -35,7 +35,7 @@ $this->title = $model->designacao;
         ],
     ]) ?>
 
-    <?= Html::a('Voltar à loja', ['index'], ['class' => 'btn btn-primary']) ?>
+    <?= Html::a('Voltar', Yii::$app->request->referrer, ['class' => 'btn btn-primary']) ?>
 
 
 </div>

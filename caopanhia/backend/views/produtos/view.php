@@ -15,11 +15,6 @@ $this->title = $model->designacao;
         <?= Html::a('Voltar', ['index'], ['class' => 'btn btn-warning']) ?>
         <?= Html::a('Editar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Adicionar stock', ['stock', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
-        <?php if ($model->status == 10){ ?>
-            <?= Html::a('Desativar', ['update', 'id' => $model->id], ['class' => 'btn btn-danger']) ?>
-        <?php }else{ ?>
-            <?= Html::a('Ativar', ['update', 'id' => $model->id], ['class' => 'btn btn-danger']) ?>
-        <?php } ?>
     </p>
 
     <center>

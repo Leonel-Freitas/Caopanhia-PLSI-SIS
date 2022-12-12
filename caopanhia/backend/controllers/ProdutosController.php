@@ -160,37 +160,6 @@ class ProdutosController extends Controller
         }
     }
 
-    //TODO ESTAS DUAS FUNCOES
-    public function actionDisable($id)
-    {
-        if (Yii::$app->user->can('desactivateProductType')){
-            $model = $this->findModel($id);
-            $produtosAssociados = Produtos::find()->where(['idCategoria' => $model->id])->all();
-            if ($produtosAssociados == null){
-                $model->status = 9;
-                $model->save();
-            }else{
-                Yii::$app->session->setFlash('error', 'Não pode desativar esta categoria uma vez que existem produtos associados a ela!');
-            }
-            return $this->redirect(['index']);
-        }else{
-            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
-        }
-    }
-
-    public function actionReactivate($id)
-    {
-        if (Yii::$app->user->can('reactivateProductType')){
-            $model = $this->findModel($id);
-            $model->status = 10;
-            $model->save();
-
-            return $this->redirect(['index']);
-        }else{
-            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
-        }
-    }
-
     /*
     public function actionDelete($id)
     {

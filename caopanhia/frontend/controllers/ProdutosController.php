@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\Encomendas;
 use common\models\Produtos;
 use Yii;
 use yii\data\ActiveDataProvider;
@@ -51,14 +52,22 @@ class ProdutosController extends Controller
     public function actionIndex()
     {
         if (Yii::$app->user->can('viewProducts')) {
-            $produtos = Produtos::find()->all();
-            $dataProvider = new ActiveDataProvider([
+            if (Encomendas::find()->where(['idUser' => Yii::$app->user->getId(), 'finalizada' => 'nao'])->one() == null){
+                $encomenda = new Encomendas();
+                $encomenda->finalizada = 'nao';
+                $encomenda->idUser = Yii::$app->user->getId();
+                $encomenda->save();
+            }
+
+            $produtos = Produtos::find()->where(['>','stock', 0])->all();
+
+            /*$dataProvider = new ActiveDataProvider([
                 'query' => Produtos::find(),
 
-            ]);
+            ]);*/
 
             return $this->render('index', [
-                'dataProvider' => $dataProvider,
+                //'dataProvider' => $dataProvider,
                 'produtos' => $produtos,
 
             ]);

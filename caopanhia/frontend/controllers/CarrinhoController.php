@@ -3,8 +3,13 @@
 namespace frontend\controllers;
 
 use common\models\Carrinho;
+use common\models\Encomendas;
+use common\models\Produtos;
+use Yii;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -21,6 +26,15 @@ class CarrinhoController extends Controller
         return array_merge(
             parent::behaviors(),
             [
+                'access' => [
+                    'class' => AccessControl::class,
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'roles' => ['admin', 'client'],
+                        ],
+                    ],
+                ],
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
@@ -31,11 +45,7 @@ class CarrinhoController extends Controller
         );
     }
 
-    /**
-     * Lists all Carrinho models.
-     *
-     * @return string
-     */
+    /*
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
@@ -46,7 +56,7 @@ class CarrinhoController extends Controller
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
-    }
+    }*/
 
     /**
      * Displays a single Carrinho model.
@@ -55,11 +65,19 @@ class CarrinhoController extends Controller
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($idEncomenda, $idProduto)
+    public function actionView()
     {
-        return $this->render('view', [
-            'model' => $this->findModel($idEncomenda, $idProduto),
-        ]);
+        if (Yii::$app->user->can('readShopCar')) {
+            $encomenda = Encomendas::find()->where(['idUser' => Yii::$app->user->getId(), 'finalizada' => 'nao'])->one();
+            $produtosCarrinho = Carrinho::find()->where(['idEncomenda' => $encomenda->id])->all();
+
+
+            return $this->render('view', [
+                'produtosCarrinho' => $produtosCarrinho
+            ]);
+        }else{
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
+        }
     }
 
     /**
@@ -69,21 +87,28 @@ class CarrinhoController extends Controller
      */
     public function actionCreate($idProduto)
     {
-        $idEncomenda = 1;
-        $model = new Carrinho();
+        if (Yii::$app->user->can('readShopCar')) {
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'idEncomenda' => $model->idEncomenda, 'idProduto' => $model->idProduto]);
+            $encomenda = Encomendas::find()->where(['idUser' => Yii::$app->user->getId(), 'finalizada' => 'nao'])->one();
+            $isProdutoOnCarrinho = Carrinho::find()->where(['idEncomenda' => $encomenda->id, 'idProduto' => $idProduto])->one();
+
+            if ($isProdutoOnCarrinho == null){
+                $produtoCarrinho = new Carrinho();
+                $produtoCarrinho->idEncomenda = $encomenda->id;
+                $produtoCarrinho->idProduto = $idProduto;
+                $produtoCarrinho->quantidade = 1;
+                $produtoCarrinho->save();
+            }else{
+                $isProdutoOnCarrinho->quantidade ++;
+                $isProdutoOnCarrinho->save();
             }
-        } else {
-            $model->loadDefaultValues();
+
+
+            Yii::$app->session->setFlash('success', 'Produto adicionado ao carrinho.');
+            return $this->redirect(['produtos/index']);
+        }else{
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
         }
-
-        return $this->render('create', [
-            'model' => $model
-
-        ]);
     }
 
     /**
@@ -94,17 +119,22 @@ class CarrinhoController extends Controller
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($idEncomenda, $idProduto)
+    public function actionUpdate($idProduto)
     {
-        $model = $this->findModel($idEncomenda, $idProduto);
+        if (Yii::$app->user->can('updateShopCar')) {
+            $encomenda = Encomendas::find()->where(['idUser' => Yii::$app->user->getId(), 'finalizada' => 'nao'])->one();
+            $model = $this->findModel($encomenda->id, $idProduto);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'idEncomenda' => $model->idEncomenda, 'idProduto' => $model->idProduto]);
+            if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view']);
+            }
+
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }else{
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
         }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -115,11 +145,16 @@ class CarrinhoController extends Controller
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($idEncomenda, $idProduto)
+    public function actionDelete($idProduto)
     {
-        $this->findModel($idEncomenda, $idProduto)->delete();
+        if (Yii::$app->user->can('deleteShopCar')) {
+            $encomenda = Encomendas::find()->where(['idUser' => Yii::$app->user->getId(), 'finalizada' => 'nao'])->one();
+            $this->findModel($encomenda->id, $idProduto)->delete();
 
-        return $this->redirect(['index']);
+            return $this->redirect(['view']);
+        }else{
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
+        }
     }
 
     /**
