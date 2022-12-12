@@ -22,10 +22,13 @@ $this->title = $thisUser->nome;
                             <div class="row g-0">
                                 <div class="col-md-4 gradient-custom text-center text-black", id="perfil"
                                      style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem; ">
-                                    <?php if ($thisUser->genero=='masculino'){
-                                        echo Html::img('@web/images/userAvatar', ['class' => 'img-fluid my-5']) ;
-                                    }else{
-                                        echo Html::img('@web/images/croupier', ['class' => 'img-fluid my-5','style'=>'width: 140px;' ]);
+                                    <?php
+                                    if ($thisUser->imagem){
+                                        echo Html::img(\yii\helpers\BaseUrl::to('@web/images/User/'.$thisUser->imagem), ['class' => 'img-fluid my-5']);
+                                    } else if ($thisUser->genero=='masculino'){
+                                            echo Html::img('@web/images/userAvatar', ['class' => 'img-fluid my-3']) ;
+                                        }else{
+                                            echo Html::img('@web/images/croupier', ['class' => 'img-fluid my-3','style'=>'width: 140px;' ]);
                                     }?>
                                     <h5><?=$thisUser->nome?></h5>
                                     <p><?=$thisUser->formacao?></p>
@@ -78,7 +81,17 @@ $this->title = $thisUser->nome;
         </section>
 
 
+
     </div>
 
 
 </div>
+<style>
+    #imagemPerfil
+    {
+        vertical-align: middle;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+    }
+</style>

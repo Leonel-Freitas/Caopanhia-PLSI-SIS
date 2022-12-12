@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= $form->field($model, 'nome')->textInput() ?>
             <?= $form->field($model, 'genero')->dropDownList(['masculino' => 'Masculino', 'feminino' => 'Feminino']) ?>
             <?= $form->field($model, 'morada')->textInput() ?>
-            <?= $form->field($model, 'codigoPostal')->textInput() ?>
+            <?= $form->field($model, 'codigoPostal')->Input('number') ?>
             <?= $form->field($model, 'idDistrito')->dropDownList($distritos)->label('Distrito') ?>
             <?= $form->field($model, 'nif')->textInput() ?>
             <?= $form->field($model, 'contacto')->textInput() ?>

@@ -16,10 +16,12 @@ use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * UserController implements the CRUD actions for User model.
  */
+
 class UserController extends Controller
 {
     /**
@@ -130,6 +132,14 @@ class UserController extends Controller
                 array_push($distritos, $distrito->designacao);
             }
 
+            if ($this->request->isPost) {
+                if (UploadedFile::getInstance($model, 'imageFile') != null) {
+                    $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+                    $model->upload();
+                    $model->imagem = $model->imageFile->name;
+                }
+            }
+
             if ($model->load(Yii::$app->request->post()) && $model->signup($role)) {
                 return $this->redirect(['index', 'role' => $role]);
             }
@@ -167,6 +177,14 @@ class UserController extends Controller
                     $model->idDistrito = $contador;
                 }
                 $contador++;
+            }
+
+            if ($this->request->isPost) {
+                if (UploadedFile::getInstance($model, 'imageFile') != null) {
+                    $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+                    $model->upload();
+                    $model->imagem = $model->imageFile->name;
+                }
             }
 
 

@@ -12,6 +12,8 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
+
+
     <?= $form->field($model, 'nome')->textInput() ?>
     <?= $form->field($user, 'email')->textInput() ?>
     <?= $form->field($model, 'genero')->dropDownList(['masculino' => 'Masculino', 'feminino' => 'Feminino']) ?>
@@ -22,6 +24,9 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'contacto')->textInput() ?>
     <?php if ($role == 'vet'){ ?>
     <?= $form->field($model, 'formacao')->textInput() ?>
+    <?php } ?>
+    <?php if ($role == 'vet'){ ?>
+        <?= $form->field($model, 'imageFile')->fileInput()->label('') ?>
     <?php } ?>
 
     <div class="form-group">

@@ -40,7 +40,7 @@ class CarrinhoController extends Controller
     {
         $dataProvider = new ActiveDataProvider([
             'query' => Carrinho::find(),
-            
+
         ]);
 
         return $this->render('index', [

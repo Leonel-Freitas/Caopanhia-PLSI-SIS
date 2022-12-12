@@ -3,9 +3,11 @@
 /** @var yii\web\View $this */
 
 use yii\helpers\Html;
+use common\models\Userprofile;
+
 
 $this->title = 'About';
-$this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="site-about">
     <h1><?= Html::encode($this->title) ?></h1>
@@ -18,8 +20,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="d-inline-flex align-items-center">
                     <i class="bi bi-geo-alt fs-1 text-primary me-3"></i>
                     <div class="text-start">
-                        <h6 class="text-uppercase mb-1">Our Office</h6>
-                        <span>123 Street, New York, USA</span>
+                        <h6 class="text-uppercase mb-1">Nossa Loja</h6>
+                        <span>Rua 123, Leiria, Portugal</span>
                     </div>
                 </div>
             </div>
@@ -27,8 +29,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="d-inline-flex align-items-center">
                     <i class="bi bi-envelope-open fs-1 text-primary me-3"></i>
                     <div class="text-start">
-                        <h6 class="text-uppercase mb-1">Email Us</h6>
-                        <span>info@example.com</span>
+                        <h6 class="text-uppercase mb-1">Envia um Email</h6>
+                        <span>caopanhia@gmail.com</span>
                     </div>
                 </div>
             </div>
@@ -36,8 +38,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="d-inline-flex align-items-center">
                     <i class="bi bi-phone-vibrate fs-1 text-primary me-3"></i>
                     <div class="text-start">
-                        <h6 class="text-uppercase mb-1">Call Us</h6>
-                        <span>+012 345 6789</span>
+                        <h6 class="text-uppercase mb-1">Liga-nos</h6>
+                        <span>+351 123421842</span>
                     </div>
                 </div>
             </div>
@@ -57,26 +59,26 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
                 <div class="col-lg-7">
                     <div class="border-start border-5 border-primary ps-5 mb-5">
-                        <h6 class="text-primary text-uppercase">About Us</h6>
-                        <h1 class="display-5 text-uppercase mb-0">We Keep Your Pets Happy All Time</h1>
+                        <h6 class="text-primary text-uppercase">Sobre Nos</h6>
+                        <h1 class="display-5 text-uppercase mb-0">Nós mantemos os cães felizes</h1>
                     </div>
-                    <h4 class="text-body mb-4">Diam dolor diam ipsum tempor sit. Clita erat ipsum et lorem stet no labore lorem sit clita duo justo magna dolore</h4>
+                    <h4 class="text-body mb-4">A Cãopanhia é um sistema on-line com a finalidade de facilitar a adoção de cães através de anúncios bem estruturados. Qualquer utilizador poderá criar anúncios e/ou responder a anúncios já criados por outro utilizador.</h4>
                     <div class="bg-light p-4">
                         <ul class="nav nav-pills justify-content-between mb-3" id="pills-tab" role="tablist">
                             <li class="nav-item w-50" role="presentation">
                                 <button class="nav-link text-uppercase w-100 active" id="pills-1-tab" data-bs-toggle="pill"
                                         data-bs-target="#pills-1" type="button" role="tab" aria-controls="pills-1"
-                                        aria-selected="true">Our Mission</button>
+                                        aria-selected="true">Nossa missão</button>
                             </li>
                             <li class="nav-item w-50" role="presentation">
                                 <button class="nav-link text-uppercase w-100" id="pills-2-tab" data-bs-toggle="pill"
                                         data-bs-target="#pills-2" type="button" role="tab" aria-controls="pills-2"
-                                        aria-selected="false">Our Vission</button>
+                                        aria-selected="false">Nossa visão</button>
                             </li>
                         </ul>
                         <div class="tab-content" id="pills-tabContent">
                             <div class="tab-pane fade show active" id="pills-1" role="tabpanel" aria-labelledby="pills-1-tab">
-                                <p class="mb-0">Tempor erat elitr at rebum at at clita aliquyam consetetur. Diam dolor diam ipsum et, tempor voluptua sit consetetur sit. Aliquyam diam amet diam et eos sadipscing labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus clita duo justo et tempor consetetur takimata eirmod, dolores takimata consetetur invidunt magna dolores aliquyam dolores dolore. Amet erat amet et magna</p>
+                                <p class="mb-0">A nossa missão será diminuir o abandono de animais nomeadamente cães com a nosso sistema de anuncios e com veterinarios prontos para acudir conseguiremos cuidar e tratar o seu animal de estimação </p>
                             </div>
                             <div class="tab-pane fade" id="pills-2" role="tabpanel" aria-labelledby="pills-2-tab">
                                 <p class="mb-0">Tempor erat elitr at rebum at at clita aliquyam consetetur. Diam dolor diam ipsum et, tempor voluptua sit consetetur sit. Aliquyam diam amet diam et eos sadipscing labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus clita duo justo et tempor consetetur takimata eirmod, dolores takimata consetetur invidunt magna dolores aliquyam dolores dolore. Amet erat amet et magna</p>
@@ -97,91 +99,36 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="container-fluid py-5">
         <div class="container">
             <div class="border-start border-5 border-primary ps-5 mb-5" style="max-width: 600px;">
-                <h6 class="text-primary text-uppercase">Team Members</h6>
-                <h1 class="display-5 text-uppercase mb-0">Qualified Pets Care Professionals</h1>
+                <h6 class="text-primary text-uppercase">Veterinarios</h6>
+                <h1 class="display-5 text-uppercase mb-0">Profissionais qualificados para cuidado de animais</h1>
             </div>
             <div class="owl-carousel team-carousel position-relative" style="padding-right: 25px;">
-                <div class="team-item">
-                    <div class="position-relative overflow-hidden">
-                        <?= Html::img('@web/images/team-1.jpg', ['class' => 'img-fluid w-100'])?>
+                <?php foreach (Userprofile::find()->where(['!=', 'formacao', 'null'])->all()  as $team) {?>
+                    <div class="team-item">
+                        <div class="position-relative overflow-hidden">
+                            <?php if(($team->imagem)==null) { ?>
+                            <?= Html::img('@web/images/vet.jpg');?>
+                                <?php }else { ?>
+                               <?= Html::img(\yii\helpers\BaseUrl::to(Yii::$app->urlManagerBackend->baseUrl.'/user/'.$team->imagem), ['class' => 'img-fluid w-100']);?>
 
-                        <div class="team-overlay">
+                           <?php }?>
+
+                            <div class="team-overlay">
                             <div class="d-flex align-items-center justify-content-start">
-                                <a class="btn btn-light btn-square mx-1" href="#"><i class="bi bi-twitter"></i></a>
-                                <a class="btn btn-light btn-square mx-1" href="#"><i class="bi bi-facebook"></i></a>
-                                <a class="btn btn-light btn-square mx-1" href="#"><i class="bi bi-linkedin"></i></a>
+
+                                <a class="btn btn-light btn-square mx-1" style="width:80px; height:70px" <?= Html::a(' Profile <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+  <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
+</svg>', ['userprofile/viewprofile', 'id' =>$team->id])?></a>
+
+                            </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="bg-light text-center p-4">
-                        <h5 class="text-uppercase">Full Name</h5>
-                        <p class="m-0">Designation</p>
-                    </div>
-                </div>
-                <div class="team-item">
-                    <div class="position-relative overflow-hidden">
-                        <?= Html::img('@web/images/team-2.jpg', ['class' => 'img-fluid w-100'])?>
-                        <div class="team-overlay">
-                            <div class="d-flex align-items-center justify-content-start">
-                                <a class="btn btn-light btn-square mx-1" href="#"><i class="bi bi-twitter"></i></a>
-                                <a class="btn btn-light btn-square mx-1" href="#"><i class="bi bi-facebook"></i></a>
-                                <a class="btn btn-light btn-square mx-1" href="#"><i class="bi bi-linkedin"></i></a>
-                            </div>
+                        <div class="bg-light text-center p-4">
+                            <h5 class="text-uppercase"><?= $team->nome ?></h5>
+
                         </div>
-                    </div>
-                    <div class="bg-light text-center p-4">
-                        <h5 class="text-uppercase">Full Name</h5>
-                        <p class="m-0">Designation</p>
-                    </div>
-                </div>
-                <div class="team-item">
-                    <div class="position-relative overflow-hidden">
-                        <?= Html::img('@web/images/team-3.jpg', ['class' => 'img-fluid w-100'])?>
-                        <div class="team-overlay">
-                            <div class="d-flex align-items-center justify-content-start">
-                                <a class="btn btn-light btn-square mx-1" href="#"><i class="bi bi-twitter"></i></a>
-                                <a class="btn btn-light btn-square mx-1" href="#"><i class="bi bi-facebook"></i></a>
-                                <a class="btn btn-light btn-square mx-1" href="#"><i class="bi bi-linkedin"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-light text-center p-4">
-                        <h5 class="text-uppercase">Full Name</h5>
-                        <p class="m-0">Designation</p>
-                    </div>
-                </div>
-                <div class="team-item">
-                    <div class="position-relative overflow-hidden">
-                        <?= Html::img('@web/images/team-4.jpg', ['class' => 'img-fluid w-100'])?>
-                        <div class="team-overlay">
-                            <div class="d-flex align-items-center justify-content-start">
-                                <a class="btn btn-light btn-square mx-1" href="#"><i class="bi bi-twitter"></i></a>
-                                <a class="btn btn-light btn-square mx-1" href="#"><i class="bi bi-facebook"></i></a>
-                                <a class="btn btn-light btn-square mx-1" href="#"><i class="bi bi-linkedin"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-light text-center p-4">
-                        <h5 class="text-uppercase">Full Name</h5>
-                        <p class="m-0">Designation</p>
-                    </div>
-                </div>
-                <div class="team-item">
-                    <div class="position-relative overflow-hidden">
-                        <?= Html::img('@web/images/team-5.jpg', ['class' => 'img-fluid w-100'])?>
-                        <div class="team-overlay">
-                            <div class="d-flex align-items-center justify-content-start">
-                                <a class="btn btn-light btn-square mx-1" href="#"><i class="bi bi-twitter"></i></a>
-                                <a class="btn btn-light btn-square mx-1" href="#"><i class="bi bi-facebook"></i></a>
-                                <a class="btn btn-light btn-square mx-1" href="#"><i class="bi bi-linkedin"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-light text-center p-4">
-                        <h5 class="text-uppercase">Full Name</h5>
-                        <p class="m-0">Designation</p>
-                    </div>
-                </div>
+                     </div>
+                    <?php }?>
             </div>
         </div>
     </div>
@@ -200,7 +147,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 
-    <code><?= __FILE__ ?></code>
+
 </div>
 
 

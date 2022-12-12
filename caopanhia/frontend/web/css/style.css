@@ -726,11 +726,33 @@ a.desc:after {
     }
 }
 
-#imagemProduto{
+#imagemProduto {
     width: 260px;
+    height: auto;
+}
+.img-fluid.my-5
+ {
+    vertical-align: middle;
+    width: 200px;
+    height: 200px;
+    border-radius: 50% !important;
+}
+
+.img-fluid.my-3{
+
+    vertical-align: middle;
+    width: 200px;
+    height: 200px;
+    border-radius: 50% !important;
+    margin-top: 3rem !important;
+    margin-bottom: 3rem !important;
+    max-width: 100%;
     height: auto;
 
 }
+
+
+
 
 
 

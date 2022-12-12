@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 $this->title = $userProfile->nome;
+
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="user-view">
