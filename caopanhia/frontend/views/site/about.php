@@ -6,7 +6,7 @@ use yii\helpers\Html;
 use common\models\Userprofile;
 
 
-$this->title = 'About';
+$this->title = 'Sobre';
 
 ?>
 <div class="site-about">
@@ -81,7 +81,7 @@ $this->title = 'About';
                                 <p class="mb-0">A nossa missão será diminuir o abandono de animais nomeadamente cães com a nosso sistema de anuncios e com veterinarios prontos para acudir conseguiremos cuidar e tratar o seu animal de estimação </p>
                             </div>
                             <div class="tab-pane fade" id="pills-2" role="tabpanel" aria-labelledby="pills-2-tab">
-                                <p class="mb-0">Tempor erat elitr at rebum at at clita aliquyam consetetur. Diam dolor diam ipsum et, tempor voluptua sit consetetur sit. Aliquyam diam amet diam et eos sadipscing labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus clita duo justo et tempor consetetur takimata eirmod, dolores takimata consetetur invidunt magna dolores aliquyam dolores dolore. Amet erat amet et magna</p>
+                                <p class="mb-0">Ver um animal abandonado é triste e queremos ajudar o maior numero possivel de cães para que eles possam saborear a vida e ter um dono que consiga cuidar dele para serem melhores amigos durante anos. </p>
                             </div>
                         </div>
                     </div>

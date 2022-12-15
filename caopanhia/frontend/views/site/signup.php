@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= $form->field($model, 'morada')->textInput() ?>
             <?= $form->field($model, 'codigoPostal')->Input('number') ?>
             <?= $form->field($model, 'idDistrito')->dropDownList($distritos)->label('Distrito') ?>
-            <?= $form->field($model, 'nif')->textInput() ?>
+            <?= $form->field($model, 'nif')->Input('number') ?>
             <?= $form->field($model, 'contacto')->textInput() ?>
 
                 <div class="form-group">

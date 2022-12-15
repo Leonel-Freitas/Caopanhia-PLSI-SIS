@@ -145,28 +145,10 @@ $this->title = 'My Yii Application';
                 </div>
             </div>
         </section>
-        <section class="u-clearfix u-image u-valign-middle-xl u-section-6" id="carousel_4bb3">
-            <div class="u-clearfix u-expanded-width-sm u-expanded-width-xs u-layout-wrap u-layout-wrap-1">
-                <div class="u-layout">
-                    <div class="u-layout-row">
-                        <div class="u-align-left u-container-style u-layout-cell u-left-cell u-size-29 u-layout-cell-1">
-                            <div class="u-container-layout u-valign-middle u-container-layout-1">
-                                <h1 class="u-custom-font u-font-playfair-display u-text u-text-1">Basic Dog</h1>
-                                <h2 class="u-text u-text-default u-text-2"> Training</h2>
-                                <p class="u-text u-text-3">Whether or not you plan on competing in dog sports and events, it’s critical that all dogs receive basic training, from how to walk well on leash to being comfortable with strangers.</p>
-                                <a href="https://nicepage.com/c/about-us-html-templates" class="u-active-black u-black u-border-radius-0 u-btn u-btn-rectangle u-button-style u-hover-grey-50 u-btn-1">all services</a>
-                            </div>
-                        </div>
-                        <div class="u-container-style u-image u-layout-cell u-right-cell u-size-31 u-image-1" data-image-width="1277" data-image-height="1229">
-                            <div class="u-container-layout u-container-layout-2"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+
         <section class="u-align-center u-black u-clearfix u-section-7" id="carousel_212e">
             <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-                <h2 class="u-custom-font u-font-playfair-display u-text u-text-1">We focus on rewarding the behaviors we like to encourage appropriate <b>dog behavior in the real world. </b>
+                <h2 class="u-custom-font u-font-playfair-display u-text u-text-1">Nos focamos-nos em compensar e encorajar o que achamos apropriado para o cuidado dos <b>cães no nosso mundo. </b>
                 </h2>
                 <div class="u-social-icons u-spacing-10 u-social-icons-1">
                     <a class="u-social-url" target="_blank" href=""><span class="u-icon u-icon-circle u-social-facebook u-social-icon u-icon-1"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 112 112" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-9d13"></use></svg><svg x="0px" y="0px" viewBox="0 0 112 112" id="svg-9d13" class="u-svg-content"><path d="M75.5,28.8H65.4c-1.5,0-4,0.9-4,4.3v9.4h13.9l-1.5,15.8H61.4v45.1H42.8V58.3h-8.8V42.4h8.8V32.2 c0-7.4,3.4-18.8,18.8-18.8h13.8v15.4H75.5z"></path></svg></span>

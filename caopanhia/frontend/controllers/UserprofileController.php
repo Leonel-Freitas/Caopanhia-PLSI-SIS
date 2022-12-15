@@ -111,7 +111,7 @@ class UserprofileController extends Controller
         if (Yii::$app->user->can('readUserProfile')) {
             $thisUser = Userprofile::findOne($id);
             $thisEmailUser = \common\models\User::findOne($thisUser->idUser)->email;
-            $thisRoleUser = \common\models\User::findOne($thisUser->id)->getRoleName();
+            $thisRoleUser = \common\models\User::findOne($thisUser->idUser)->getRoleName();
             return $this->render('viewprofile', [
                 'thisUser' => $thisUser,
                 'thisEmailUser' => $thisEmailUser,

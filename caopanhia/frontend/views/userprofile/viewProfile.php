@@ -27,7 +27,7 @@ $this->title = $thisUser->nome;
                                      style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem; ">
 
                                     <?php
-                                    if ($role=='vet'){
+                                    if ($role=='vet' && $thisUser->imagem){
                                         echo Html::img(\yii\helpers\BaseUrl::to(Yii::$app->urlManagerBackend->baseUrl.'/user/'.$thisUser->imagem), ['class' => 'img-fluid my-5']);
                                     } else if ($thisUser->imagem) {
                                         echo Html::img(\yii\helpers\BaseUrl::to('@web/images/User/'.$thisUser->imagem), ['class' => 'img-fluid my-5']);
