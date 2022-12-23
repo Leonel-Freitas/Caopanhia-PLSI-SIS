@@ -8,7 +8,7 @@ $config = [
         ],
         'urlManagerBackend' => [
             'class' => 'yii\web\urlManager',
-            'baseUrl' => '/caopanhia/backend/web/images/',
+            'baseUrl' => '/Caopanhia-PLSI-SIS/caopanhia/backend/web/images/',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
         ],

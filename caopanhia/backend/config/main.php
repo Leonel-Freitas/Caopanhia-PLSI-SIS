@@ -11,7 +11,7 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => ['api' => ['class' => 'backend\modules\api\ModuleAPI',],],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
@@ -40,7 +40,15 @@ return [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+
             'rules' => [
+                [
+                    'class' => 'yii\rest\UrlRule','controller' => 'api/user',
+                    'extraPatterns' => [
+                    'GET count' => 'count', ],],
+                ['class' => 'yii\rest\UrlRule','controller' => 'api/marcacoesveterinarias', 'pluralize' => false,],
+                ['class' => 'yii\rest\UrlRule','controller' => 'api/caes', 'pluralize' => false,],
+                ['class' => 'yii\rest\UrlRule','controller' => 'api/userprofile', 'pluralize' => false,],
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
