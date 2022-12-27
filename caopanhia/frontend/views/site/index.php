@@ -5,7 +5,7 @@
 
 use yii\helpers\Html;
 
-$this->title = 'My Yii Application';
+$this->title = 'Cãopanhia';
 ?>
 
 <div class="site-index">
@@ -88,7 +88,6 @@ $this->title = 'My Yii Application';
                                     <h1 class="u-custom-font u-font-playfair-display u-text u-text-default u-text-2">Ajude-nos a cuidar do seu <b>Animal</b>
                                     </h1>
                                     <p class="u-text u-text-default u-text-3">Cãopanhia ofereçe veterinarios prontos para ajudar o seu animal de estimação dispostos a encontrarem-se contigo</p>
-                                    <a><button class="btn btn-primary">Marque uma consulta</button></a>
                                 </div>
                             </div>
                             <div class="u-container-style u-image u-layout-cell u-size-24 u-image-1">
@@ -135,7 +134,7 @@ $this->title = 'My Yii Application';
                                     <div class="u-container-layout u-container-layout-4">
                                         <p class="u-text u-text-3">Visite-nos para encontrar os melhores produtos a preços asseciveis<br>
                                         </p>
-                                        <a><button class="btn btn-primary">Consultar loja</button></a>
+                                        <?= Html::a('Consulte a nossa loja', ['/produtos/index'] , ['class' => 'btn btn-primary']) ?>
 
                                     </div>
                                 </div>
@@ -148,8 +147,7 @@ $this->title = 'My Yii Application';
 
         <section class="u-align-center u-black u-clearfix u-section-7" id="carousel_212e">
             <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-                <h2 class="u-custom-font u-font-playfair-display u-text u-text-1">Nos focamos-nos em compensar e encorajar o que achamos apropriado para o cuidado dos <b>cães no nosso mundo. </b>
-                </h2>
+                <h2 class="u-custom-font u-font-playfair-display u-text u-text-1">Nos focamos-nos em compensar e encorajar o que achamos apropriado para o cuidado dos <b>cães no nosso mundo. </b></h2>
                 <div class="u-social-icons u-spacing-10 u-social-icons-1">
                     <a class="u-social-url" target="_blank" href=""><span class="u-icon u-icon-circle u-social-facebook u-social-icon u-icon-1"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 112 112" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-9d13"></use></svg><svg x="0px" y="0px" viewBox="0 0 112 112" id="svg-9d13" class="u-svg-content"><path d="M75.5,28.8H65.4c-1.5,0-4,0.9-4,4.3v9.4h13.9l-1.5,15.8H61.4v45.1H42.8V58.3h-8.8V42.4h8.8V32.2 c0-7.4,3.4-18.8,18.8-18.8h13.8v15.4H75.5z"></path></svg></span>
                     </a>

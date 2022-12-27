@@ -8,12 +8,11 @@ use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
 
 $this->title = 'Login';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Please fill out the following fields to login:</p>
+    <p>Insira as suas credenciais para entrar no sistema!</p>
 
     <div class="row">
         <div class="col-lg-5">
@@ -26,9 +25,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= $form->field($model, 'rememberMe')->checkbox() ?>
 
                 <div class="my-1 mx-0" style="color:#999;">
-                    If you forgot your password you can <?= Html::a('reset it', ['site/request-password-reset']) ?>.
+                    Esqueceu-se da password? <?= Html::a('Recupere-a', ['site/request-password-reset']) ?>.
                     <br>
-                    Need new verification email? <?= Html::a('Resend', ['site/resend-verification-email']) ?>
+                    Ainda não possui conta? <?= Html::a('Crie agora', ['site/signup']) ?>!
                 </div>
 
                 <div class="form-group">
@@ -42,5 +41,3 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 
 </div>
-
-<?= Html::a('Sign Up', ['site/signup'] ,['class' => 'btn btn-primary']) ?>

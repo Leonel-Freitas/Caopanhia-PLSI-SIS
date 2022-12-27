@@ -51,6 +51,7 @@ class ProdutosController extends Controller
      */
     public function actionIndex()
     {
+
         if (Yii::$app->user->can('viewProducts')) {
             if (Encomendas::find()->where(['idUser' => Yii::$app->user->getId(), 'finalizada' => 'nao'])->one() == null){
                 $encomenda = new Encomendas();

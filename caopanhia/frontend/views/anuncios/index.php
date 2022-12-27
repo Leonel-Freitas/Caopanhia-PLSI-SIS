@@ -43,5 +43,11 @@ $this->title = 'Anúncios';
     <?php } ?>
     </div>
 
+    <br><br>
+
+    <p>
+        Não sabe que raça mais se adequa a si? Responda a este <?= Html::a('questionário', ['questionario/create']) ?>!
+    </p>
+
 
 </div>

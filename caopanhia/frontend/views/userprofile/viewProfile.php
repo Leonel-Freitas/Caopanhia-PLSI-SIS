@@ -35,7 +35,7 @@ $this->title = $thisUser->nome;
                                         else if ($thisUser->genero=='masculino'){
                                         echo Html::img('@web/images/userAvatar', ['class' => 'img-fluid my-3']) ;
                                     }else{
-                                        echo Html::img('@web/images/croupier', ['class' => 'img-fluid my-3','style'=>'width: 140px;' ]);
+                                        echo Html::img('@web/images/userAvatarFemale', ['class' => 'img-fluid my-3','style'=>'width: 140px;' ]);
 
                                     }?>
                                     <h5><?= $thisUser->nome ?></h5>

@@ -8,10 +8,11 @@ use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
 
 $this->title = 'Signup';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-signup">
     <h1><?= Html::encode($this->title) ?></h1>
+
+    <?= common\widgets\Alert::widget()?>
 
     <p>Please fill out the following fields to signup:</p>
 
@@ -28,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= $form->field($model, 'nome')->textInput() ?>
             <?= $form->field($model, 'genero')->dropDownList(['masculino' => 'Masculino', 'feminino' => 'Feminino']) ?>
             <?= $form->field($model, 'morada')->textInput() ?>
-            <?= $form->field($model, 'codigoPostal')->Input('number') ?>
+            <?= $form->field($model, 'codigoPostal')->textInput() ?>
             <?= $form->field($model, 'idDistrito')->dropDownList($distritos)->label('Distrito') ?>
             <?= $form->field($model, 'nif')->Input('number') ?>
             <?= $form->field($model, 'contacto')->textInput() ?>

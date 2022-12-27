@@ -23,10 +23,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'nif')->textInput() ?>
     <?= $form->field($model, 'contacto')->textInput() ?>
     <?php if ($role == 'vet'){ ?>
-    <?= $form->field($model, 'formacao')->textInput() ?>
-    <?php } ?>
-    <?php if ($role == 'vet'){ ?>
-        <?= $form->field($model, 'imageFile')->fileInput()->label('') ?>
+        <?= $form->field($model, 'formacao')->textInput() ?>
+        <?= $form->field($model, 'imageFile')->fileInput()->label('Imagem ->') ?>
     <?php } ?>
 
     <div class="form-group">

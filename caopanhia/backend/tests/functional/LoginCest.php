@@ -4,6 +4,7 @@ namespace backend\tests\functional;
 
 use backend\tests\FunctionalTester;
 use common\fixtures\UserFixture;
+use common\models\User;
 
 /**
  * Class LoginCest
@@ -26,6 +27,22 @@ class LoginCest
             ]
         ];
     }
+
+    public function _before(){
+        $user = new User();
+        $user->username = 'user';
+        $user->email = 'user@mail.pt';
+        $user->setPassword('userPassword');
+        $user->generateAuthKey();
+        $user->generateEmailVerificationToken();
+        $user->status = 10;
+        $user->save();
+    }
+
+    public function _after(){
+        $user = User::find()->one();
+        $user->delete();
+    }
     
     /**
      * @param FunctionalTester $I
@@ -33,11 +50,11 @@ class LoginCest
     public function loginUser(FunctionalTester $I)
     {
         $I->amOnRoute('/site/login');
-        $I->fillField('Username', 'erau');
-        $I->fillField('Password', 'password_0');
+        $I->fillField('Username', 'user');
+        $I->fillField('Password', 'userPassword');
         $I->click('login-button');
 
-        $I->see('Logout (erau)', 'form button[type=submit]');
+        $I->see('Logout (user)', 'form button[type=submit]');
         $I->dontSeeLink('Login');
         $I->dontSeeLink('Signup');
     }
