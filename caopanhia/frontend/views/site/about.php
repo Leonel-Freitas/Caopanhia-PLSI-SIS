@@ -6,7 +6,7 @@ use yii\helpers\Html;
 use common\models\Userprofile;
 
 
-$this->title = 'Sobre';
+$this->title = 'Sobre Nós';
 
 ?>
 <div class="site-about">
@@ -20,7 +20,7 @@ $this->title = 'Sobre';
                 <div class="d-inline-flex align-items-center">
                     <i class="bi bi-geo-alt fs-1 text-primary me-3"></i>
                     <div class="text-start">
-                        <h6 class="text-uppercase mb-1">Nossa Loja</h6>
+                        <h6 class="text-uppercase mb-1">A Nossa Sede</h6>
                         <span>Rua 123, Leiria, Portugal</span>
                     </div>
                 </div>
@@ -29,7 +29,7 @@ $this->title = 'Sobre';
                 <div class="d-inline-flex align-items-center">
                     <i class="bi bi-envelope-open fs-1 text-primary me-3"></i>
                     <div class="text-start">
-                        <h6 class="text-uppercase mb-1">Envia um Email</h6>
+                        <h6 class="text-uppercase mb-1">Envia-nos um Email</h6>
                         <span>caopanhia@gmail.com</span>
                     </div>
                 </div>
@@ -39,7 +39,7 @@ $this->title = 'Sobre';
                     <i class="bi bi-phone-vibrate fs-1 text-primary me-3"></i>
                     <div class="text-start">
                         <h6 class="text-uppercase mb-1">Liga-nos</h6>
-                        <span>+351 123421842</span>
+                        <span>+351 912345678</span>
                     </div>
                 </div>
             </div>
@@ -81,8 +81,7 @@ $this->title = 'Sobre';
                                 <p class="mb-0">A nossa missão será diminuir o abandono de animais nomeadamente cães com a nosso sistema de anuncios e com veterinarios prontos para acudir conseguiremos cuidar e tratar o seu animal de estimação </p>
                             </div>
                             <div class="tab-pane fade" id="pills-2" role="tabpanel" aria-labelledby="pills-2-tab">
-                                <p class="mb-0">Ver um animal abandonado é triste e queremos ajudar o maior numero possivel de cães para que eles possam saborear a vida e ter um dono que consiga cuidar dele para serem melhores amigos durante anos. </p>
-                            </div>
+                                <p class="mb-0">Ver um animal abandonado é triste e queremos ajudar o maior numero possivel de cães para que eles possam saborear a vida e ter um dono que consiga cuidar dele para serem melhores amigos durante anos. </p>                            </div>
                         </div>
                     </div>
                 </div>
@@ -92,6 +91,55 @@ $this->title = 'Sobre';
     <!-- About End -->
 
 
+    <!-- Help Start -->
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="border-start border-5 border-primary ps-5 mb-5" style="max-width: 600px;">
+                <h6 class="text-primary text-uppercase">Ajude-nos</h6>
+                <h1 class="display-5 text-uppercase mb-0">A sua ajuda pode salvar vidas!</h1>
+            </div>
+            <h4>A cãopanhia e a sua equipa agradece do fundo do coração qualquer doação de artigos ou dinheiro que queira realizar. Toda e qualquer ajuda é bem vinda!</h4>
+            <div class="bg-light p-4">
+                <ul class="nav nav-pills justify-content-between mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item w-50" role="presentation">
+                        <button class="nav-link text-uppercase w-100 active" id="pills-3-tab" data-bs-toggle="pill"
+                                data-bs-target="#pills-3" type="button" role="tab" aria-controls="pills-3"
+                                aria-selected="true">Doação monetária</button>
+                    </li>
+                    <li class="nav-item w-50" role="presentation">
+                        <button class="nav-link text-uppercase w-100" id="pills-4-tab" data-bs-toggle="pill"
+                                data-bs-target="#pills-4" type="button" role="tab" aria-controls="pills-4"
+                                aria-selected="false">Doação de bens</button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-3" role="tabpanel" aria-labelledby="pills-1-tab">
+                        <p class="mb-0">
+                            <h6>A doação monetária pode ser realizada através de:</h6>
+                            <ul>
+                                <li><b>MB Way:</b> 912345678</li>
+                                <li><b>IBAN:</b> PT50 0018 0008 0617 2554 0201 4</li>
+                            </ul>
+                        </p>
+                    </div>
+                    <div class="tab-pane fade" id="pills-4" role="tabpanel" aria-labelledby="pills-2-tab">
+                        <p class="mb-0">
+                            <h6>A doação de bens pode ser realizada na nossa sede ou num local a combinar através do nosso email.</h6>
+                            Eis alguns dos bens mais precisos:
+                            <ul>
+                                <li>Ração</li>
+                                <li>Cobertores</li>
+                                <li>Comedores</li>
+                                <li>Álcool, Betadine, algodão, ligaduras, compressas, e outros produtos de  primeiros-socorros</li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Help End -->
 
 
 

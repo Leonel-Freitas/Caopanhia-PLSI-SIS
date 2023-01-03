@@ -77,7 +77,7 @@ class UserprofileController extends Controller
     {
         if (Yii::$app->user->can('readUserProfile')) {
             $thisUser = Userprofile::findOne($id);
-            $role = \common\models\User::findOne($thisUser->id)->getRoleName();
+            $role = \common\models\User::findOne($thisUser->idUser)->getRoleName();
             return $this->render('view', [
                 'thisUser' => $thisUser,
                 'role' => $role,

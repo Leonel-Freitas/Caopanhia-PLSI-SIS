@@ -54,7 +54,7 @@ AppAsset::register($this);
         ['label' => 'Home', 'url' => ['/site/index']],
         ['label' => 'Anuncios', 'url' => ['/anuncios/index']],
         ['label' => 'Loja', 'url' => ['produtos/index'] ],
-        ['label' => 'Sobre', 'url' => ['/site/about']],
+        ['label' => 'Sobre nós', 'url' => ['/site/about']],
 
 
     ];
@@ -100,15 +100,17 @@ AppAsset::register($this);
 <footer     <div class="container-fluid bg-light mt-5 py-5">
     <div class="container pt-5">
         <div class="row g-5">
-            <div class="col-lg-3 col-md-6">
+
+            <div class="col-lg-4 col-md-6">
                 <h5 class="text-uppercase border-start border-5 border-primary ps-3 mb-4">Contacta-nos</h5>
-                <p class="mb-4">Se tiver alguma duvida ou precisar de ajuda não receie em contactar-nos</p>
+                <p class="mb-4">Se tiver alguma duvida ou precisar de ajuda não receie em contactar-nos!</p>
                 <p class="mb-2"><i class="bi bi-geo-alt text-primary me-2"></i>Rua 123, Leiria, Portugal</p>
                 <p class="mb-2"><i class="bi bi-envelope-open text-primary me-2"></i>caopanhia@gmail.com</p>
                 <p class="mb-0"><i class="bi bi-telephone text-primary me-2"></i>+351 123421842</p>
             </div>
-            <div class="col-lg-3 col-md-6">
-                <h5 class="text-uppercase border-start border-5 border-primary ps-3 mb-4">Links Rapidos</h5>
+
+            <div class="col-lg-4 col-md-6">
+                <h5 class="text-uppercase border-start border-5 border-primary ps-3 mb-4">Links Rápidos</h5>
                 <div class="d-flex flex-column justify-content-start">
                     <?= Html::a('<i class="bi bi-arrow-right text-primary me-2"></i>Home', ['/'], ['class' => 'text-body mb-2'])?>
                     <?= Html::a('<i class="bi bi-arrow-right text-primary me-2"></i>Sobre', ['/site/about'], ['class' => 'text-body mb-2'])?>
@@ -116,13 +118,7 @@ AppAsset::register($this);
                     <?= Html::a('<i class="bi bi-arrow-right text-primary me-2"></i>Anuncios', ['/anuncios/index'], ['class' => 'text-body mb-2'])?>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
-
-                <div class="d-flex flex-column justify-content-start">
-
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-4 col-md-6">
                 <h6 class="text-uppercase mt-4 mb-3">Segue-nos</h6>
                 <div class="d-flex">
                     <a class="btn btn-outline-primary btn-square me-2" href="#"><i class="bi bi-twitter"></i></a>
@@ -131,7 +127,6 @@ AppAsset::register($this);
                     <a class="btn btn-outline-primary btn-square" href="#"><i class="bi bi-instagram"></i></a>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

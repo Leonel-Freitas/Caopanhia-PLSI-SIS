@@ -23,7 +23,6 @@ $this->title = $userProfile->nome;
                 'label' => 'Distrito',
                 'value' => $distrito,
             ],
-            'imageFile',
             'nif',
             'contacto',
             'formacao',

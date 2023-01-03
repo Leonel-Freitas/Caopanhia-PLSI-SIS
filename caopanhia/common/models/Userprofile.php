@@ -48,7 +48,7 @@ class Userprofile extends \yii\db\ActiveRecord
     {
         return [
             [['nome', 'morada', 'codigoPostal', 'genero', 'nif', 'contacto'], 'required'],
-            [['nif', 'contacto', 'idUser', 'idDistrito'], 'integer'],
+            [['nif', 'contacto', 'idUser'], 'integer'],
             [['nome', 'morada', 'formacao'], 'string', 'max' => 255],
             [['codigoPostal'], 'string', 'max' => 8],
             [['genero'], 'string', 'max' => 10],

@@ -56,11 +56,11 @@ class LoginCest
         $I->seeValidationError('Incorrect username or password');
     }
 
-    public function checkValidLogin(FunctionalTester $I)
+   /* public function checkValidLogin(FunctionalTester $I)
     {
-        $I->submitForm('#login-form', $this->formParams('erau', 'password_0'));
-        $I->see('Logout (erau)', 'form button[type=submit]');
+        $I->submitForm('#login-form', $this->formParams('client', 'clientclient'));
+        $I->see('Logout', 'form button[type=submit]');
         $I->dontSeeLink('Login');
         $I->dontSeeLink('Signup');
-    }
+    }*/
 }

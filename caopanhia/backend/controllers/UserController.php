@@ -59,7 +59,7 @@ class UserController extends Controller
     public function actionIndex($role)
     {
         if (Yii::$app->user->can('viewUsersProfile')) {
-            $usersRole = Auth_assignment::find()->where(['item_name' => $role])->all();
+            $usersRole = Auth_assignment::find()->where(['item_name' => $role])->orderBy(['user_id' => SORT_ASC])->all();
             $users = [];
             foreach ($usersRole as $userRole) {
                 $user = User::find()->where(['id' => $userRole->user_id])->one();
@@ -195,7 +195,7 @@ class UserController extends Controller
 
                 $model->save();
                 $user->save();
-                return $this->redirect(['view', 'id' => $model->id, 'role' => $role]);
+                return $this->redirect(['view', 'id' => $user->id, 'role' => $role]);
             }
 
 

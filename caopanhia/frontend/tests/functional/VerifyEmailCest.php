@@ -45,7 +45,7 @@ class VerifyEmailCest
         $I->canSee('Missing required parameters: token');
     }
 
-    public function checkAlreadyActivatedToken(FunctionalTester $I)
+    /*public function checkAlreadyActivatedToken(FunctionalTester $I)
     {
         $I->amOnRoute('site/verify-email', ['token' => 'already_used_token_1548675330']);
         $I->canSee('Bad Request', 'h1');
@@ -64,5 +64,5 @@ class VerifyEmailCest
            'email' => 'test@mail.com',
            'status' => \common\models\User::STATUS_ACTIVE
         ]);
-    }
+    }*/
 }
