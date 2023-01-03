@@ -15,6 +15,9 @@ return [
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ],
         ],
         'user' => [
             'identityClass' => 'common\models\User',
@@ -45,8 +48,10 @@ return [
                 [
                     'class' => 'yii\rest\UrlRule','controller' => 'api/user',
                     'extraPatterns' => [
-                    'GET count' => 'count', ],],
+                        'GET contagem' => 'contagem',
+                        'POST login' => 'login'],],
                 ['class' => 'yii\rest\UrlRule','controller' => 'api/marcacoesveterinarias', 'pluralize' => false,],
+                ['class' => 'yii\rest\UrlRule','controller' => 'api/login', 'pluralize' => false, 'extraPatterns' => ['POST post' => 'post'],],
                 ['class' => 'yii\rest\UrlRule','controller' => 'api/caes', 'pluralize' => false,],
                 ['class' => 'yii\rest\UrlRule','controller' => 'api/userprofile', 'pluralize' => false,],
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
