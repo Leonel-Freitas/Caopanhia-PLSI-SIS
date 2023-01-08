@@ -3,7 +3,7 @@ actor: AcceptanceTester
 modules:
     enabled:
         - WebDriver:
-            url: http://localhost:8080
-            browser: firefox
+            url: http://localhost/caopanhia/frontend/web/
+            browser: chrome
         - Yii2:
-            part: init
+            part: orm

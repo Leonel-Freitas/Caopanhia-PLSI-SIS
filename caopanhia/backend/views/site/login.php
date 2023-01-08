@@ -17,13 +17,13 @@ use yii\helpers\Html;
 
 
         <?= $form->field($model,'username')
-            ->label(false)
+            ->label('Username:')
             ->textInput(['placeholder' => $model->getAttributeLabel('username')]) ?>
 
         <br>
 
         <?= $form->field($model, 'password')
-            ->label(false)
+            ->label('Password:')
             ->passwordInput(['placeholder' => $model->getAttributeLabel('password')]) ?>
 
         <br>
@@ -39,7 +39,7 @@ use yii\helpers\Html;
             </div>
         <center>
             <div class="col-4">
-                <?= Html::submitButton('Sign In', ['class' => 'btn btn-primary btn-block']) ?>
+                <?= Html::submitButton('Sign In', ['class' => 'btn btn-primary btn-block', 'name' => 'login-button']) ?>
             </div>
         </center>
 

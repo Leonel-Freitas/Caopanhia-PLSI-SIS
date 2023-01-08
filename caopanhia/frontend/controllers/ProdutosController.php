@@ -2,8 +2,10 @@
 
 namespace frontend\controllers;
 
+use common\models\Categorias;
 use common\models\Encomendas;
 use common\models\Produtos;
+use common\models\Userprofile;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
@@ -49,18 +51,21 @@ class ProdutosController extends Controller
      *
      * @return string
      */
-    public function actionIndex()
+    public function actionIndex($filtro)
     {
 
         if (Yii::$app->user->can('viewProducts')) {
-            if (Encomendas::find()->where(['idUser' => Yii::$app->user->getId(), 'finalizada' => 'nao'])->one() == null){
+            if (Encomendas::find()->where(['idUser' => Userprofile::find()->where(['idUser' => Yii::$app->user->getId()])->one()->id])->andWhere(['finalizada' => 'nao'])->one() == null){
                 $encomenda = new Encomendas();
                 $encomenda->finalizada = 'nao';
-                $encomenda->idUser = Yii::$app->user->getId();
+                $encomenda->idUser = Userprofile::find()->where(['idUser' => Yii::$app->user->getId()])->one()->id;
                 $encomenda->save();
             }
 
-            $produtos = Produtos::find()->where(['>','stock', 0])->all();
+            if ($filtro == 0)
+                $produtos = Produtos::find()->where(['>','stock', 0])->all();
+            else
+                $produtos = Produtos::find()->where(['>','stock', 0])->andWhere(['idCategoria' => $filtro])->all();
 
             /*$dataProvider = new ActiveDataProvider([
                 'query' => Produtos::find(),
@@ -88,6 +93,20 @@ class ProdutosController extends Controller
         if (Yii::$app->user->can('readProduct')) {
             return $this->render('view', [
                 'model' => $this->findModel($id),
+            ]);
+        }else{
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
+        }
+    }
+
+    public function actionFiltrar()
+    {
+        if (Yii::$app->user->can('viewProducts')) {
+
+            $categorias = Categorias::find()->where(['status' => 10])->all();
+
+            return $this->render('filtrar', [
+                'categorias' => $categorias
             ]);
         }else{
             throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');

@@ -5,6 +5,7 @@ namespace backend\tests\functional;
 use backend\tests\FunctionalTester;
 use common\fixtures\UserFixture;
 use common\models\User;
+use Yii;
 
 /**
  * Class LoginCest
@@ -37,6 +38,8 @@ class LoginCest
         $user->generateEmailVerificationToken();
         $user->status = 10;
         $user->save();
+        $auth = Yii::$app->authManager;
+        $auth->assign($auth->getRole('admin'), $user->id);
     }
 
     public function _after(){
@@ -50,11 +53,11 @@ class LoginCest
     public function loginUser(FunctionalTester $I)
     {
         $I->amOnRoute('/site/login');
-        $I->fillField('Username', 'user');
-        $I->fillField('Password', 'userPassword');
+        $I->fillField('Username:', 'user');
+        $I->fillField('Password:', 'userPassword');
         $I->click('login-button');
 
-        $I->see('Logout (user)', 'form button[type=submit]');
+        $I->see('Starter Page');
         $I->dontSeeLink('Login');
         $I->dontSeeLink('Signup');
     }

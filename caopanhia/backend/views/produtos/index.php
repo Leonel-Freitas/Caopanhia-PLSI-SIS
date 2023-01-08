@@ -16,6 +16,7 @@ $this->title = 'Produtos';
 
     <p>
         <?= Html::a('Adicionar Produto', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Filtrar pesquisa', ['filtrar'], ['class' => 'btn btn-warning']) ?>
     </p>
     <?= common\widgets\Alert::widget()?>
 

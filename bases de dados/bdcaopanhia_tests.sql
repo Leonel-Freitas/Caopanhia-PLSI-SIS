@@ -71,7 +71,6 @@ CREATE TABLE `auth_assignment` (
 
 LOCK TABLES `auth_assignment` WRITE;
 /*!40000 ALTER TABLE `auth_assignment` DISABLE KEYS */;
-INSERT INTO `auth_assignment` VALUES ('admin','1',1669672771),('admin','5',1669672771),('admin','6',1669672771),('client','4',1669672771),('client','7',1669672771),('gestor','2',1669672771),('vet','3',1669672771);
 /*!40000 ALTER TABLE `auth_assignment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -183,7 +182,7 @@ CREATE TABLE `caes` (
   KEY `idRaca` (`idRaca`),
   CONSTRAINT `caes_ibfk_1` FOREIGN KEY (`idUserProfile`) REFERENCES `userprofile` (`id`),
   CONSTRAINT `caes_ibfk_2` FOREIGN KEY (`idRaca`) REFERENCES `racas` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -235,7 +234,7 @@ CREATE TABLE `categorias` (
   `designacao` varchar(250) NOT NULL,
   `status` int(11) DEFAULT '10',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -289,7 +288,7 @@ CREATE TABLE `consultas` (
   `diagonostico` varchar(250) DEFAULT NULL,
   `notas` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -313,7 +312,7 @@ CREATE TABLE `distritos` (
   `designacao` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
   `status` int(11) DEFAULT '10',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=108 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -384,7 +383,7 @@ CREATE TABLE `marcacoesveterinarias` (
   CONSTRAINT `marcacoesveterinarias_ibfk_2` FOREIGN KEY (`idVet`) REFERENCES `userprofile` (`id`),
   CONSTRAINT `marcacoesveterinarias_ibfk_3` FOREIGN KEY (`idCao`) REFERENCES `caes` (`id`),
   CONSTRAINT `marcacoesveterinarias_ibfk_4` FOREIGN KEY (`idConsulta`) REFERENCES `consultas` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -439,7 +438,7 @@ CREATE TABLE `produtos` (
   PRIMARY KEY (`id`),
   KEY `idCategoria` (`idCategoria`),
   CONSTRAINT `produtos_ibfk_1` FOREIGN KEY (`idCategoria`) REFERENCES `categorias` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -489,7 +488,7 @@ CREATE TABLE `racas` (
   `pontos` int(11) NOT NULL,
   `status` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -515,7 +514,7 @@ CREATE TABLE `tiposexpedicao` (
   `tempoMedio` varchar(10) NOT NULL,
   `status` int(11) DEFAULT '10',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -539,7 +538,7 @@ CREATE TABLE `tipospagamento` (
   `designacao` varchar(250) NOT NULL,
   `status` int(11) DEFAULT '10',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -573,7 +572,7 @@ CREATE TABLE `user` (
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `password_reset_token` (`password_reset_token`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -610,7 +609,7 @@ CREATE TABLE `userprofile` (
   KEY `idDistrito` (`idDistrito`),
   CONSTRAINT `userprofile_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `user` (`id`),
   CONSTRAINT `userprofile_ibfk_2` FOREIGN KEY (`idDistrito`) REFERENCES `distritos` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=161 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -631,4 +630,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-27 15:31:52
+-- Dump completed on 2023-01-08 17:41:30

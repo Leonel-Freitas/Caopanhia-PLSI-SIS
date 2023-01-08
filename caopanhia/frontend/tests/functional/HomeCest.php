@@ -10,8 +10,5 @@ class HomeCest
     {
         $I->amOnRoute(\Yii::$app->homeUrl);
         $I->see('Login');
-        $I->seeLink('About');
-        $I->click('About');
-        $I->see('NÓS MANTEMOS OS CÃES FELIZES');
     }
 }

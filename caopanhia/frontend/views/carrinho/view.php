@@ -17,7 +17,7 @@ $valorTotal = 0;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Voltar a loja', ['produtos/index'], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Voltar a loja', ['produtos/index', 'filtro' => 0], ['class' => 'btn btn-primary']) ?>
     </p>
 
     <?= common\widgets\Alert::widget()?>

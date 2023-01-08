@@ -13,6 +13,8 @@ $this->title = 'Perguntas do questionário';
 ?>
 <div class="questionario-index">
 
+    <?= common\widgets\Alert::widget()?>
+
     <div class="row">
         <div class="col-sm-12">
             <table class="table table-striped"><thead><th><h3>Pergunta</h3></th><th><h3>Sim</h3></th><th><h3>Não</h3></th><th><h3>Opções</h3></th></thead>

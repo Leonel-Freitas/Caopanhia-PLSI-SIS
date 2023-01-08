@@ -6,6 +6,7 @@ use common\models\Carrinho;
 use common\models\Encomendas;
 use common\models\Produtos;
 use common\models\Tiposexpedicao;
+use common\models\Userprofile;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
@@ -50,7 +51,7 @@ class EncomendasController extends Controller
     public function actionIndex()
     {
         if (Yii::$app->user->can('viewPackages')){
-            $encomendas = Encomendas::find()->where(['idUser' => Yii::$app->user->getId(), 'finalizada' => 'sim'])->orderBy(['data' => SORT_DESC])->all();
+            $encomendas = Encomendas::find()->where(['idUser' => Userprofile::find()->where(['idUser' => Yii::$app->user->getId()])->one()->id, 'finalizada' => 'sim'])->orderBy(['data' => SORT_DESC])->all();
 
             return $this->render('index', [
                 'encomendas' => $encomendas,
@@ -93,7 +94,7 @@ class EncomendasController extends Controller
     {
         if(Yii::$app->user->can('createPackage')){
             //Get encomenda e produtos do carrinho
-            $encomenda = Encomendas::find()->where(['idUser' => \Yii::$app->user->getId(), 'finalizada' => 'nao'])->one();
+            $encomenda = Encomendas::find()->where(['idUser' => Userprofile::find()->where(['idUser' => Yii::$app->user->getId()])->one()->id, 'finalizada' => 'nao'])->one();
             $produtosCarrinho = Carrinho::find()->where(['idEncomenda' => $encomenda->id])->all();
             foreach ($produtosCarrinho as $produto){
                 $produtoReal = Produtos::findOne($produto->idProduto);
@@ -134,7 +135,7 @@ class EncomendasController extends Controller
 
 
                     Yii::$app->session->setFlash('success', 'A sua encomenda foi concluida com sucesso, obrigado!');
-                    return $this->redirect(['produtos/index']);
+                    return $this->redirect(['produtos/index', 'filtro' => 0]);
                 }
             }
 

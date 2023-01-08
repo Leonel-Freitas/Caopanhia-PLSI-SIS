@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use common\models\Questionario;
+use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -71,6 +72,12 @@ class QuestionarioController extends Controller
     public function actionCreate()
     {
         if (\Yii::$app->user->can('createQuestions')){
+
+            if (count(Questionario::find()->all()) == 6 ){
+                Yii::$app->session->setFlash('error', 'Não é possivel criar mais perguntas, o limite é de 6 perguntas');
+                return $this->redirect(['index']);
+            }
+
             $model = new Questionario();
 
             if ($this->request->isPost) {

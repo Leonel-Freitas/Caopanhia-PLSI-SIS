@@ -48,7 +48,7 @@ $this->title = 'Histórico de encomendas';
 
     <?php } ?>
 
-    <?= Html::a('Voltar', ['produtos/index'], ['class' => 'btn btn-primary']) ?>
+    <?= Html::a('Voltar', ['produtos/index', 'filtro' => 0], ['class' => 'btn btn-primary']) ?>
 
 
 </div>

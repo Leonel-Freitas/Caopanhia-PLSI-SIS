@@ -134,7 +134,7 @@ $this->title = 'Cãopanhia';
                                     <div class="u-container-layout u-container-layout-4">
                                         <p class="u-text u-text-3">Visite-nos para encontrar os melhores produtos a preços asseciveis<br>
                                         </p>
-                                        <?= Html::a('Consulte a nossa loja', ['/produtos/index'] , ['class' => 'btn btn-primary']) ?>
+                                        <?= Html::a('Consulte a nossa loja', ['/produtos/index', 'filtro' => 0] , ['class' => 'btn btn-primary']) ?>
 
                                     </div>
                                 </div>

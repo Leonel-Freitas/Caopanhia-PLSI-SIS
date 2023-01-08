@@ -12,7 +12,7 @@ $this->title = $model->designacao;
 <div class="produtos-view">
 
     <p>
-        <?= Html::a('Voltar', ['index'], ['class' => 'btn btn-warning']) ?>
+        <?= Html::a('Voltar', ['index', 'filtro' => $model->idCategoria], ['class' => 'btn btn-warning']) ?>
         <?= Html::a('Editar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Adicionar stock', ['stock', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
     </p>

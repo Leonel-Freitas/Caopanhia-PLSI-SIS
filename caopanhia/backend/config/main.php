@@ -49,7 +49,8 @@ return [
                     'class' => 'yii\rest\UrlRule','controller' => 'api/user',
                     'extraPatterns' => [
                         'GET contagem' => 'contagem',
-                        'POST login' => 'login'],],
+                        'POST login' => 'login'],
+                ],
                 ['class' => 'yii\rest\UrlRule','controller' => 'api/marcacoesveterinarias', 'pluralize' => false,],
                 ['class' => 'yii\rest\UrlRule','controller' => 'api/login', 'pluralize' => false, 'extraPatterns' => ['POST post' => 'post'],],
                 ['class' => 'yii\rest\UrlRule','controller' => 'api/caes', 'pluralize' => false,],

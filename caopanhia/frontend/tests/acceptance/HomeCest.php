@@ -2,20 +2,18 @@
 
 namespace frontend\tests\acceptance;
 
+use common\models\User;
 use frontend\tests\AcceptanceTester;
+use Yii;
 use yii\helpers\Url;
 
 class HomeCest
 {
+
     public function checkHome(AcceptanceTester $I)
     {
-        $I->amOnRoute(Url::toRoute('/site/index'));
-        $I->see('My Application');
+        $I->amOnPage(Url::toRoute('/site/login'));
 
-        $I->seeLink('About');
-        $I->click('About');
-        $I->wait(2); // wait for page to be opened
-
-        $I->see('This is the About page.');
+        $I->see('Login', 'h1');
     }
 }

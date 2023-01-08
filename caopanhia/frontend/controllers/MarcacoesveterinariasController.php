@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use common\models\Marcacoesveterinarias;
+use common\models\Userprofile;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
@@ -52,7 +53,7 @@ class MarcacoesveterinariasController extends Controller
     {
         if (Yii::$app->user->can('viewAppointment')) {
 
-            $marcacoes = Marcacoesveterinarias::find()->where(['idClient' => \Yii::$app->user->getId()])->andWhere(['>=' ,'data', date('Y-m-d')])->orderBy(['data' => SORT_ASC, 'hora' => SORT_ASC]) ->all();
+            $marcacoes = Marcacoesveterinarias::find()->where(['idClient' => Userprofile::find()->where(['idUser' => Yii::$app->user->getId()])->one()->id])->andWhere(['>=' ,'data', date('Y-m-d')])->orderBy(['data' => SORT_ASC, 'hora' => SORT_ASC]) ->all();
 
             return $this->render('index', [
                 'marcacoes' => $marcacoes,
@@ -66,7 +67,7 @@ class MarcacoesveterinariasController extends Controller
     {
         if (Yii::$app->user->can('viewAppointment')) {
 
-            $marcacoes = Marcacoesveterinarias::find()->where(['idClient' => \Yii::$app->user->getId()])->andWhere(['<' ,'data', date('Y-m-d')])->orderBy(['data' => SORT_DESC, 'hora' => SORT_DESC]) ->all();
+            $marcacoes = Marcacoesveterinarias::find()->where(['idClient' => Userprofile::find()->where(['idUser' => Yii::$app->user->getId()])->one()->id])->andWhere(['<' ,'data', date('Y-m-d')])->orderBy(['data' => SORT_DESC, 'hora' => SORT_DESC]) ->all();
 
             return $this->render('indexhistorico', [
                 'marcacoes' => $marcacoes,

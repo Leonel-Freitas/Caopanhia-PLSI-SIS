@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `bdcaopanhia` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `bdcaopanhia`;
 -- MySQL dump 10.13  Distrib 8.0.30, for Win64 (x86_64)
 --
 -- Host: localhost    Database: bdcaopanhia
@@ -36,7 +34,7 @@ CREATE TABLE `anuncios` (
   KEY `idUser` (`idUser`),
   CONSTRAINT `anuncios_ibfk_1` FOREIGN KEY (`idCao`) REFERENCES `caes` (`id`),
   CONSTRAINT `anuncios_ibfk_2` FOREIGN KEY (`idUser`) REFERENCES `userprofile` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +43,7 @@ CREATE TABLE `anuncios` (
 
 LOCK TABLES `anuncios` WRITE;
 /*!40000 ALTER TABLE `anuncios` DISABLE KEYS */;
-INSERT INTO `anuncios` VALUES (1,'Sou um cão trapalhão mas muito amavel <3','2022-11-23 19:58:07','2022-11-24 12:14:12',2,8),(2,'Gosto de brincar, etc etc ','2022-11-23 20:51:29',NULL,3,4),(4,'Olaaaaa isto é um exemplo de uma descrição para me adotarem','2022-11-24 00:29:37',NULL,5,4),(5,'Sou um pug.','2022-11-24 00:55:41',NULL,6,8),(8,'Descrição para adotarem o Sid ','2022-11-24 15:41:01',NULL,9,4),(9,'Descrição para o pastor alemão','2022-11-24 15:45:34',NULL,10,8);
+INSERT INTO `anuncios` VALUES (1,'Sou um cão trapalhão mas muito amavel <3','2022-11-23 19:58:07','2022-11-24 12:14:12',2,8),(2,'Gosto de brincar, etc etc ','2022-11-23 20:51:29',NULL,3,4),(4,'Olaaaaa isto é um exemplo de uma descrição para me adotarem','2022-11-24 00:29:37',NULL,5,4),(5,'Sou um pug.','2022-11-24 00:55:41',NULL,6,8),(8,'Descrição para adotarem o Sid ','2022-11-24 15:41:01',NULL,9,4),(9,'Descrição para o pastor alemão','2022-11-24 15:45:34',NULL,10,8),(10,'Exemplo de uma descrição extensaaaa','2023-01-07 21:34:32',NULL,11,18);
 /*!40000 ALTER TABLE `anuncios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -72,7 +70,7 @@ CREATE TABLE `auth_assignment` (
 
 LOCK TABLES `auth_assignment` WRITE;
 /*!40000 ALTER TABLE `auth_assignment` DISABLE KEYS */;
-INSERT INTO `auth_assignment` VALUES ('admin','1',1669672771),('admin','5',1669672771),('admin','6',1669672771),('client','14',1671100354),('client','23',1671102029),('client','25',1671819580),('client','4',1669672771),('client','7',1669672771),('gestor','2',1669672771),('vet','10',1670869798),('vet','11',1670870071),('vet','24',1671817830),('vet','3',1669672771),('vet','8',1670856310),('vet','9',1670869673);
+INSERT INTO `auth_assignment` VALUES ('admin','1',1669672771),('admin','5',1669672771),('admin','6',1669672771),('client','14',1671100354),('client','23',1671102029),('client','25',1671819580),('client','27',1672850935),('client','29',1673125069),('client','4',1669672771),('client','7',1669672771),('gestor','2',1669672771),('vet','10',1670869798),('vet','11',1670870071),('vet','24',1671817830),('vet','3',1669672771),('vet','8',1670856310),('vet','9',1670869673);
 /*!40000 ALTER TABLE `auth_assignment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -184,7 +182,7 @@ CREATE TABLE `caes` (
   KEY `idRaca` (`idRaca`),
   CONSTRAINT `caes_ibfk_1` FOREIGN KEY (`idUserProfile`) REFERENCES `userprofile` (`id`),
   CONSTRAINT `caes_ibfk_2` FOREIGN KEY (`idRaca`) REFERENCES `racas` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -193,7 +191,7 @@ CREATE TABLE `caes` (
 
 LOCK TABLES `caes` WRITE;
 /*!40000 ALTER TABLE `caes` DISABLE KEYS */;
-INSERT INTO `caes` VALUES (2,'cao_teste.jpg','Jackie',2017,'macho','sim','nao',0,'sim',8,3),(3,'pet.jpg','Snoopy',2017,'macho','sim','nao',0,'nao',4,13),(5,'cao2.jpeg','Xica',2015,'femea','sim','sim',0,'nao',4,10),(6,'pugOracio.jpg','Orácio',2020,'macho','sim','nao',1,'nao',8,3),(9,'caoSuplente.jpg','Sid',2003,'femea','sim','sim',0,'nao',4,8),(10,'pastor-alemão.jpg','Pastor',2015,'femea','nao','nao',0,'nao',8,5);
+INSERT INTO `caes` VALUES (2,'cao_teste.jpg','Jackie',2017,'macho','sim','nao',0,'sim',8,3),(3,'pet.jpg','Snoopy',2017,'macho','sim','nao',0,'nao',4,13),(5,'cao2.jpeg','Xica',2015,'femea','sim','sim',0,'nao',4,10),(6,'pugOracio.jpg','Orácio',2020,'macho','sim','nao',1,'nao',8,3),(9,'caoSuplente.jpg','Sid',2003,'femea','sim','sim',0,'nao',4,8),(10,'pastor-alemão.jpg','Pastor',2015,'femea','nao','nao',0,'nao',8,5),(11,'chihuahua-6.jpg','Alice',2023,'femea','sim','nao',0,'nao',18,16);
 /*!40000 ALTER TABLE `caes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -222,7 +220,7 @@ CREATE TABLE `carrinho` (
 
 LOCK TABLES `carrinho` WRITE;
 /*!40000 ALTER TABLE `carrinho` DISABLE KEYS */;
-INSERT INTO `carrinho` VALUES (1,1,1,7.75),(1,2,1,3.00),(2,1,3,7.75),(2,2,2,NULL),(2,4,1,NULL),(3,4,2,15.00),(4,3,6,4.00),(5,1,1,7.75),(5,2,1,3.00),(5,3,1,4.00),(5,4,1,15.00),(6,3,1,NULL);
+INSERT INTO `carrinho` VALUES (1,1,1,7.75),(1,2,1,3.00),(2,1,3,7.75),(2,2,2,NULL),(3,4,2,15.00),(4,3,6,4.00),(5,1,1,7.75),(5,2,1,3.00),(5,3,1,4.00),(5,4,1,15.00),(6,2,1,3.00),(6,3,2,4.00),(7,4,1,15.00),(10,4,1,15.00),(10,5,2,18.00),(11,1,1,NULL);
 /*!40000 ALTER TABLE `carrinho` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -238,7 +236,7 @@ CREATE TABLE `categorias` (
   `designacao` varchar(250) NOT NULL,
   `status` int(11) DEFAULT '10',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -247,7 +245,7 @@ CREATE TABLE `categorias` (
 
 LOCK TABLES `categorias` WRITE;
 /*!40000 ALTER TABLE `categorias` DISABLE KEYS */;
-INSERT INTO `categorias` VALUES (1,'Comida',10),(2,'Brinquedos',10),(3,'Roupa',10),(4,'Acessórios',10);
+INSERT INTO `categorias` VALUES (1,'Comida',10),(2,'Brinquedos',10),(3,'Roupa',10),(4,'Acessórios',10),(5,'Conforto',10);
 /*!40000 ALTER TABLE `categorias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -268,7 +266,7 @@ CREATE TABLE `comentarios` (
   KEY `idUser` (`idUser`),
   CONSTRAINT `comentarios_ibfk_1` FOREIGN KEY (`idAnuncio`) REFERENCES `anuncios` (`id`),
   CONSTRAINT `comentarios_ibfk_2` FOREIGN KEY (`idUser`) REFERENCES `userprofile` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -277,7 +275,7 @@ CREATE TABLE `comentarios` (
 
 LOCK TABLES `comentarios` WRITE;
 /*!40000 ALTER TABLE `comentarios` DISABLE KEYS */;
-INSERT INTO `comentarios` VALUES (1,'Se não for muito gordo fico com ele!',1,8),(2,'Teste de mensagem1',5,4),(3,'Teste de mensagem 2',5,4),(4,'Teste de mensagem 3',5,4),(5,'Olá!',5,4),(6,'Queroo',5,4);
+INSERT INTO `comentarios` VALUES (1,'Se não for muito gordo fico com ele!',1,8),(2,'Teste de mensagem1',5,4),(3,'Teste de mensagem 2',5,4),(4,'Teste de mensagem 3',5,4),(5,'Olá!',5,4),(6,'Queroo',5,4),(7,'Quero!',9,18);
 /*!40000 ALTER TABLE `comentarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -294,7 +292,7 @@ CREATE TABLE `consultas` (
   `diagonostico` varchar(250) DEFAULT NULL,
   `notas` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -303,7 +301,7 @@ CREATE TABLE `consultas` (
 
 LOCK TABLES `consultas` WRITE;
 /*!40000 ALTER TABLE `consultas` DISABLE KEYS */;
-INSERT INTO `consultas` VALUES (2,'Vacina contra infeção, anti-inflamatórios, pomada','Infeção pulmonar, pata traseira esquerda com corte forte','Dar os anti-inflamatórios de 4 em 4 horas durante 3 dias, pomada aplicar 3 vezes ao dia até cicatrizar'),(3,'a definir','a definir','nada a apontar'),(4,'Comprimidos para constipação','Constipação','Dar apenas 1 comprimido por dia durante no máximo 7 dias');
+INSERT INTO `consultas` VALUES (2,'Vacina contra infeção, anti-inflamatórios, pomada','Infeção pulmonar, pata traseira esquerda com corte forte','Dar os anti-inflamatórios de 4 em 4 horas durante 3 dias, pomada aplicar 3 vezes ao dia até cicatrizar'),(3,'a definir','a definir','nada a apontar'),(4,'Comprimidos para constipação','Constipação','Dar apenas 1 comprimido por dia durante no máximo 7 dias'),(5,'a definir','a definir','nada a apontar');
 /*!40000 ALTER TABLE `consultas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -319,7 +317,7 @@ CREATE TABLE `distritos` (
   `designacao` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
   `status` int(11) DEFAULT '10',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -355,7 +353,7 @@ CREATE TABLE `encomendas` (
   CONSTRAINT `encomendas_ibfk_1` FOREIGN KEY (`idExpedicao`) REFERENCES `tiposexpedicao` (`id`),
   CONSTRAINT `encomendas_ibfk_2` FOREIGN KEY (`idPagamento`) REFERENCES `tipospagamento` (`id`),
   CONSTRAINT `encomendas_ibfk_3` FOREIGN KEY (`idUser`) REFERENCES `userprofile` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -364,7 +362,7 @@ CREATE TABLE `encomendas` (
 
 LOCK TABLES `encomendas` WRITE;
 /*!40000 ALTER TABLE `encomendas` DISABLE KEYS */;
-INSERT INTO `encomendas` VALUES (1,18.25,'2022-12-07 22:49:14','sim',2,3,4,'entregue'),(2,NULL,NULL,'nao',NULL,NULL,7,'pendente'),(3,32.75,'2022-12-07 22:56:32','sim',3,5,4,'enviada'),(4,29.00,'2022-12-07 23:03:32','sim',1,1,4,'enviada'),(5,32.50,'2022-12-09 15:01:34','sim',3,5,4,'entregue'),(6,NULL,NULL,'nao',NULL,NULL,4,'pendente');
+INSERT INTO `encomendas` VALUES (1,18.25,'2022-12-07 22:49:14','sim',2,3,4,'entregue'),(2,NULL,NULL,'nao',NULL,NULL,8,'pendente'),(3,32.75,'2022-12-07 22:56:32','sim',3,5,4,'enviada'),(4,29.00,'2022-12-07 23:03:32','sim',1,1,4,'enviada'),(5,32.50,'2022-12-09 15:01:34','sim',3,5,4,'entregue'),(6,13.75,'2023-01-03 20:29:25','sim',3,4,4,'entregue'),(7,22.50,'2023-01-03 20:31:52','sim',2,1,4,'enviada'),(8,NULL,NULL,'nao',NULL,NULL,4,'pendente'),(9,NULL,NULL,'nao',NULL,NULL,7,'pendente'),(10,53.75,'2023-01-07 21:30:35','sim',3,3,18,'pendente'),(11,NULL,NULL,'nao',NULL,NULL,18,'pendente');
 /*!40000 ALTER TABLE `encomendas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -392,7 +390,7 @@ CREATE TABLE `marcacoesveterinarias` (
   CONSTRAINT `marcacoesveterinarias_ibfk_2` FOREIGN KEY (`idVet`) REFERENCES `userprofile` (`id`),
   CONSTRAINT `marcacoesveterinarias_ibfk_3` FOREIGN KEY (`idCao`) REFERENCES `caes` (`id`),
   CONSTRAINT `marcacoesveterinarias_ibfk_4` FOREIGN KEY (`idConsulta`) REFERENCES `consultas` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -401,7 +399,7 @@ CREATE TABLE `marcacoesveterinarias` (
 
 LOCK TABLES `marcacoesveterinarias` WRITE;
 /*!40000 ALTER TABLE `marcacoesveterinarias` DISABLE KEYS */;
-INSERT INTO `marcacoesveterinarias` VALUES (2,'2022-11-27','16:45:00',4,3,9,2),(3,'2022-12-01','20:15:00',4,3,3,3),(4,'2022-11-24','09:30:00',4,3,5,4);
+INSERT INTO `marcacoesveterinarias` VALUES (2,'2022-11-27','16:45:00',4,3,9,2),(3,'2022-12-01','20:15:00',4,3,3,3),(4,'2022-11-24','09:30:00',4,3,5,4),(5,'2023-01-09','18:45:00',18,3,11,5);
 /*!40000 ALTER TABLE `marcacoesveterinarias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -448,7 +446,7 @@ CREATE TABLE `produtos` (
   PRIMARY KEY (`id`),
   KEY `idCategoria` (`idCategoria`),
   CONSTRAINT `produtos_ibfk_1` FOREIGN KEY (`idCategoria`) REFERENCES `categorias` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -457,7 +455,7 @@ CREATE TABLE `produtos` (
 
 LOCK TABLES `produtos` WRITE;
 /*!40000 ALTER TABLE `produtos` DISABLE KEYS */;
-INSERT INTO `produtos` VALUES (1,'racao_One.jpg','Ração One 2.5Kg',7.75,15,1,10,'Ração One de 2500g, recomendada para qualquer tipo de cão de porte grande '),(2,'bola.jpg','Bola com buzina',3.00,28,2,10,'Bola de borracha com buzina embutida acionada ao apertar, 300g'),(3,'comida_humida.jpg','Comida humida frango',4.00,8,1,10,'Comida humida da Active Pet com sabor a frango, ideal para qualquer tipo de cão a partir do primeiro ano'),(4,'coleteCao.jpg','Colete para cão',15.00,2,3,10,'Colete de algodão, altura: 45 cm, largura: 30cm');
+INSERT INTO `produtos` VALUES (1,'racao_One.jpg','Ração One 2.5Kg',7.75,15,1,10,'Ração One de 2500g, recomendada para qualquer tipo de cão de porte grande '),(2,'bola.jpg','Bola com buzina',3.00,27,2,10,'Bola de borracha com buzina embutida acionada ao apertar, 300g'),(3,'comida_humida.jpg','Comida humida frango',4.00,6,1,10,'Comida humida da Active Pet com sabor a frango, ideal para qualquer tipo de cão a partir do primeiro ano'),(4,'coleteCao.jpg','Colete para cão',15.00,15,3,10,'Colete de algodão, altura: 45 cm, largura: 30cm'),(5,'comidaFriskies4kg.jpg','Comida Friskies 4kg',18.00,18,1,10,'Comida Friskies de 4kg ideal para cães de porte grande feita à base de frango e pato'),(6,'RoyalCaninChihuahua.jpg','Comida Royal Canin Chihuahua',25.00,27,1,10,'A comida ideal para o seu chihuahua, produzida pela royal canin um pacote com 1kg de puro sabor'),(7,'guardaChuvaCao.jpg','Guarda chuva para cão',7.00,10,4,10,'A solução ideal para os passeios em dia de chuva! Com volume suficiente para qualquer tipo de cão'),(8,'ossoBorracha.jpg','Osso de borracha',5.00,20,2,10,'Osso de borracha para tardes cheias de diversão'),(9,'roupaPorco.jpg','Blusa Love',12.00,10,3,10,'Blusa de algodão cor de rosa, com carapuço de porco. Altura: 15cm, Largura: 20cm'),(10,'perucaCao.jpg','Peruca de tijela',4.00,30,4,10,'Peruca à tijela, ideal para despertar o sentido de humor das suas visitas'),(11,'roupaMalha.jpg','Blusa de Malha',8.00,10,3,10,'Blusa de malha, ideal para o inverno. Altura: 36cm, Largura: 28cm'),(12,'cordaCao.jpg','Corda pequena',3.00,20,2,10,'Corda para roer, ideal para manter o seu cão entretido'),(13,'peluchePolvo.jpg','Peluche Polvo',5.00,8,2,10,'Peluche em formato de polvo'),(14,'camaCao.jpg','Cama com franja',20.00,10,5,10,'Cama com franja em veludo, muito confortável com diâmetro de 1 metro'),(15,'camaAlgodao.jpg','Cama de algodão',15.00,13,5,10,'Cama de algodão almofadada, largura de 1 metro, comprimento de 50 cm');
 /*!40000 ALTER TABLE `produtos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -474,7 +472,7 @@ CREATE TABLE `questionario` (
   `pontosSim` int(11) NOT NULL,
   `pontosNao` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -500,7 +498,7 @@ CREATE TABLE `racas` (
   `pontos` int(11) NOT NULL,
   `status` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -509,7 +507,7 @@ CREATE TABLE `racas` (
 
 LOCK TABLES `racas` WRITE;
 /*!40000 ALTER TABLE `racas` DISABLE KEYS */;
-INSERT INTO `racas` VALUES (1,'Golden Retriver',90,10),(3,'Pug',30,10),(5,'Pastor Alemão',60,10),(7,'Labrador',80,10),(8,'Poodle',70,10),(9,'Buldogue',20,10),(10,'Yorkshire terrier',40,10),(11,'Buldogue francês',30,10),(12,'Rottweiler',60,10),(13,'Beagle',40,10),(14,'Dobermann',50,10),(15,'Bull terrier',10,10),(16,'Chihuahua',0,10);
+INSERT INTO `racas` VALUES (1,'Golden Retriver',90,10),(3,'Pug',30,10),(5,'Pastor Alemão',60,10),(7,'Labrador',80,10),(8,'Poodle',80,10),(9,'Buldogue',20,10),(10,'Yorkshire terrier',40,10),(11,'Buldogue francês',30,10),(12,'Rottweiler',60,10),(13,'Beagle',40,10),(14,'Dobermann',50,10),(15,'Bull terrier',10,10),(16,'Chihuahua',0,10),(17,'São Bernardo',70,10);
 /*!40000 ALTER TABLE `racas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -530,7 +528,7 @@ CREATE TABLE `respostasquestionario` (
   KEY `idUser` (`idUser`),
   CONSTRAINT `respostasquestionario_ibfk_1` FOREIGN KEY (`idPergunta`) REFERENCES `questionario` (`id`),
   CONSTRAINT `respostasquestionario_ibfk_2` FOREIGN KEY (`idUser`) REFERENCES `userprofile` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -616,7 +614,7 @@ CREATE TABLE `user` (
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `password_reset_token` (`password_reset_token`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -625,7 +623,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Admin','8fWtAZKfkjhCXqBipL_Oy2jTWCbn2duU','$2y$13$PT8Y.OxCbj5voB8Gf3w6xO/QViphu20X.Pl2375mJ6vxc4fqY2Mn.',NULL,'Admin@mail.pt',10,1667230787,1667230787,'4wSe3YzhMl2mFhaK8PA9pf1Dg0ujz7rt_1667230787'),(2,'Gestor','-NS7vboub8OXHHriRoC-kjxRTPIY0wES','$2y$13$pwH2S6Iu/V2XryW4a5YCS.AdzENOsEijcWcqZyFlgiShEdT3hIqfq',NULL,'gestor@mail.pt',10,1667230920,1667920919,'egRl44SdoA5lYOE1eHddluiKtfW5j9ld_1667230920'),(3,'Veterinario','N1z0ywv3bVlbFvaVThyx5LQolG0AOShC','$2y$13$/B/cBEI0EQG58B4VJ0g7Wu8EFglp5qxvKofgWZEfbNV7xMAbis78G',NULL,'vet@mail.pt',10,1667230973,1667230973,'r2qyN45wb56bGU0wHuyi5svCmDQFQGrp_1667230973'),(4,'Client','h-thDu-IuI4_MZ7D5iABfLvrLaEFaFMD','$2y$13$.f4g5VvM4Rpqh/8yKdwXy.LkvBUiivjfRZZJ2RaSiti9KYovX2X.6',NULL,'client@mail.pt',10,1667231007,1667231007,'T7ugwSfCWPp4XXPgu_XjWZbW2AlfE9WC_1667231007'),(5,'adminTiago','yKO5uFE2RbfZVRnD6HxSrAdSKPmBKteM','$2y$13$4XZGfKqm4Sya1xDwgmqDqeM48zNk.aO56b8lyPFropzXLxDtG3ysG',NULL,'tiago@mail.pt',10,1668185249,1668185249,'i_05LlB5t-VaRXo_kAw_pg3w922e9SqK_1668185249'),(6,'adminLeonel','f5W-A6hAe0k_m-aE8TOWM8cprlRtMfID','$2y$13$BQjo1lxhqHCsb3VDDEsLjei1G4c3OFnD.jtY7mlIF0ceGMWGROv/C',NULL,'leonel@mail.pt',10,1668186180,1668186180,'9icNR89F4MOsI5Z0c33jQRECEmYBob_N_1668186180'),(7,'Client2','Nlu_EPkfq1DGxJZsj0HnExGSKq7UyMw9','$2y$13$9lCh98ddgIKyoCR68/q4wuOsQWdLZXXjShm8V.zkEg8BE.xOvRATy',NULL,'client2@mail.pt',10,1669250495,1669250495,'uXzVuUZwF7aKPnlziODOjyxaetqJUxnZ_1669250495'),(8,'Vet2','pP4PrmVwJGvTNxAItFplCM5jS08SW0oL','$2y$13$S0Jtbmee2KRUSXEoyBkI9.c3rQResmY3q6BfC/iVjHEULmcw/xNnC',NULL,'emailVet@mail.pt',10,1670856310,1670856310,'RxFPfsvt90iSI0SVM_Ges-lh_jJgiRwd_1670856310'),(9,'Vet3','dY3633UnyZuk1muY0GUKXbVnopjSVPG0','$2y$13$EZ6pcTv32y4BsVFRF4yeR.wdjfc1Vuu8dkE94k0l/UOmGZZn9x2nu',NULL,'maildacatarina@mail.pt',10,1670869673,1670869673,'6wkEGBadP6low1CGSLbXIE39ysW4THHH_1670869673'),(10,'Vet4','rhT2fg1m5qK0n6s_fAalT8qTTBZpGGaP','$2y$13$Rr.gi.djfXvowe0X/.iZ..BXhewej6ASeCjjkTAw6i2ul.Le3HKsO',NULL,'ana@mail.pt',10,1670869798,1670869798,'SIh3b97gV6n8Srb2mY4lTPXxbs9VkoW1_1670869798'),(11,'vet5','weURMow_B5Mhv2m9xcYU5qbNT9IO-y1x','$2y$13$cXpwZj9MtDpaTyyihg5Fh.mogtLsGRtIFEZ6fS83jlOvSEf1YkpWm',NULL,'mailvet5@mail.pt',10,1670870071,1670870071,'74hdyl9VDEjz0L_naQWDnavmGodi0ilS_1670870071'),(14,'Client3','0tzSe_9-0tA6mjMIbnt5ZE3wEdlCbZoU','$2y$13$OzvzeXhMtAji9bmXj3e.a.AbD91Peg0KqkJzecXbHWbclNtU9Vtjy',NULL,'client3@mail.pt',10,1671100354,1671100354,'nMRDU5Xr8lSPCOHbSyMcYELbjs5Q3m_Q_1671100354'),(23,'Client4','KyNG4ZrW7SdiFeVzl1kV-1QCZ1lhFJ1V','$2y$13$fb870QxbPRui533hcncVmetwnDZJA5.NkcGiMtuLwe1hUB.6DHrfq',NULL,'client4@mail.pt',10,1671102029,1671102029,'nxQyydhVNRwmfrmKG3Cu6v6N9b6rYYo8_1671102029'),(24,'Vet6','LZH4Kk8A8uKQZTaoCFIIWNbi8d9JcUkL','$2y$13$YukakgC3b1baX5UVG.DN1uGbMPuB6UzW6DMJllSA1BZc.dqO/BjNm',NULL,'emailVet6@mail.pt',10,1671817830,1671817830,'PTo6bUcAAKVzI3s-ln76u2Zn7ebCNuWI_1671817830'),(25,'Client5','ctZGlsSiZyFTiLd44PDbtubJyjNVeYG_','$2y$13$0JMbXp5.7x36MZYHT1f07uW.iAMb1Xb5ZlETwyC4TZha7lEGx10JK',NULL,'clientEmail5@gmail.com',10,1671819580,1671819580,'YNporXcH4Q6gzBoKfS114JRRsfXk1FlH_1671819580');
+INSERT INTO `user` VALUES (1,'Admin','8fWtAZKfkjhCXqBipL_Oy2jTWCbn2duU','$2y$13$PT8Y.OxCbj5voB8Gf3w6xO/QViphu20X.Pl2375mJ6vxc4fqY2Mn.',NULL,'Admin@mail.pt',10,1667230787,1667230787,'4wSe3YzhMl2mFhaK8PA9pf1Dg0ujz7rt_1667230787'),(2,'Gestor','-NS7vboub8OXHHriRoC-kjxRTPIY0wES','$2y$13$pwH2S6Iu/V2XryW4a5YCS.AdzENOsEijcWcqZyFlgiShEdT3hIqfq',NULL,'gestor@mail.pt',10,1667230920,1667920919,'egRl44SdoA5lYOE1eHddluiKtfW5j9ld_1667230920'),(3,'Veterinario','N1z0ywv3bVlbFvaVThyx5LQolG0AOShC','$2y$13$/B/cBEI0EQG58B4VJ0g7Wu8EFglp5qxvKofgWZEfbNV7xMAbis78G',NULL,'vet@mail.pt',10,1667230973,1667230973,'r2qyN45wb56bGU0wHuyi5svCmDQFQGrp_1667230973'),(4,'Client','h-thDu-IuI4_MZ7D5iABfLvrLaEFaFMD','$2y$13$.f4g5VvM4Rpqh/8yKdwXy.LkvBUiivjfRZZJ2RaSiti9KYovX2X.6',NULL,'client@mail.pt',10,1667231007,1667231007,'T7ugwSfCWPp4XXPgu_XjWZbW2AlfE9WC_1667231007'),(5,'adminTiago','yKO5uFE2RbfZVRnD6HxSrAdSKPmBKteM','$2y$13$4XZGfKqm4Sya1xDwgmqDqeM48zNk.aO56b8lyPFropzXLxDtG3ysG',NULL,'tiago@mail.pt',10,1668185249,1668185249,'i_05LlB5t-VaRXo_kAw_pg3w922e9SqK_1668185249'),(6,'adminLeonel','f5W-A6hAe0k_m-aE8TOWM8cprlRtMfID','$2y$13$BQjo1lxhqHCsb3VDDEsLjei1G4c3OFnD.jtY7mlIF0ceGMWGROv/C',NULL,'leonel@mail.pt',10,1668186180,1668186180,'9icNR89F4MOsI5Z0c33jQRECEmYBob_N_1668186180'),(7,'Client2','Nlu_EPkfq1DGxJZsj0HnExGSKq7UyMw9','$2y$13$9lCh98ddgIKyoCR68/q4wuOsQWdLZXXjShm8V.zkEg8BE.xOvRATy',NULL,'client2@mail.pt',10,1669250495,1669250495,'uXzVuUZwF7aKPnlziODOjyxaetqJUxnZ_1669250495'),(8,'Vet2','pP4PrmVwJGvTNxAItFplCM5jS08SW0oL','$2y$13$S0Jtbmee2KRUSXEoyBkI9.c3rQResmY3q6BfC/iVjHEULmcw/xNnC',NULL,'emailVet@mail.pt',10,1670856310,1670856310,'RxFPfsvt90iSI0SVM_Ges-lh_jJgiRwd_1670856310'),(9,'Vet3','dY3633UnyZuk1muY0GUKXbVnopjSVPG0','$2y$13$EZ6pcTv32y4BsVFRF4yeR.wdjfc1Vuu8dkE94k0l/UOmGZZn9x2nu',NULL,'maildacatarina@mail.pt',10,1670869673,1670869673,'6wkEGBadP6low1CGSLbXIE39ysW4THHH_1670869673'),(10,'Vet4','rhT2fg1m5qK0n6s_fAalT8qTTBZpGGaP','$2y$13$Rr.gi.djfXvowe0X/.iZ..BXhewej6ASeCjjkTAw6i2ul.Le3HKsO',NULL,'ana@mail.pt',10,1670869798,1670869798,'SIh3b97gV6n8Srb2mY4lTPXxbs9VkoW1_1670869798'),(11,'vet5','weURMow_B5Mhv2m9xcYU5qbNT9IO-y1x','$2y$13$cXpwZj9MtDpaTyyihg5Fh.mogtLsGRtIFEZ6fS83jlOvSEf1YkpWm',NULL,'mailvet5@mail.pt',10,1670870071,1670870071,'74hdyl9VDEjz0L_naQWDnavmGodi0ilS_1670870071'),(14,'Client3','0tzSe_9-0tA6mjMIbnt5ZE3wEdlCbZoU','$2y$13$OzvzeXhMtAji9bmXj3e.a.AbD91Peg0KqkJzecXbHWbclNtU9Vtjy',NULL,'client3@mail.pt',10,1671100354,1671100354,'nMRDU5Xr8lSPCOHbSyMcYELbjs5Q3m_Q_1671100354'),(23,'Client4','KyNG4ZrW7SdiFeVzl1kV-1QCZ1lhFJ1V','$2y$13$fb870QxbPRui533hcncVmetwnDZJA5.NkcGiMtuLwe1hUB.6DHrfq',NULL,'client4@mail.pt',10,1671102029,1671102029,'nxQyydhVNRwmfrmKG3Cu6v6N9b6rYYo8_1671102029'),(24,'Vet6','LZH4Kk8A8uKQZTaoCFIIWNbi8d9JcUkL','$2y$13$YukakgC3b1baX5UVG.DN1uGbMPuB6UzW6DMJllSA1BZc.dqO/BjNm',NULL,'emailVet6@mail.pt',10,1671817830,1671817830,'PTo6bUcAAKVzI3s-ln76u2Zn7ebCNuWI_1671817830'),(25,'Client5','ctZGlsSiZyFTiLd44PDbtubJyjNVeYG_','$2y$13$0JMbXp5.7x36MZYHT1f07uW.iAMb1Xb5ZlETwyC4TZha7lEGx10JK',NULL,'clientEmail5@gmail.com',10,1671819580,1671819580,'YNporXcH4Q6gzBoKfS114JRRsfXk1FlH_1671819580'),(27,'Client6','xh328SjxUfjHyA1pXoUWGIal_DusIyZ2','$2y$13$zAMg.vfxeFJTh8tu3jxpu.v3FpaVknjSxNbOQdLVVRGeEabftODSu',NULL,'emailClient6@mail.pt',10,1672850935,1672850935,'jrdq2UKrShv0hjzTqGBF6jtojrZEMfgd_1672850935'),(29,'ClientTest','5hCRZYCj995ecttej_44RCHPpLJf8xNm','$2y$13$V5z7eegGUpGU0SCMIUHySOFM/smVgTzOfh1KXqmci7KA3Oi6bIsfm',NULL,'clientTestFinal@mail.pt',10,1673125069,1673125069,'1ZbRDORocVijSLEAwNuLPOM2ep6pnB_U_1673125069');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -654,7 +652,7 @@ CREATE TABLE `userprofile` (
   KEY `idDistrito` (`idDistrito`),
   CONSTRAINT `userprofile_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `user` (`id`),
   CONSTRAINT `userprofile_ibfk_2` FOREIGN KEY (`idDistrito`) REFERENCES `distritos` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -663,7 +661,7 @@ CREATE TABLE `userprofile` (
 
 LOCK TABLES `userprofile` WRITE;
 /*!40000 ALTER TABLE `userprofile` DISABLE KEYS */;
-INSERT INTO `userprofile` VALUES (1,'Administrador','R. Gen. Norton de Matos ','2411-901','masculino',123456789,912345677,1,10,NULL,NULL),(2,'Gestor','R. Gen. Norton de Matos','2411-901','masculino',121212345,961953111,2,1,NULL,NULL),(3,'Veterinário','R. Gen. Norton de Matos','2411-901','feminino',987654321,939393931,3,1,'Doutoramento em veterinária animal','team-4'),(4,'Cliente','R. Gen Norton de Matos','2400-014','feminino',956874539,919132912,4,6,NULL,NULL),(5,'Tiago Vital','Rua D. João II  n 14','2260-029','masculino',123443212,912345413,5,14,NULL,NULL),(7,'Leonel Freitas','Rua do Leonel','4820-645','masculino',987698768,939399993,6,9,NULL,NULL),(8,'Francisco','rua do francisco','2230-028','masculino',732635289,919132912,7,11,NULL,NULL),(9,'Clara','rua da clara em santarem','2260-056','feminino',956874569,956874569,8,14,'douturamento em veterinária','team-5'),(10,'Catarina','rua da catarina','2300-029','feminino',919191944,912837465,9,6,'Licenciatura em médica animal','team-1.jpg'),(11,'Ana','rua da ana','2700-043','feminino',939393939,939393939,10,14,'Mestrado em engenharia animal','team-2.jpg'),(12,'Mariana','rua da mariana','2800-039','feminino',629264839,918273456,11,16,'12º ano em saude animal','team-3.jpg'),(13,'João','rua do joao','2260-029','masculino',987667899,919132912,14,9,NULL,NULL),(14,'Fred','rua do fred','2230-03','masculino',192828194,961982735,23,5,NULL,NULL),(15,'André Salvador','rua do andre','3200-037','masculino',234952837,912345411,24,6,'Licenciatura em saúde dentária animal',NULL),(16,'Maria de Lurdes','rua da maria ','2300-042','feminino',719263016,912384756,25,4,NULL,NULL);
+INSERT INTO `userprofile` VALUES (1,'Administrador','R. Gen. Norton de Matos ','2411-901','masculino',123456789,912345677,1,10,NULL,NULL),(2,'Gestor','R. Gen. Norton de Matos','2411-901','masculino',121212345,961953111,2,1,NULL,NULL),(3,'Veterinário','R. Gen. Norton de Matos','2411-901','feminino',987654321,939393931,3,1,'Doutoramento em veterinária animal','team-4'),(4,'Cliente','R. Gen Norton de Matos','2400-014','feminino',956874539,919132912,4,6,NULL,NULL),(5,'Tiago Vital','Rua D. João II  n 14','2260-029','masculino',123443212,912345413,5,14,NULL,NULL),(7,'Leonel Freitas','Rua do Leonel','4820-645','masculino',987698768,939399993,6,9,NULL,NULL),(8,'Francisco','rua do francisco','2230-028','masculino',732635289,919132912,7,11,NULL,NULL),(9,'Clara','rua da clara em santarem','2260-056','feminino',956874569,956874569,8,14,'douturamento em veterinária','team-5'),(10,'Catarina','rua da catarina','2300-029','feminino',919191944,912837465,9,6,'Licenciatura em médica animal','team-1.jpg'),(11,'Ana','rua da ana','2700-043','feminino',939393939,939393939,10,14,'Mestrado em engenharia animal','team-2.jpg'),(12,'Mariana','rua da mariana','2800-039','feminino',629264839,918273456,11,16,'12º ano em saude animal','team-3.jpg'),(13,'João','rua do joao','2260-029','masculino',987667899,919132912,14,9,NULL,NULL),(14,'Fred','rua do fred','2230-03','masculino',192828194,961982735,23,5,NULL,NULL),(15,'André Salvador','rua do andre','3200-037','masculino',234952837,912345411,24,6,'Licenciatura em saúde dentária animal',NULL),(16,'Maria de Lurdes','rua da maria ','2300-042','feminino',719263016,912384756,25,4,NULL,NULL),(17,'Clara','rua da clara','2722-032','feminino',981167899,912398711,27,15,NULL,NULL),(18,'Cliente Teste Final','test street 3rd','2300-031','masculino',919191142,912384799,29,10,NULL,NULL);
 /*!40000 ALTER TABLE `userprofile` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -676,4 +674,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-27 15:30:14
+-- Dump completed on 2023-01-08 17:41:06

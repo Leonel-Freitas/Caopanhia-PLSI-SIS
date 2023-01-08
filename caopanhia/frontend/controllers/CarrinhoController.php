@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use common\models\Carrinho;
 use common\models\Encomendas;
 use common\models\Produtos;
+use common\models\Userprofile;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
@@ -68,7 +69,7 @@ class CarrinhoController extends Controller
     public function actionView()
     {
         if (Yii::$app->user->can('readShopCar')) {
-            $encomenda = Encomendas::find()->where(['idUser' => Yii::$app->user->getId(), 'finalizada' => 'nao'])->one();
+            $encomenda = Encomendas::find()->where(['idUser' => Userprofile::find()->where(['idUser' => Yii::$app->user->getId()])->one()->id , 'finalizada' => 'nao'])->one();
             $produtosCarrinho = Carrinho::find()->where(['idEncomenda' => $encomenda->id])->all();
 
 
@@ -89,7 +90,7 @@ class CarrinhoController extends Controller
     {
         if (Yii::$app->user->can('readShopCar')) {
 
-            $encomenda = Encomendas::find()->where(['idUser' => Yii::$app->user->getId(), 'finalizada' => 'nao'])->one();
+            $encomenda = Encomendas::find()->where(['idUser' => Userprofile::find()->where(['idUser' => Yii::$app->user->getId()])->one()->id, 'finalizada' => 'nao'])->one();
             $isProdutoOnCarrinho = Carrinho::find()->where(['idEncomenda' => $encomenda->id, 'idProduto' => $idProduto])->one();
 
             if ($isProdutoOnCarrinho == null){
@@ -105,7 +106,7 @@ class CarrinhoController extends Controller
 
 
             Yii::$app->session->setFlash('success', 'Produto adicionado ao carrinho.');
-            return $this->redirect(['produtos/index']);
+            return $this->redirect(['produtos/index', 'filtro' => Produtos::findOne($idProduto)->idCategoria]);
         }else{
             throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
         }
@@ -122,7 +123,7 @@ class CarrinhoController extends Controller
     public function actionUpdate($idProduto)
     {
         if (Yii::$app->user->can('updateShopCar')) {
-            $encomenda = Encomendas::find()->where(['idUser' => Yii::$app->user->getId(), 'finalizada' => 'nao'])->one();
+            $encomenda = Encomendas::find()->where(['idUser' => Userprofile::find()->where(['idUser' => Yii::$app->user->getId()])->one()->id, 'finalizada' => 'nao'])->one();
             $model = $this->findModel($encomenda->id, $idProduto);
 
             if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
@@ -148,7 +149,7 @@ class CarrinhoController extends Controller
     public function actionDelete($idProduto)
     {
         if (Yii::$app->user->can('deleteShopCar')) {
-            $encomenda = Encomendas::find()->where(['idUser' => Yii::$app->user->getId(), 'finalizada' => 'nao'])->one();
+            $encomenda = Encomendas::find()->where(['idUser' => Userprofile::find()->where(['idUser' => Yii::$app->user->getId()])->one()->id, 'finalizada' => 'nao'])->one();
             $this->findModel($encomenda->id, $idProduto)->delete();
 
             return $this->redirect(['view']);

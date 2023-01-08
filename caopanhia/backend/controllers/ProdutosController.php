@@ -50,19 +50,33 @@ class ProdutosController extends Controller
      *
      * @return string
      */
-    public function actionIndex()
+    public function actionIndex($filtro)
     {
         if (Yii::$app->user->can('viewProducts')) {
-            $produtos = Produtos::find()->all();
 
-            $searchModel = new SearchProdutos();
-            $dataProvider = $searchModel->search($this->request->queryParams);
+            if ($filtro == 0)
+                $produtos = Produtos::find()->all();
+            else
+                $produtos = Produtos::find()->where(['idCategoria' => $filtro])->all();
+
 
             return $this->render('index', [
-                'searchModel' => $searchModel,
-                'dataProvider' => $dataProvider,
                 'produtos' => $produtos,
 
+            ]);
+        }else{
+            throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
+        }
+    }
+
+    public function actionFiltrar()
+    {
+        if (Yii::$app->user->can('viewProducts')) {
+
+            $categorias = Categorias::find()->where(['status' => 10])->all();
+
+            return $this->render('filtrar', [
+                'categorias' => $categorias
             ]);
         }else{
             throw new ForbiddenHttpException('Você não tem permissão para realizar esta ação!');
@@ -103,7 +117,7 @@ class ProdutosController extends Controller
             }
             if ($this->request->isPost) {
                 if ($model->load($this->request->post()) && $model->save()) {
-                    return $this->redirect(['index']);
+                    return $this->redirect(['index', 'filtro' => $model->idCategoria]);
                 }
             } else {
                 $model->loadDefaultValues();
@@ -129,6 +143,11 @@ class ProdutosController extends Controller
         if (Yii::$app->user->can('updateProduct')) {
             $model = $this->findModel($id);
 
+            if (UploadedFile::getInstance($model, 'imageFile') != null) {
+                $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+                $model->upload();
+                $model->imagem = $model->imageFile->name;
+            }
             if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }

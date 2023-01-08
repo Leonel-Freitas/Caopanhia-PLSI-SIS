@@ -31,7 +31,7 @@ $this->title = 'Login';
                 </div>
 
                 <div class="form-group">
-                    <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                    <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'id' => 'login-button']) ?>
                 </div>
 
             <?php ActiveForm::end(); ?>

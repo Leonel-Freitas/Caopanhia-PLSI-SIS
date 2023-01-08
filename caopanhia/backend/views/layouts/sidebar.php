@@ -38,7 +38,7 @@
                     ['label' => 'Dashboard', 'url' => ['site/login'], 'icon' => 'home'],
                     ['label' => 'Loja', 'header' => true],
                     ['label' => 'Encomendas Realizadas','url'=>['encomendas/index'], 'icon' => 'archive'],
-                    ['label' => 'Gestão de Produtos','url'=>['produtos/index'], 'icon' => 'shopping-cart'],
+                    ['label' => 'Gestão de Produtos','url'=>['produtos/index/', 'filtro' => 0], 'icon' => 'shopping-cart'],
                     ['label' => 'Tipos de Porduto', 'url'=>['categorias/index'], 'icon' => 'tags'],
                     ['label' => 'Consultas','header' => true],
                     ['label' => 'Marcar consultas', 'url' => ['marcacoesveterinarias/indexpedidos'], 'icon' => 'heartbeat'],

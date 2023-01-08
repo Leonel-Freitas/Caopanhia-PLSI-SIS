@@ -16,7 +16,7 @@ class MarcacoesveterinariasController extends ActiveController
     {
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
-            'class' => HttpBasicAuth::className(),  // ou QueryParamAuth::className(),
+            'class' => QueryParamAuth::className(),  // ou QueryParamAuth::className(),
             //’except' => ['index', 'view'], //Excluir aos GETs
             'auth' => [$this, 'auth']
         ];

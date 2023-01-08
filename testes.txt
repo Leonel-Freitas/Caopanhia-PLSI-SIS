@@ -1,0 +1,21 @@
+na raiz do projeto abrir a linha de comandos
+
+	testes unitarios:	
+		criar um teste unitário -> php vendor/bin/codecept generate:test unit NomeDbCrudTest -c backend/frontend/common
+		correr um teste unitário -> php vendor/bin/codecept run unit NomeDbCrudTest -c backend/frontend/common
+		correr todos os testes unitarios -> php vendor/bin/codecept run unit -c backend/frontend/common
+
+	testes funcionais:	
+		criar um teste funcional -> php vendor/bin/codecept generate:test functional NomeCest -c backend/frontend
+		correr um teste funcional -> php vendor/bin/codecept run functional NomeCest -c backend/frontend
+		correr todos os testes funcional -> php vendor/bin/codecept run functional -c backend/frontend
+
+	testes de aceitação:
+		1º abrir outra consola e correr: selenium-standalone start
+		criar um teste de aceitação -> php vendor/bin/codecept generate:test acceptance NomeCest -c backend/frontend
+		correr um teste de aceitação -> php vendor/bin/codecept run acceptance NomeCest -c backend/frontend
+		correr todos os testes de aceitação -> php vendor/bin/codecept run acceptance -c backend/frontend
+		
+
+
+	
