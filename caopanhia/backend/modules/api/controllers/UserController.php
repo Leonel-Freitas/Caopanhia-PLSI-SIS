@@ -14,7 +14,7 @@ class UserController extends ActiveController
 {
     public $modelClass = 'common\models\User';
 
-    public $user=null;
+
 
     public function behaviors()
     {
@@ -22,22 +22,11 @@ class UserController extends ActiveController
         $behaviors['authenticator'] = [
             'class' => QueryParamAuth::className(),  // ou QueryParamAuth::className(),
             //’except' => ['index', 'view'], //Excluir aos GETs
-            'auth' => [$this, 'auth']
+
         ];
         return $behaviors;
     }
-    public function auth($username, $password)
-    {
-        $user = \common\models\User::findByUsername($username);
-        if ($user && $user->validatePassword($password))
-        {
-            $this->user=$user;
-            $this->actionLogin($user);
-            return $user;
 
-        }
-        throw new \yii\web\ForbiddenHttpException('No authentication'); //403
-    }
 
 
     public function actionContagem()

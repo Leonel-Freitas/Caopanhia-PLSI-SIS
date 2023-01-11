@@ -25,6 +25,8 @@ class LoginController extends ActiveController
 
         return [
             'token' => $user->auth_key,
+            'role' => $user->getRoleName(),
+            'username' => $user->username,
         ];
     }
 

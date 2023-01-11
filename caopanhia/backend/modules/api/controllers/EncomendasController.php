@@ -1,15 +1,13 @@
 <?php
 
-
 namespace backend\modules\api\controllers;
-use common\models\Caes;
+
+use common\models\Encomendas;
 use yii\filters\auth\QueryParamAuth;
 use yii\rest\ActiveController;
-use yii\web\Controller;
 
-
-class CaesController extends ActiveController
-    {
+class EncomendasController extends ActiveController
+{
     public $modelClass = 'common\models\Caes';
     public function behaviors()
     {
@@ -22,25 +20,24 @@ class CaesController extends ActiveController
         return $behaviors;
     }
 
-    public function actionCaespessoais(){
+    public function actionDados(){
         $request = \Yii::$app->request;
         $data = $request->post();
-        $users = Caes::find()->where(['idUserProfile' => $data['idUserProfile']])->andWhere(['adotado' => 'sim'])->all();
+        $encomendas = Encomendas::find()->where(['idUser' => $data['idUser']])->andWhere(['finalizada' => 'sim'])->all();
 
         $result = [];
 
-        foreach ($users as $user){
+        foreach ($encomendas as $encomenda){
             $result[] = [
-                'ID' => $user->id,
-                'Nome' => $user->nome,
-                'AnoNascimento' => $user->anoNascimento,
-                'Genero' => $user->genero,
-                'Microship' => $user->microship,
-                'Castrado' => $user->castrado,
+                'ID' => $encomenda->id,
+                'ValorTotal' => $encomenda->valorTotal,
+                'Data' => $encomenda->data,
+                'Estado' => $encomenda->estado,
             ];
         }
         return $result;
 
 
     }
-    }
+
+}
