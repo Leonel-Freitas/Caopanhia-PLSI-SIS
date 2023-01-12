@@ -2,6 +2,8 @@
 
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
+
+$this->title = 'Login'
 ?>
 <div class="card">
     <div class="card-body login-card-body">

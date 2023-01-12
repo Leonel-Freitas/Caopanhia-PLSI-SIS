@@ -3,6 +3,8 @@
 
 namespace backend\modules\api\controllers;
 use common\models\Caes;
+use common\models\User;
+use common\models\Userprofile;
 use yii\filters\auth\QueryParamAuth;
 use yii\rest\ActiveController;
 use yii\web\Controller;
@@ -22,21 +24,26 @@ class CaesController extends ActiveController
         return $behaviors;
     }
 
-    public function actionCaespessoais(){
-        $request = \Yii::$app->request;
-        $data = $request->post();
-        $users = Caes::find()->where(['idUserProfile' => $data['idUserProfile']])->andWhere(['adotado' => 'sim'])->all();
+    public function actionCaespessoais($idUser){
+
+        $caesPessoais = new $this->modelClass;
+        $caes = $caesPessoais::find()->where(['idUserProfile' => Userprofile::find()->select(['id'])->where(['idUser' => $idUser])->scalar()])->andWhere(['adotado' => 'sim'])->all();
 
         $result = [];
 
-        foreach ($users as $user){
+        foreach ($caes as $cao){
             $result[] = [
-                'ID' => $user->id,
-                'Nome' => $user->nome,
-                'AnoNascimento' => $user->anoNascimento,
-                'Genero' => $user->genero,
-                'Microship' => $user->microship,
-                'Castrado' => $user->castrado,
+                'id' => $cao->id,
+                'imagem' => $cao->imagem,
+                'nome' => $cao->nome,
+                'anoNascimento' => $cao->anoNascimento,
+                'genero' => $cao->genero,
+                'microship' => $cao->microship,
+                'castrado' => $cao->castrado,
+                'pedidoConsulta' => $cao->pedidoConsulta,
+                'adotado' => $cao->adotado,
+                'idUserProfile' => $cao->idUserProfile,
+                'idRaca' => $cao->idRaca,
             ];
         }
         return $result;
