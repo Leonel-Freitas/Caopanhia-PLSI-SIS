@@ -5,6 +5,7 @@ namespace backend\modules\api\controllers;
 use common\models\Caes;
 use common\models\User;
 use common\models\Userprofile;
+use Yii;
 use yii\filters\auth\QueryParamAuth;
 use yii\rest\ActiveController;
 use yii\web\Controller;
@@ -24,10 +25,12 @@ class CaesController extends ActiveController
         return $behaviors;
     }
 
-    public function actionCaespessoais($idUser){
+    public function actionCaespessoais(){
 
+        $user = Yii::$app->user->identity;
+        $id = $user->getId();
         $caesPessoais = new $this->modelClass;
-        $caes = $caesPessoais::find()->where(['idUserProfile' => Userprofile::find()->select(['id'])->where(['idUser' => $idUser])->scalar()])->andWhere(['adotado' => 'sim'])->all();
+        $caes = $caesPessoais::find()->where(['idUserProfile' => Userprofile::find()->select(['id'])->where(['idUser' => $id])->scalar()])->andWhere(['adotado' => 'sim'])->all();
 
         $result = [];
 
@@ -50,4 +53,6 @@ class CaesController extends ActiveController
 
 
     }
-    }
+
+
+}

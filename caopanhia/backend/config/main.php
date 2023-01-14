@@ -45,23 +45,10 @@ return [
             'showScriptName' => false,
 
             'rules' => [
-                [
-                    'class' => 'yii\rest\UrlRule',
-                    'controller' => 'api/user',
-                    'controller' => 'api/caes',
-                    'extraPatterns' => [
-                        'GET contagem' => 'contagem',
-                        'POST login' => 'login',
-                        'GET caespessoais/{idUser}' => 'caespessoais'],
-                    'tokens' => [
-                        '{id}' => '<id:\\d+>',
-                        '{idUser}' => '<idUser:\\w+>',],
-                ],
-                ['class' => 'yii\rest\UrlRule','controller' => 'api/marcacoesveterinarias', 'pluralize' => false,],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'api/user', 'controller' => 'api/caes', 'extraPatterns' => ['GET contagem' => 'contagem', 'GET caespessoais/' => 'caespessoais'],],
+                ['class' => 'yii\rest\UrlRule','controller' => 'api/marcacoesveterinarias', 'pluralize' => false, 'extraPatterns' => ['GET consultas' => 'consultas'],],
                 ['class' => 'yii\rest\UrlRule','controller' => 'api/login', 'pluralize' => false, 'extraPatterns' => ['POST post' => 'post'],],
-
-                ['class' => 'yii\rest\UrlRule','controller' => 'api/caes', 'pluralize' => false,'extraPatterns' => ['GET caespessoais/{idUser}' => 'caespessoais']],
-
+                ['class' => 'yii\rest\UrlRule','controller' => 'api/caes', 'pluralize' => false,'extraPatterns' => ['GET caespessoais' => 'caespessoais']],
                 ['class' => 'yii\rest\UrlRule','controller' => 'api/userprofile', 'pluralize' => false, 'extraPatterns' => ['POST consultas' => 'consultas'],],
                 ['class' => 'yii\rest\UrlRule','controller' => 'api/encomendas', 'pluralize' => false, 'extraPatterns' => ['POST dados' => 'dados'],],
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',

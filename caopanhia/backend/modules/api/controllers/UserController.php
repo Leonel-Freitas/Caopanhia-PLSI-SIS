@@ -31,9 +31,11 @@ class UserController extends ActiveController
 
     public function actionContagem()
     {
-        $pratosmodel = new $this->modelClass;
-        $recs = $pratosmodel::find()->all();
-        return ['count' => count($recs)];
+
+        $user = Yii::$app->user->identity;
+        $id = $user->getId();
+
+        return $id;
     }
 
 

@@ -21,9 +21,9 @@ class EncomendasController extends ActiveController
     }
 
     public function actionDados(){
-        $request = \Yii::$app->request;
-        $data = $request->post();
-        $encomendas = Encomendas::find()->where(['idUser' => $data['idUser']])->andWhere(['finalizada' => 'sim'])->all();
+        $user = Yii::$app->user->identity;
+        $id = $user->getId();
+        $encomendas = Encomendas::find()->where(['idUser' => $id['idUser']])->andWhere(['finalizada' => 'sim'])->all();
 
         $result = [];
 
