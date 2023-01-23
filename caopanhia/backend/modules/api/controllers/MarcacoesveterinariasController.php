@@ -10,6 +10,7 @@ use Yii;
 use yii\filters\auth\HttpBasicAuth;
 use yii\filters\auth\QueryParamAuth;
 use yii\rest\ActiveController;
+use yii\web\ForbiddenHttpException;
 
 class MarcacoesveterinariasController extends ActiveController
 {
@@ -27,15 +28,17 @@ class MarcacoesveterinariasController extends ActiveController
         return $behaviors;
     }
 
-    public function actionConsultas()
+    public function actionFuturasconsultas()
     {
         $user = Yii::$app->user->identity;
         $id = $user->getId();
         $user = User::findOne($id);
         if ($user->getRoleName() == 'client'){
-            $consultas = Marcacoesveterinarias::find()->where(['idClient' => Userprofile::find()->select(['id'])->where(['idUser' => $id])])->andWhere(['>=', 'data', date('Y-m-d')])->orderBy(['data' => SORT_ASC, 'hora' => SORT_ASC])->all();
+            $consultas = Marcacoesveterinarias::find()->where(['idClient' => Userprofile::find()->select(['id'])->where(['idUser' => $id])])->andWhere(['>=', 'hora', date("H:i:s")])->orderBy(['data' => SORT_ASC, 'hora' => SORT_ASC])->all();
+
+
         }else{
-            $consultas = Marcacoesveterinarias::find()->where(['idVet' => Userprofile::find()->select(['id'])->where(['idUser' => $id])->scalar()])->andWhere(['>=', 'data', date('Y-m-d')])->orderBy(['data' => SORT_ASC, 'hora' => SORT_ASC])->all();
+            $consultas = Marcacoesveterinarias::find()->where(['idVet' => Userprofile::find()->select(['id'])->where(['idUser' => $id])->scalar()])->andWhere(['>=', 'hora', date("H:i:s")])->orderBy(['data' => SORT_ASC, 'hora' => SORT_ASC])->all();
         }
 
         $result = [];
@@ -53,14 +56,15 @@ class MarcacoesveterinariasController extends ActiveController
             $hora_consulta = strtotime($consulta->hora);
             $hora_atual = strtotime(date("H:i:s"));
             $diferenca_horas = $hora_consulta - $hora_atual;
-            if ($consulta->data == date("Y-m-d") && $diferenca_horas <= 7200) {
+            if ($consulta->data == date("Y-m-d") && $diferenca_horas <= 86400) {
                 try {
-                    $message = ["Tem consulta hoje"];
+                    $message = "Ira ter uma consulta as ".$consulta->hora;
                     $mmqt = new \PhpMqtt\Client\MqttClient('broker.mqttdashboard.com', 1883, 'backend');
                     $mmqt->connect();
                     $mmqt->publish('testeAndroid', json_encode($message), 1);
                     $mmqt->disconnect();
                     echo 'Mensagem publicada com sucesso!';
+
                 } catch (\Exception $e) {
                     echo 'Erro ao publicar mensagem: ' . $e->getMessage();
                 }

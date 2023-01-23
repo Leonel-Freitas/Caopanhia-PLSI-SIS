@@ -3,12 +3,14 @@
 namespace backend\modules\api\controllers;
 
 use common\models\Encomendas;
+use Yii;
 use yii\filters\auth\QueryParamAuth;
 use yii\rest\ActiveController;
+use yii\web\ForbiddenHttpException;
 
 class EncomendasController extends ActiveController
 {
-    public $modelClass = 'common\models\Caes';
+    public $modelClass = 'common\models\Encomendas';
     public function behaviors()
     {
         $behaviors = parent::behaviors();
@@ -20,11 +22,10 @@ class EncomendasController extends ActiveController
         return $behaviors;
     }
 
-    public function actionDados(){
+    public function actionHistorico(){
         $user = Yii::$app->user->identity;
         $id = $user->getId();
-        $encomendas = Encomendas::find()->where(['idUser' => $id['idUser']])->andWhere(['finalizada' => 'sim'])->all();
-
+        $encomendas = Encomendas::find()->where(['idUser' => $id])->andWhere(['finalizada' => 'sim'])->all();
         $result = [];
 
         foreach ($encomendas as $encomenda){
