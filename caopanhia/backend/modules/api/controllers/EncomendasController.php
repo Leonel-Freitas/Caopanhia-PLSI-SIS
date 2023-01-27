@@ -30,10 +30,10 @@ class EncomendasController extends ActiveController
 
         foreach ($encomendas as $encomenda){
             $result[] = [
-                'ID' => $encomenda->id,
-                'ValorTotal' => $encomenda->valorTotal,
-                'Data' => $encomenda->data,
-                'Estado' => $encomenda->estado,
+                'id' => $encomenda->id,
+                'valorTotal' => $encomenda->valorTotal,
+                'data' => $encomenda->data,
+                'estado' => $encomenda->estado,
             ];
         }
         return $result;

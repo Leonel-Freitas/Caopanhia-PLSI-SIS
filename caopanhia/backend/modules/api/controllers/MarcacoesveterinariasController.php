@@ -33,12 +33,11 @@ class MarcacoesveterinariasController extends ActiveController
         $user = Yii::$app->user->identity;
         $id = $user->getId();
         $user = User::findOne($id);
+
         if ($user->getRoleName() == 'client'){
-            $consultas = Marcacoesveterinarias::find()->where(['idClient' => Userprofile::find()->select(['id'])->where(['idUser' => $id])])->andWhere(['>=', 'hora', date("H:i:s")])->orderBy(['data' => SORT_ASC, 'hora' => SORT_ASC])->all();
-
-
+            $consultas = Marcacoesveterinarias::find()->where(['idClient' => Userprofile::find()->select(['id'])->where(['idUser' => $id])->scalar()])->andWhere(['>=', 'data', date("Y-m-d")])->orderBy(['data' => SORT_ASC, 'hora' => SORT_ASC])->all();
         }else{
-            $consultas = Marcacoesveterinarias::find()->where(['idVet' => Userprofile::find()->select(['id'])->where(['idUser' => $id])->scalar()])->andWhere(['>=', 'hora', date("H:i:s")])->orderBy(['data' => SORT_ASC, 'hora' => SORT_ASC])->all();
+            $consultas = Marcacoesveterinarias::find()->where(['idVet' => Userprofile::find()->select(['id'])->where(['idUser' => $id])->scalar()])->andWhere(['>=', 'data', date("Y-m-d")])->orderBy(['data' => SORT_ASC, 'hora' => SORT_ASC])->all();
         }
 
         $result = [];
@@ -46,39 +45,19 @@ class MarcacoesveterinariasController extends ActiveController
         foreach ($consultas as $consulta) {
             $nomeCao = Caes::findOne($consulta->idCao)->nome;
             $nomeClient = Userprofile::findOne($consulta->idClient)->nome;
+            $nomeVet = Userprofile::findOne($consulta->idVet)->nome;
             $result[] = [
-                'ID' => $consulta->data,
-                'Nome' => $consulta->hora,
-                'NomeClient' => $nomeClient,
-                'NomeCao' => $nomeCao,
+                'id' => $consulta->id,
+                'data' => $consulta->data,
+                'hora' => $consulta->hora,
+                'nomeClient' => $nomeClient,
+                'nomeVet' => $nomeVet,
+                'nomeCao' => $nomeCao,
+
             ];
-
-            $hora_consulta = strtotime($consulta->hora);
-            $hora_atual = strtotime(date("H:i:s"));
-            $diferenca_horas = $hora_consulta - $hora_atual;
-            if ($consulta->data == date("Y-m-d") && $diferenca_horas <= 86400) {
-                try {
-                    $message = "Ira ter uma consulta as ".$consulta->hora;
-                    $mmqt = new \PhpMqtt\Client\MqttClient('broker.mqttdashboard.com', 1883, 'backend');
-                    $mmqt->connect();
-                    $mmqt->publish('testeAndroid', json_encode($message), 1);
-                    $mmqt->disconnect();
-                    echo 'Mensagem publicada com sucesso!';
-
-                } catch (\Exception $e) {
-                    echo 'Erro ao publicar mensagem: ' . $e->getMessage();
-                }
-            }
-
         }
 
         return $result;
 
-
-
-
-
     }
-
-
 }
